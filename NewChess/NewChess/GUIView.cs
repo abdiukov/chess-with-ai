@@ -82,8 +82,6 @@ namespace Chess
         {
             int x = this.ClientSize.Width / 8;
             int y = this.ClientSize.Height / 8;
-            // line size = size of the highlighted box
-            // changed from 50 to 25
             int lineSize = (x + y / 2) / 25;
             e.Graphics.DrawImage(buffer, 0, 0, this.ClientSize.Width, this.ClientSize.Height);
             if (selectedSquare != null)

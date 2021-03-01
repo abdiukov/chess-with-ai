@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Chess
@@ -43,6 +40,11 @@ namespace Chess
         public virtual Move CanMove(BoardUtilities utils, Point origin, Point destination)
         {
             Move move = GetValidMove(origin, destination);
+            //utils.
+            //    if ()
+
+            //board.
+
             if (utils.Obstructed(origin, destination))
             {
                 move = null;
@@ -84,7 +86,7 @@ namespace Chess
             moves.Add(new MoveLinearOnce(2, this));
 
             //otherwise if move is obsturcted - can only go sideways
-           // moves.Add(new MoveDiagonal(1));
+            // moves.Add(new MoveDiagonal(1));
 
         }
 

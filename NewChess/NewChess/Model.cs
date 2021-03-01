@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chess
 {
@@ -76,6 +72,16 @@ namespace Chess
         private bool Move(Point origin, Point destination)
         {
             Piece mover = board[origin.X, origin.Y].piece;
+
+            //checks if its a pawn and if it is trying to move, dont allow
+            if (mover.ToString() == "Chess.Pawn")
+            {
+                if (board[destination.X, destination.Y].piece != null)
+                {
+                    return false;
+                }
+            }
+
             Move move = mover.CanMove(this, origin, destination);
             if (move != null)
             {
@@ -110,14 +116,14 @@ namespace Chess
         private void InitBackRow(int row, Team team)
         {
             //changed the row a bit, now it works
-            Place(row,0, new Rook(team));
-            Place(row,1, new Knight(team));
-            Place(row,2, new Bishop(team));
-            Place(row,3, new Queen(team));
-            Place(row,4, new King(team));
-            Place(row,5, new Bishop(team));
-            Place(row,6, new Knight(team));
-            Place(row,7, new Rook(team));
+            Place(row, 0, new Rook(team));
+            Place(row, 1, new Knight(team));
+            Place(row, 2, new Bishop(team));
+            Place(row, 3, new Queen(team));
+            Place(row, 4, new King(team));
+            Place(row, 5, new Bishop(team));
+            Place(row, 6, new Knight(team));
+            Place(row, 7, new Rook(team));
         }
 
         private void InitPawns(int row, Team team)
@@ -125,7 +131,7 @@ namespace Chess
             for (int i = 0; i < 8; i++)
             {
                 //modified 
-                Place(row,i, new Pawn(team));
+                Place(row, i, new Pawn(team));
             }
         }
 
