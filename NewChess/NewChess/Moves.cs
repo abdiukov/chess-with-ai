@@ -60,6 +60,17 @@ namespace Chess
         {
             owner.FirstMove();
         }
+
+        public override bool isValid(Point origin, Point destination)
+        {
+            if (destination.X != origin.X || destination.Y != origin.Y)
+            {
+                return Distance(origin, destination) <= limit;
+            }
+            return false;
+        }
+
+
     }
 
     public class MoveOrthogonal : Move
