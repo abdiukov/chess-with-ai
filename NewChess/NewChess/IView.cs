@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 namespace Chess
 {
     public interface IView : CommandHandler<ViewCommand>
