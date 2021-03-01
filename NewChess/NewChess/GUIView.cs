@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chess
@@ -29,7 +23,7 @@ namespace Chess
             //Menu - start a new game, save the game, customise the game ( change pieces ), change color scheme
 
             //Rules - Castling, pawn taking, upgrade pawn, win condition, no check /checkmate / status label
-            
+
             //Add a timer / 10 min game, 5 min game
 
             //label bottom left - that shows the status - e.g how they have it in browser

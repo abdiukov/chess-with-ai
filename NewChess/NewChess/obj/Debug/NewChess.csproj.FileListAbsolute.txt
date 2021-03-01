@@ -15,3 +15,12 @@ C:\Users\Ash\Desktop\Chess Application\NewChess\NewChess\obj\Debug\NewChess.cspr
 C:\Users\Ash\Desktop\Chess Application\NewChess\NewChess\obj\Debug\NewChess.csproj.CoreCompileInputs.cache
 C:\Users\Ash\Desktop\Chess Application\NewChess\NewChess\obj\Debug\NewChess.exe
 C:\Users\Ash\Desktop\Chess Application\NewChess\NewChess\obj\Debug\NewChess.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\bin\Debug\NewChess.exe.config
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\bin\Debug\NewChess.exe
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\bin\Debug\NewChess.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.Properties.Resources.resources
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.csproj.GenerateResource.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.exe
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\NewChess\obj\Debug\NewChess.pdb
