@@ -45,17 +45,6 @@ namespace Chess
             // get the width of the form and divide by 8
             // get the height of gui form and divide by 8
             Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
-
-            //SelectSquareCommand selectCommand = new SelectSquareCommand(coord.Value);
-
-            //creates the command and says to model - go handle that command bro
-
-            //model.Handle(selectCommand);
-
-            //if its succcessful, create selected square
-            //selectedSquare = (selectCommand.Success ? coord : null);
-
-            // redirects to GUIView_Paint
             this.Invalidate();
         }
 
@@ -69,7 +58,6 @@ namespace Chess
         {
             buffer = new Bitmap(bufferDimension, bufferDimension);
             this.DoubleBuffered = true;
-            // that is why Paint by default is GuiView paint
             this.Paint += GUIView_Paint;
             this.Resize += GUIView_Resize;
         }

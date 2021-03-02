@@ -3,19 +3,13 @@ using System.Drawing;
 
 namespace Chess
 {
-    public interface BoardUtilities
-    {
-        //bool Obstructed(Point origin, Point destination);
-    }
 
-    public class Model : BoardUtilities, CommandHandler<ModelCommand>
+    public class Model : CommandHandler<ModelCommand>
     {
         private const int BoardRows = 8;
         private const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
         private Square[,] board = new Square[BoardRows, BoardColumns];
-        private Team currentPlayer;
-        private Point? selectedSquare;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
@@ -85,69 +79,5 @@ namespace Chess
             Piece piece = board[coord.X, coord.Y].piece;
             commandHandler.Handle(new DrawSquareCommand(coord, piece));
         }
-
-
-        //public bool Select(Point coord)
-        //{
-        //    Piece piece = board[coord.X, coord.Y].piece;
-        //    if ((piece != null) && (piece.Team == currentPlayer))
-        //    {
-        //        selectedSquare = coord;
-        //        return true;
-        //    }
-        //    else if (selectedSquare != null)
-        //    {
-        //        bool success = Move(selectedSquare.Value, coord);
-        //        selectedSquare = null;
-        //        return success;
-        //    }
-        //    return false;
-        //}
-
-        //private bool Move(Point origin, Point destination)
-        //{
-        //    Piece mover = board[origin.X, origin.Y].piece;
-
-        //    //checks if its a pawn and if it is trying to move, dont allow
-        //    if (mover.ToString() == "Chess.Pawn")
-        //    {
-        //        if (board[destination.X, destination.Y].piece != null)
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    Move move = mover.CanMove(this, origin, destination);
-        //    if (move != null)
-        //    {
-        //        move.Execute();
-        //        board[destination.X, destination.Y].piece = mover;
-        //        board[origin.X, origin.Y].piece = null;
-        //        Update(origin);
-        //        Update(destination);
-        //        currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-        //public bool Obstructed(Point origin, Point destination)
-        //{
-        //    Point move = origin;
-        //    Point oneBefore = destination;
-        //    int xDir = Math.Sign(destination.X - origin.X);
-        //    int yDir = Math.Sign(destination.Y - origin.Y);
-        //    oneBefore.X -= xDir;
-        //    oneBefore.Y -= yDir;
-        //    while (move != oneBefore)
-        //    {
-        //        move.X += xDir;
-        //        move.Y += yDir;
-        //        if (board[move.X, move.Y].piece != null) { return true; }
-        //    }
-        //    return false;
-        //}
-
-
     }
 }
