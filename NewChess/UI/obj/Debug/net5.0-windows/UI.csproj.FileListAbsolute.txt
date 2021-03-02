@@ -19,3 +19,8 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.csproj.CopyComplete
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\LogicLayer.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\LogicLayer.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\System.Drawing.Common.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessBoardAssets.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessBoardAssets.pdb

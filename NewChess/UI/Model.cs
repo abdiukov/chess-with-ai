@@ -1,4 +1,5 @@
-﻿using LogicLayer;
+﻿using ChessBoardAssets;
+using LogicLayer;
 using System;
 using System.Drawing;
 
@@ -71,6 +72,7 @@ namespace Chess
         private bool Move(Point origin, Point destination)
         {
             Piece mover = board[origin.X, origin.Y].piece;
+
             //contr.SelectPiece(mover);
             //Move move = mover.CanMove(this, origin, destination);
             //if (move != null)

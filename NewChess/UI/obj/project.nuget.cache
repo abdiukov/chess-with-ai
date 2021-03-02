@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "N7C5+T+CEiWgh9Ck0Wh4qemD1qYsWqovF8MHt5/os4zoO0rARtDpF7AHT9G1Yk1Hy+KhlGB028euJlIoGyEI9A==",
+  "dgSpecHash": "dlRmsZ1rzDJd1Fxyn7xMJ/dugGJzeK8aB64/MVbp4BmZ41rGMDW9w73g1zKyPxUbZ9lD94WTEixnVWtSmYGUdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\UI\\UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Ash\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Ash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\Ash\\.nuget\\packages\\system.drawing.common\\5.0.1\\system.drawing.common.5.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

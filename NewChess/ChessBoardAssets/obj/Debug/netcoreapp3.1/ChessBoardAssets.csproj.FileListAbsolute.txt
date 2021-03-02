@@ -1,0 +1,9 @@
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\bin\Debug\netcoreapp3.1\ChessBoardAssets.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\bin\Debug\netcoreapp3.1\ChessBoardAssets.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\bin\Debug\netcoreapp3.1\ChessBoardAssets.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.AssemblyInfoInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.AssemblyInfo.cs
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessBoardAssets\obj\Debug\netcoreapp3.1\ChessBoardAssets.pdb

@@ -1,3 +1,4 @@
+using ChessBoardAssets;
 using System.Drawing;
 
 namespace Chess

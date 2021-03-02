@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Movement
 {
-    class MoveAnyDirectionOnce
+    class MoveAnyDirectionOnce : Move
     {
+        public override bool isValid(Point origin, Point destination)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

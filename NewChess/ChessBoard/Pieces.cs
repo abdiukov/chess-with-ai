@@ -1,17 +1,5 @@
-﻿using System.Drawing;
-
-namespace Chess
+﻿namespace ChessBoard
 {
-    public class Square
-    {
-        public Piece piece;
-
-        public Square()
-        {
-
-        }
-    }
-
     public enum Team { White, Black };
 
     public abstract class Piece
