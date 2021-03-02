@@ -1,0 +1,13 @@
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.exe
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.runtimeconfig.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.runtimeconfig.dev.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\netcoreapp3.1\UI.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.AssemblyInfoInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.AssemblyInfo.cs
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\netcoreapp3.1\UI.genruntimeconfig.cache
