@@ -21,7 +21,6 @@ namespace Chess
     public abstract class Piece
     {
         private Team team;
-        //protected List<Move> moves;
         public Image image;
 
         public Piece(Team team, string file)

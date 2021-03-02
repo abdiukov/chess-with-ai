@@ -1,6 +1,0 @@
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\bin\Debug\ModelLayer.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\bin\Debug\ModelLayer.pdb
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\obj\Debug\ModelLayer.csprojAssemblyReference.cache
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\obj\Debug\ModelLayer.csproj.CoreCompileInputs.cache
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\obj\Debug\ModelLayer.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ModelLayer\obj\Debug\ModelLayer.pdb

@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Controller
+namespace Movement
 {
-    class MoveHorse : Move
+    class MoveKnight : Move
     {
         public override bool isValid(Point origin, Point destination)
         {
