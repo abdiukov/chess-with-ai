@@ -46,13 +46,14 @@ namespace Chess
             // get the height of gui form and divide by 8
             Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
 
-            SelectSquareCommand selectCommand = new SelectSquareCommand(coord.Value);
+            //SelectSquareCommand selectCommand = new SelectSquareCommand(coord.Value);
 
             //creates the command and says to model - go handle that command bro
-            model.Handle(selectCommand);
+
+            //model.Handle(selectCommand);
 
             //if its succcessful, create selected square
-            selectedSquare = (selectCommand.Success ? coord : null);
+            //selectedSquare = (selectCommand.Success ? coord : null);
 
             // redirects to GUIView_Paint
             this.Invalidate();

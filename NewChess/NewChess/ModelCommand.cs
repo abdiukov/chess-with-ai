@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace Chess
 {
     public abstract class ModelCommand : ICommand<Model>
@@ -22,15 +20,15 @@ namespace Chess
         }
     }
 
-    class SelectSquareCommand : ModelCommand
-    {
-        private Point coord;
+    //class SelectSquareCommand : ModelCommand
+    //{
+    //    //private Point coord;
 
-        public SelectSquareCommand(Point coord) { this.coord = coord; }
+    //    //public SelectSquareCommand(Point coord) { this.coord = coord; }
 
-        public override void execute(Model model)
-        {
-            Success = model.Select(coord);
-        }
-    }
+    //    //public override void execute(Model model)
+    //    //{
+    //    //    Success = model.Select(coord);
+    //    //}
+    //}
 }

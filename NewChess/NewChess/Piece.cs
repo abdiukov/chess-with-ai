@@ -37,20 +37,20 @@ namespace Chess
             image = Image.FromFile(file + "_" + team.ToString().ToCharArray()[0] + ".png");
         }
 
-        public virtual Move CanMove(BoardUtilities utils, Point origin, Point destination)
-        {
-            Move move = GetValidMove(origin, destination);
-            //utils.
-            //    if ()
+        //public virtual Move CanMove(BoardUtilities utils, Point origin, Point destination)
+        //{
+        //    //Move move = GetValidMove(origin, destination);
+        //    ////utils.
+        //    ////    if ()
 
-            //board.
+        //    ////board.
 
-            if (utils.Obstructed(origin, destination))
-            {
-                move = null;
-            }
-            return move;
-        }
+        //    //if (utils.Obstructed(origin, destination))
+        //    //{
+        //    //    move = null;
+        //    //}
+        //    //return move;
+        //}
 
         protected Move GetValidMove(Point origin, Point destination)
         {
@@ -90,11 +90,11 @@ namespace Chess
 
         }
 
-        public override Move CanMove(BoardUtilities utils, Point origin, Point destination)
-        {
-            //thats where you put pawn logic
-            return base.CanMove(utils, origin, destination);
-        }
+        //public override Move CanMove(BoardUtilities utils, Point origin, Point destination)
+        //{
+        //    //thats where you put pawn logic
+        //    return base.CanMove(utils, origin, destination);
+        //}
 
         public void FirstMove()
         {
@@ -119,10 +119,10 @@ namespace Chess
         {
             moves.Add(new MoveOrthogonal());
         }
-        public override Move CanMove(BoardUtilities utils, Point origin, Point destination)
-        {
-            return base.GetValidMove(origin, destination);
-        }
+        //public override Move CanMove(BoardUtilities utils, Point origin, Point destination)
+        //{
+        //    return base.GetValidMove(origin, destination);
+        //}
     }
 
     public class King : Piece
