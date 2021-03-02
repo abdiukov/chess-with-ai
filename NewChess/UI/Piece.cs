@@ -4,15 +4,11 @@ namespace Chess
 {
     public class Square
     {
-        public static System.Drawing.Image background;
         public Piece piece;
 
         public Square()
         {
-            if (background == null)
-            {
-                background = Image.FromFile("Empty.png");
-            }
+
         }
     }
 

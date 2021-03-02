@@ -42,8 +42,6 @@ namespace Chess
 
         private void GUIView_MouseClick(object sender, MouseEventArgs e)
         {
-            // get the width of the form and divide by 8
-            // get the height of gui form and divide by 8
             Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
             this.Invalidate();
         }
@@ -80,13 +78,12 @@ namespace Chess
             }
         }
 
-        public void DrawSquare(Image background, Image piece, Point coord)
+        public void DrawSquare(Image piece, Point coord)
         {
             Brush brush = (coord.Y % 2 == 0) ? (coord.X % 2 == 0) ? c1 : c2 : (coord.X % 2 == 0) ? c2 : c1;
             using (Graphics g = Graphics.FromImage(buffer))
             {
                 g.FillRectangle(brush, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
-                g.DrawImage(background, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
                 if (piece != null)
                 {
                     g.DrawImage(piece, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);

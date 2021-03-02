@@ -25,7 +25,7 @@ namespace Chess
             {
                 pieceImage = piece.image;
             }
-            view.DrawSquare(Square.background, pieceImage, coord);
+            view.DrawSquare(pieceImage, coord);
         }
     }
 }

@@ -3,6 +3,6 @@ namespace Chess
 {
     public interface IView : CommandHandler<ViewCommand>
     {
-        void DrawSquare(Image background, Image piece, Point coord);
+        void DrawSquare(Image piece, Point coord);
     }
 }
