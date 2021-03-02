@@ -16,3 +16,6 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\ref\UI.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.genruntimeconfig.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.csproj.CopyComplete
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\LogicLayer.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\LogicLayer.pdb

@@ -16,12 +16,12 @@ namespace Chess
 
     public abstract class Piece
     {
-        private Team team;
+        public Team Team;
         public Image image;
 
         public Piece(Team team, string file)
         {
-            this.team = team;
+            Team = team;
             image = Image.FromFile(file + "_" + team.ToString().ToCharArray()[0] + ".png");
         }
     }

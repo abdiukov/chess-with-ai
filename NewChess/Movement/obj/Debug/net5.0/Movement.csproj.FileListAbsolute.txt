@@ -1,0 +1,12 @@
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\bin\Debug\net5.0\Movement.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\bin\Debug\net5.0\Movement.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\bin\Debug\net5.0\ref\Movement.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\bin\Debug\net5.0\Movement.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.AssemblyInfoInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.AssemblyInfo.cs
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\ref\Movement.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\Movement\obj\Debug\net5.0\Movement.pdb

@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Update="GUIView.cs">
 			<SubType>Form</SubType>
 		</Compile>

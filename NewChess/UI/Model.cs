@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicLayer;
+using System;
 using System.Drawing;
 
 namespace Chess
@@ -10,6 +11,9 @@ namespace Chess
         private const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
         private Square[,] board = new Square[BoardRows, BoardColumns];
+        private Team currentPlayer;
+        private Point? selectedSquare;
+        private Controller contr;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
@@ -45,6 +49,44 @@ namespace Chess
                 }
             }
         }
+
+        public bool Select(Point coord)
+        {
+            Piece piece = board[coord.X, coord.Y].piece;
+            if ((piece != null) && (piece.Team == currentPlayer))
+            {
+                selectedSquare = coord;
+                return true;
+            }
+            else if (selectedSquare != null)
+            {
+                bool success = Move(selectedSquare.Value, coord);
+                selectedSquare = null;
+                return success;
+            }
+            return false;
+        }
+
+
+        private bool Move(Point origin, Point destination)
+        {
+            Piece mover = board[origin.X, origin.Y].piece;
+            //contr.SelectPiece(mover);
+            //Move move = mover.CanMove(this, origin, destination);
+            //if (move != null)
+            //{
+            //    move.Execute();
+            //    board[destination.X, destination.Y].piece = mover;
+            //    board[origin.X, origin.Y].piece = null;
+            //    Update(origin);
+            //    Update(destination);
+            //    currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
+            //    return true;
+            //}
+            //return false;
+            return true;
+        }
+
 
 
         private void InitBackRow(int row, Team team)
