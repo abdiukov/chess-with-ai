@@ -40,6 +40,11 @@ namespace Chess
         public virtual Move CanMove(BoardUtilities utils, Point origin, Point destination)
         {
             Move move = GetValidMove(origin, destination);
+            //utils.
+            //    if ()
+
+            //board.
+
             if (utils.Obstructed(origin, destination))
             {
                 move = null;
@@ -51,7 +56,6 @@ namespace Chess
         {
             foreach (Move move in moves)
             {
-                //if movelinear say yes
                 if (move.isValid(origin, destination))
                 {
                     return move;
@@ -75,27 +79,20 @@ namespace Chess
         public Pawn(Team team)
             : base(team, "Pawn")
         {
+
+            //if move is not obstructed = you can do this\
+
             moves.Add(new MoveLinearOnce(1, this));
             moves.Add(new MoveLinearOnce(2, this));
-            moves.Add(new MoveDiagonal(1));
+
+            //otherwise if move is obsturcted - can only go sideways
+            // moves.Add(new MoveDiagonal(1));
 
         }
 
         public override Move CanMove(BoardUtilities utils, Point origin, Point destination)
         {
-            Model utilsmodel = (Model)utils;
-            int v = 0;
-            if (destination.X != origin.X) { v += 1; }  //if move is diagonal
-            if (utilsmodel.board[destination.X, destination.Y].piece != null) { v += 2; } //if the piece selected is not empty
-
-            switch (v)
-            {
-                case 0:
-                case 3:
-                    return GetValidMove(origin, destination);
-                default:
-                    return null;
-            }
+            //thats where you put pawn logic
             return base.CanMove(utils, origin, destination);
         }
 

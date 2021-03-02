@@ -8,13 +8,12 @@ namespace Chess
         bool Obstructed(Point origin, Point destination);
     }
 
-
     public class Model : BoardUtilities, CommandHandler<ModelCommand>
     {
         private const int BoardRows = 8;
         private const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
-        public Square[,] board = new Square[BoardRows, BoardColumns];
+        private Square[,] board = new Square[BoardRows, BoardColumns];
         private Team currentPlayer;
         private Point? selectedSquare;
 
@@ -73,13 +72,17 @@ namespace Chess
         private bool Move(Point origin, Point destination)
         {
             Piece mover = board[origin.X, origin.Y].piece;
-            Move move = mover.CanMove(this, origin, destination);
-            //checks if its a pawn and if it is trying to move, dont allow
-            //if (mover.ToString() == "Chess.Pawn")
-            //{
 
-            //}
-            //DoTheMove:
+            //checks if its a pawn and if it is trying to move, dont allow
+            if (mover.ToString() == "Chess.Pawn")
+            {
+                if (board[destination.X, destination.Y].piece != null)
+                {
+                    return false;
+                }
+            }
+
+            Move move = mover.CanMove(this, origin, destination);
             if (move != null)
             {
                 move.Execute();
@@ -92,17 +95,6 @@ namespace Chess
             }
             return false;
         }
-
-        public bool pieceIsNull(Point destination)
-        {
-            Piece piece = board[destination.X, destination.Y].piece;
-            if (piece == null)
-            {
-                return true;
-            }
-            return false;
-        }
-
 
         public bool Obstructed(Point origin, Point destination)
         {
@@ -120,8 +112,6 @@ namespace Chess
             }
             return false;
         }
-
-
 
         private void InitBackRow(int row, Team team)
         {
