@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ChessBoardAssets;
+using System;
 using System.Windows.Forms;
 
 namespace Chess
 {
     static class Program
     {
+        public static Square[,] board = new Square[8, 8];
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

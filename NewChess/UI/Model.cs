@@ -8,13 +8,12 @@ namespace Chess
 
     public class Model : CommandHandler<ModelCommand>
     {
-        private const int BoardRows = 8;
-        private const int BoardColumns = 8;
+        public const int BoardRows = 8;
+        public const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
-        private Square[,] board = new Square[BoardRows, BoardColumns];
-        private Team currentPlayer;
         private Point? selectedSquare;
         private Controller contr;
+        private Square[,] board = Program.board;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
@@ -53,18 +52,18 @@ namespace Chess
 
         public bool Select(Point coord)
         {
-            Piece piece = board[coord.X, coord.Y].piece;
-            if ((piece != null) && (piece.Team == currentPlayer))
-            {
-                selectedSquare = coord;
-                return true;
-            }
-            else if (selectedSquare != null)
-            {
-                bool success = Move(selectedSquare.Value, coord);
-                selectedSquare = null;
-                return success;
-            }
+            //Piece piece = board[coord.X, coord.Y].piece;
+            //if ((piece != null) && (piece.Team == currentPlayer))
+            //{
+            //    selectedSquare = coord;
+            //    return true;
+            //}
+            //else if (selectedSquare != null)
+            //{
+            //    bool success = Move(selectedSquare.Value, coord);
+            //    selectedSquare = null;
+            //    return success;
+            //}
             return false;
         }
 
@@ -73,8 +72,7 @@ namespace Chess
         {
             Piece mover = board[origin.X, origin.Y].piece;
 
-            //contr.SelectPiece(mover);
-            //Move move = mover.CanMove(this, origin, destination);
+            //return contr.CanMove(origin, destination);
             //if (move != null)
             //{
             //    move.Execute();

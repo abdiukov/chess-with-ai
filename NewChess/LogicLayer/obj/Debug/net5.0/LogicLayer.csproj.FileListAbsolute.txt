@@ -1,0 +1,17 @@
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\LogicLayer.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\LogicLayer.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ref\LogicLayer.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\LogicLayer.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ChessBoardAssets.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\Movement.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ChessBoardAssets.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\Movement.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.AssemblyInfoInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.AssemblyInfo.cs
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.csproj.CopyComplete
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\ref\LogicLayer.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.pdb
