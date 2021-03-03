@@ -13,7 +13,7 @@ namespace Chess
         private CommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
         private Controller contr;
-        private Square[,] board = Program.board;
+        private Square[,] board = Coordinates.board;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
