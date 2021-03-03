@@ -1,7 +1,5 @@
 ﻿using ChessBoardAssets;
 using Movement;
-using System.Collections.Generic;
-using System.Drawing;
 
 namespace LogicLayer
 {
@@ -10,30 +8,62 @@ namespace LogicLayer
         private Team currentPlayer;
         private Move moves;
 
-        public void Moves(Point origin)
+        public void GetPossibleMoves(Piece piece)
         {
-            //moves should retrieve all coordinates
-            //moves should retieve the name of piece
-
-            List<Move> AllMoves = GetAllMoves();
-
-            foreach (var item in AllMoves)
+            switch (piece)
             {
-                //
+                case Pawn:
+                    GetMovesPawn(piece);
+                    break;
+                case Knight:
+                    GetMovesKnight(piece);
+                    break;
+                case Rook:
+                    GetMovesRook(piece);
+                    break;
+                case Bishop:
+                    GetMovesBishop(piece);
+                    break;
+                case King:
+                    GetMovesKing(piece);
+                    break;
+                case Queen:
+                    GetMovesQueen(piece);
+                    break;
             }
 
-            //output = List<Point> destination;
-            //coordinates need to be stored somewhere safe
-            return;
+            //returns the highlighted squares
+
+            //the program then looks at these highlighted squares and moves there
         }
 
-        private List<Move> GetAllMoves() //supply name of iece
+
+
+        private void GetMovesPawn(Piece piece)
         {
-            //should supply the moves to the getallmoves
-            //filter the moves for the specific piece
-            List<Move> movess = new List<Move>();
-            movess.Add(moves);
-            return movess;
+
         }
+
+        private void GetMovesRook(Piece piece)
+        {
+        }
+
+        private void GetMovesKnight(Piece piece)
+        {
+        }
+
+        private void GetMovesBishop(Piece piece)
+        {
+        }
+
+        private void GetMovesKing(Piece piece)
+        {
+        }
+
+        private void GetMovesQueen(Piece piece)
+        {
+        }
+
+
     }
 }

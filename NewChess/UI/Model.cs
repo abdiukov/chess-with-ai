@@ -11,8 +11,8 @@ namespace Chess
         public const int BoardRows = 8;
         public const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
-        private Point? selectedSquare;
-        private Controller contr;
+        private Point? selectedsquare;
+        private Controller contr = new Controller();
         private Square[,] board = Coordinates.board;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
@@ -52,16 +52,22 @@ namespace Chess
 
         public bool Select(Point coord)
         {
-            //Piece piece = board[coord.X, coord.Y].piece;
-            //if ((piece != null) && (piece.Team == currentPlayer))
+            Piece piece = board[coord.X, coord.Y].piece;
+
+            if (piece != null)
+            {
+                contr.GetPossibleMoves(piece);
+            }
+
+            //if ((piece != null) && (piece.Team == currentplayer))
             //{
-            //    selectedSquare = coord;
+            //    selectedsquare = coord;
             //    return true;
             //}
-            //else if (selectedSquare != null)
+            //else if (selectedsquare != null)
             //{
-            //    bool success = Move(selectedSquare.Value, coord);
-            //    selectedSquare = null;
+            //    bool success = move(selectedsquare.value, coord);
+            //    selectedsquare = null;
             //    return success;
             //}
             return false;
@@ -72,7 +78,7 @@ namespace Chess
         {
             Piece mover = board[origin.X, origin.Y].piece;
 
-            //return contr.CanMove(origin, destination);
+            contr.GetPossibleMoves(mover);
             //if (move != null)
             //{
             //    move.Execute();
@@ -80,7 +86,7 @@ namespace Chess
             //    board[origin.X, origin.Y].piece = null;
             //    Update(origin);
             //    Update(destination);
-            //    currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
+            //currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
             //    return true;
             //}
             //return false;
