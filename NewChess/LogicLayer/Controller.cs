@@ -1,34 +1,48 @@
 ﻿using ChessBoardAssets;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace LogicLayer
 {
+
     public class Controller
     {
 
-        public void GetPossibleMoves(Piece piece, int X, int Y)
+        public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
         {
+            List<Point?> movableSquares = new List<Point?>();
+
             switch (piece)
             {
                 case Pawn:
-                    GetMovesPawn(X, Y);
+                    if (piece.Team == Team.White)
+                    {
+                        movableSquares = GetMovesWhitePawn(X, Y);
+                    }
+                    else
+                    {
+                        movableSquares = GetMovesBlackPawn(X, Y);
+                    }
                     break;
                 case Knight:
-                    GetMovesKnight(X, Y);
+                    movableSquares = GetMovesKnight(X, Y);
                     break;
                 case Rook:
-                    GetMovesRook(X, Y);
+                    movableSquares = GetMovesRook(X, Y);
                     break;
                 case Bishop:
-                    GetMovesBishop(X, Y);
+                    movableSquares = GetMovesBishop(X, Y);
                     break;
                 case King:
-                    GetMovesKing(X, Y);
+                    movableSquares = GetMovesKing(X, Y);
                     break;
                 case Queen:
-                    GetMovesQueen(X, Y);
+                    movableSquares = GetMovesQueen(X, Y);
                     break;
             }
 
+
+            return movableSquares;
             //returns the highlighted squares
 
             //the program then looks at these highlighted squares and moves there
@@ -36,40 +50,71 @@ namespace LogicLayer
 
 
 
-        private void GetMovesPawn(int X, int Y)
+        private List<Point?> GetMovesBlackPawn(int X, int Y)
         {
+            List<Point?> output = new List<Point?>();
             if (Coordinates.IsEmpty(X, Y + 1) == true)
             {
-                //add (x,y+1) to output
-                if (Y == 6)
+                output.Add(new Point(X, Y + 1));
+                if (Y == 1)
                 {
                     if (Coordinates.IsEmpty(X, Y + 2) == true)
                     {
-                        //add (x,y+1) to output
-
+                        output.Add(new Point(X, Y + 2));
                     }
                 }
             }
             else if (Coordinates.IsEmpty(X + 1, Y + 1) == false)
             {
-                //add x+1 y+1 to output
+                output.Add(new Point(X + 1, Y + 1));
             }
             else if (Coordinates.IsEmpty(X - 1, Y + 1) == false)
             {
-                //add x-1, y+1
+                output.Add(new Point(X - 1, Y + 1));
             }
 
+            return output;
         }
 
-        private void GetMovesRook(int X, int Y)
+        private List<Point?> GetMovesWhitePawn(int X, int Y)
         {
+            List<Point?> output = new List<Point?>();
+            if (Coordinates.IsEmpty(X, Y - 1) == true)
+            {
+                output.Add(new Point(X, Y - 1));
+                if (Y == 6)
+                {
+                    if (Coordinates.IsEmpty(X, Y - 2) == true)
+                    {
+                        output.Add(new Point(X, Y - 2));
+                    }
+                }
+            }
+            else if (Coordinates.IsEmpty(X + 1, Y - 1) == false)
+            {
+                output.Add(new Point(X + 1, Y - 1));
+            }
+            else if (Coordinates.IsEmpty(X - 1, Y - 1) == false)
+            {
+                output.Add(new Point(X - 1, Y - 1));
+            }
+            return output;
+        }
+
+
+
+
+
+        private List<Point?> GetMovesRook(int X, int Y)
+        {
+            List<Point?> output = new List<Point?>();
             bool ExitLoop = false;
             //checking moves from the left
             for (int i = X - 1; ExitLoop == false; i--)
             {
                 if (Coordinates.IsEmpty(i, Y) == true)
                 {
-                    //add the coordinate
+                    output.Add(new Point(i, Y));
                 }
                 else
                 {
@@ -85,7 +130,7 @@ namespace LogicLayer
             {
                 if (Coordinates.IsEmpty(i, Y) == true)
                 {
-                    //add the coordinate
+                    output.Add(new Point(i, Y));
                 }
                 else
                 {
@@ -100,7 +145,7 @@ namespace LogicLayer
             {
                 if (Coordinates.IsEmpty(X, i) == true)
                 {
-                    //add the coordinate
+                    output.Add(new Point(X, i));
                 }
                 else
                 {
@@ -114,7 +159,7 @@ namespace LogicLayer
             {
                 if (Coordinates.IsEmpty(X, i) == true)
                 {
-                    //add the coordinate
+                    output.Add(new Point(X, i));
                 }
                 else
                 {
@@ -123,10 +168,13 @@ namespace LogicLayer
             }
 
             //return all the moves
+            return output;
 
         }
-        private void GetMovesKing(int X, int Y)
+        private List<Point?> GetMovesKing(int X, int Y)
         {
+            List<Point?> output = new List<Point?>();
+
             //move right up and down -  from the white side perspective
             //so for example from the black perspective, up would be down, down would be up etc
 
@@ -136,35 +184,40 @@ namespace LogicLayer
             //down y+1
 
             //up and down
-            if (Coordinates.IsEmpty(X, Y - 1) == true) { int up; }
-            if (Coordinates.IsEmpty(X, Y + 1) == true) { int down; }
+            if (Coordinates.IsEmpty(X, Y - 1) == true) { output.Add(new Point(X, Y - 1)); }
+
+            if (Coordinates.IsEmpty(X, Y + 1) == true) { output.Add(new Point(X, Y + 1)); }
 
             //left and right
-            if (Coordinates.IsEmpty(X + 1, Y) == true) { int right; }
-            if (Coordinates.IsEmpty(X - 1, Y) == true) { int left; }
+            if (Coordinates.IsEmpty(X + 1, Y) == true) { output.Add(new Point(X + 1, Y)); }
+            if (Coordinates.IsEmpty(X - 1, Y) == true) { output.Add(new Point(X - 1, Y)); }
 
             //left up
-            if (Coordinates.IsEmpty(X - 1, Y - 1) == true) { int left_up; }
+            if (Coordinates.IsEmpty(X - 1, Y - 1) == true) { output.Add(new Point(X - 1, Y - 1)); }
 
             //left down
-            if (Coordinates.IsEmpty(X - 1, Y + 1) == true) { int left_down; }
+            if (Coordinates.IsEmpty(X - 1, Y + 1) == true) { output.Add(new Point(X - 1, Y + 1)); }
 
             //right up
-            if (Coordinates.IsEmpty(X + 1, Y - 1) == true) { int right_up; }
+            if (Coordinates.IsEmpty(X + 1, Y - 1) == true) { output.Add(new Point(X + 1, Y - 1)); }
 
             //right down
-            if (Coordinates.IsEmpty(X + 1, Y + 1) == true) { int right_down; }
+            if (Coordinates.IsEmpty(X + 1, Y + 1) == true) { output.Add(new Point(X + 1, Y + 1)); }
+
+            return output;
         }
 
-        private void GetMovesBishop(int X, int Y)
+        private List<Point?> GetMovesBishop(int X, int Y)
         {
+            List<Point?> output = new List<Point?>();
+
             bool ExitLoop = false;
 
             //right down
 
             for (int x = X + 1, y = Y + 1; ExitLoop == false; x++, y++)
             {
-                if (Coordinates.IsEmpty(x, y) == true) { int right_down; }
+                if (Coordinates.IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
                 else
                 {
                     ExitLoop = true;
@@ -176,7 +229,7 @@ namespace LogicLayer
 
             for (int x = X + 1, y = Y - 1; ExitLoop == false; x++, y--)
             {
-                if (Coordinates.IsEmpty(x, y) == true) { int left_down; }
+                if (Coordinates.IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
                 else
                 {
                     ExitLoop = true;
@@ -189,7 +242,7 @@ namespace LogicLayer
 
             for (int x = X - 1, y = Y - 1; ExitLoop == false; x--, y--)
             {
-                if (Coordinates.IsEmpty(x, y) == true) { int left_down; }
+                if (Coordinates.IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
                 else
                 {
                     ExitLoop = true;
@@ -201,28 +254,32 @@ namespace LogicLayer
 
             for (int x = X - 1, y = Y + 1; ExitLoop == false; x--, y++)
             {
-                if (Coordinates.IsEmpty(x, y) == true) { int left_down; }
+                if (Coordinates.IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
                 else
                 {
                     ExitLoop = true;
                 }
             }
+
+            return output;
         }
 
-        private void GetMovesKnight(int X, int Y)
+        private List<Point?> GetMovesKnight(int X, int Y)
         {
+            List<Point?> output = new List<Point?>();
+
             //http://www.chesscorner.com/tutorial/basic/knight/knight.htm
 
             //up left
 
-            if (Coordinates.IsEmpty(X - 1, Y - 2) == true) { int up_left; }
+            if (Coordinates.IsEmpty(X - 1, Y - 2) == true) { output.Add(new Point(X - 1, Y - 2)); }
 
             //y decreases by 2
             //x decreases by 1
 
             //up right
 
-            if (Coordinates.IsEmpty(X + 1, Y - 2) == true) { int up_right; }
+            if (Coordinates.IsEmpty(X + 1, Y - 2) == true) { output.Add(new Point(X + 1, Y - 2)); }
 
             //y decreases by 2
             //x increases by 1
@@ -230,7 +287,7 @@ namespace LogicLayer
 
             //down left
 
-            if (Coordinates.IsEmpty(X - 1, Y + 2) == true) { int down_left; }
+            if (Coordinates.IsEmpty(X - 1, Y + 2) == true) { output.Add(new Point(X - 1, Y + 2)); }
 
 
             //y increases by 2
@@ -238,7 +295,7 @@ namespace LogicLayer
 
             //down right
 
-            if (Coordinates.IsEmpty(X + 1, Y + 2) == true) { int down_left; }
+            if (Coordinates.IsEmpty(X + 1, Y + 2) == true) { output.Add(new Point(X + 1, Y + 2)); }
 
 
             //y increases by 2
@@ -247,38 +304,42 @@ namespace LogicLayer
 
             //left up
 
-            if (Coordinates.IsEmpty(X - 2, Y - 1) == true) { int left_up; }
+            if (Coordinates.IsEmpty(X - 2, Y - 1) == true) { output.Add(new Point(X - 2, Y - 1)); }
 
             //x decreases by 2
             //y decreases by 1
 
             //left down
 
-            if (Coordinates.IsEmpty(X - 2, Y + 1) == true) { int left_down; }
+            if (Coordinates.IsEmpty(X - 2, Y + 1) == true) { output.Add(new Point(X - 2, Y + 1)); }
 
 
             //x decreases by 2
             //y increases by 1
 
             //right up
-            if (Coordinates.IsEmpty(X + 2, Y - 1) == true) { int right_up; }
+            if (Coordinates.IsEmpty(X + 2, Y - 1) == true) { output.Add(new Point(X + 2, Y - 1)); }
             //x increases by 2
             //y decreases by 1
 
             //right down
-            if (Coordinates.IsEmpty(X + 2, Y + 1) == true) { int right_up; }
+            if (Coordinates.IsEmpty(X + 2, Y + 1) == true) { output.Add(new Point(X + 2, Y + 1)); }
             //x increases by 2
             //y increases by 1
 
 
+            return output;
         }
 
 
-        private void GetMovesQueen(int X, int Y)
+        private List<Point?> GetMovesQueen(int X, int Y)
         {
-            GetMovesBishop(X, Y);
+            List<Point?> output = new List<Point?>();
 
-            GetMovesRook(X, Y);
+            output.AddRange(GetMovesBishop(X, Y));
+            output.AddRange(GetMovesRook(X, Y));
+
+            return output;
         }
 
 

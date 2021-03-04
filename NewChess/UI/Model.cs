@@ -11,7 +11,7 @@ namespace Chess
         public const int BoardRows = 8;
         public const int BoardColumns = 8;
         private CommandHandler<ViewCommand> commandHandler;
-        private Point? selectedsquare;
+        private Point? selectedSquare;
         private Controller contr = new Controller();
         private Square[,] board = Coordinates.board;
 
@@ -56,7 +56,8 @@ namespace Chess
 
             if (piece != null)
             {
-                contr.GetPossibleMoves(piece, coord.X, coord.Y);
+                selectedSquare = coord;
+                GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
             }
 
             //if ((piece != null) && (piece.Team == currentplayer))
@@ -70,7 +71,7 @@ namespace Chess
             //    selectedsquare = null;
             //    return success;
             //}
-            return false;
+            return true;
         }
 
 
