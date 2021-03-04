@@ -70,11 +70,17 @@ namespace LogicLayer
             {
                 if (Coordinates.board[X + 1, Y + 1].piece is not null)
                 {
-                    output.Add(new Point(X + 1, Y + 1));
+                    if (Coordinates.board[X + 1, Y + 1].piece.Team != Information.currentPlayer)
+                    {
+                        output.Add(new Point(X + 1, Y + 1));
+                    }
                 }
                 if (Coordinates.board[X - 1, Y + 1].piece is not null)
                 {
-                    output.Add(new Point(X - 1, Y + 1));
+                    if (Coordinates.board[X - 1, Y + 1].piece.Team != Information.currentPlayer)
+                    {
+                        output.Add(new Point(X - 1, Y + 1));
+                    }
                 }
             }
             catch (IndexOutOfRangeException) { }
@@ -105,12 +111,18 @@ namespace LogicLayer
 
                 if (Coordinates.board[X + 1, Y - 1].piece is not null)
                 {
-                    output.Add(new Point(X + 1, Y - 1));
+                    if (Coordinates.board[X + 1, Y - 1].piece.Team != Information.currentPlayer)
+                    {
+                        output.Add(new Point(X + 1, Y - 1));
+                    }
                 }
 
                 if (Coordinates.board[X - 1, Y - 1].piece is not null)
                 {
-                    output.Add(new Point(X - 1, Y - 1));
+                    if (Coordinates.board[X - 1, Y - 1].piece.Team != Information.currentPlayer)
+                    {
+                        output.Add(new Point(X - 1, Y - 1));
+                    }
                 }
             }
             catch (IndexOutOfRangeException) { }
