@@ -9,6 +9,7 @@
       "UI/1.0.0": {
         "dependencies": {
           "ChessBoardAssets": "1.0.0",
+          "GameInfo": "1.0.0",
           "LogicLayer": "1.0.0"
         },
         "runtime": {
@@ -48,15 +49,22 @@
       },
       "ChessBoardAssets/1.0.0": {
         "dependencies": {
+          "GameInfo": "1.0.0",
           "System.Drawing.Common": "5.0.1"
         },
         "runtime": {
           "ChessBoardAssets.dll": {}
         }
       },
+      "GameInfo/1.0.0": {
+        "runtime": {
+          "GameInfo.dll": {}
+        }
+      },
       "LogicLayer/1.0.0": {
         "dependencies": {
-          "ChessBoardAssets": "1.0.0"
+          "ChessBoardAssets": "1.0.0",
+          "GameInfo": "1.0.0"
         },
         "runtime": {
           "LogicLayer.dll": {}
@@ -92,6 +100,11 @@
       "hashPath": "system.drawing.common.5.0.1.nupkg.sha512"
     },
     "ChessBoardAssets/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GameInfo/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

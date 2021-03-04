@@ -13,3 +13,5 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\ref\LogicLayer.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameInfo.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameInfo.pdb

@@ -50,6 +50,16 @@
             "rid": "win"
           }
         }
+      },
+      "GameInfo/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/GameInfo.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GameInfo.dll": {}
+        }
       }
     }
   },
@@ -141,10 +151,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "GameInfo/1.0.0": {
+      "type": "project",
+      "path": "../GameInfo/GameInfo.csproj",
+      "msbuildProject": "../GameInfo/GameInfo.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "GameInfo >= 1.0.0",
       "System.Drawing.Common >= 5.0.1"
     ]
   },
@@ -179,7 +195,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj": {
+              "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

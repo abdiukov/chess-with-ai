@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChessBoardAssets\ChessBoardAssets.csproj" />
+    <ProjectReference Include="..\GameInfo\GameInfo.csproj" />
   </ItemGroup>
 
 </Project>

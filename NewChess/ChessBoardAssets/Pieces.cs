@@ -1,8 +1,8 @@
-﻿using System.Drawing;
+﻿using GameInfo;
+using System.Drawing;
 
 namespace ChessBoardAssets
 {
-    public enum Team { White, Black };
 
 
     public abstract class Piece

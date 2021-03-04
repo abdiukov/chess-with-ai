@@ -15,7 +15,6 @@ namespace Chess
         private Point? selectedSquare;
         private Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
         public static List<Point?> possibleMoves = new List<Point?>();
-
         public GUIView()
         {
             InitializeComponent();

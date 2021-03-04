@@ -1,4 +1,5 @@
 ﻿using ChessBoardAssets;
+using GameInfo;
 using LogicLayer;
 using System;
 using System.Drawing;
@@ -13,10 +14,9 @@ namespace Chess
         private CommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
         private Controller contr = new Controller();
-        public static Team currentPlayer = Team.Black;
-
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
+            Information.currentPlayer = Team.White;
             this.commandHandler = commandHandler;
             for (int i = 0; i < BoardRows; i++)
             {
@@ -54,7 +54,7 @@ namespace Chess
         {
             Piece piece = Coordinates.board[coord.X, coord.Y].piece;
 
-            if (piece != null && piece.Team != currentPlayer)
+            if (piece != null && piece.Team == Information.currentPlayer)
             {
                 selectedSquare = coord;
                 GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
@@ -86,7 +86,7 @@ namespace Chess
                 Coordinates.board[origin.X, origin.Y].piece = null;
                 Update(origin);
                 Update(destination);
-                currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
+                Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
                 return true;
             }
             return false;
