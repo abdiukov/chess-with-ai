@@ -56,7 +56,7 @@ namespace Chess
 
             if (piece != null)
             {
-                contr.GetPossibleMoves(piece);
+                contr.GetPossibleMoves(piece, coord.X, coord.Y);
             }
 
             //if ((piece != null) && (piece.Team == currentplayer))
@@ -76,9 +76,7 @@ namespace Chess
 
         private bool Move(Point origin, Point destination)
         {
-            Piece mover = board[origin.X, origin.Y].piece;
-
-            contr.GetPossibleMoves(mover);
+            //contr.GetPossibleMoves(Piece,X,y);
             //if (move != null)
             //{
             //    move.Execute();
