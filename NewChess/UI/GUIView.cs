@@ -77,7 +77,6 @@ namespace Chess
                 {
                     Point highlight = (Point)item;
                     e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
-
                 }
             }
 

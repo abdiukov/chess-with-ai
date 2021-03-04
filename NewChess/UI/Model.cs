@@ -13,7 +13,7 @@ namespace Chess
         private CommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
         private Controller contr = new Controller();
-        public static Team currentPlayer = Team.White;
+        public static Team currentPlayer = Team.Black;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
@@ -54,7 +54,7 @@ namespace Chess
         {
             Piece piece = Coordinates.board[coord.X, coord.Y].piece;
 
-            if (piece != null)
+            if (piece != null && piece.Team != currentPlayer)
             {
                 selectedSquare = coord;
                 GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
@@ -67,9 +67,13 @@ namespace Chess
                 GUIView.possibleMoves.Clear();
                 return success;
             }
+            else
+            {
+                GUIView.possibleMoves.Clear();
+                return false;
+            }
 
 
-            return false;
         }
 
 

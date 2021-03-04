@@ -109,6 +109,7 @@ namespace LogicLayer
         {
             List<Point?> output = new List<Point?>();
             bool ExitLoop = false;
+
             //checking moves from the left
             for (int i = X - 1; ExitLoop == false; i--)
             {
@@ -141,7 +142,7 @@ namespace LogicLayer
             //checking moves from above
             ExitLoop = false;
 
-            for (int i = Y + 1; ExitLoop == false; i++)
+            for (int i = Y - 1; ExitLoop == false; i--)
             {
                 if (Coordinates.IsEmpty(X, i) == true)
                 {
@@ -154,8 +155,9 @@ namespace LogicLayer
             }
 
             //checking moves from below
+            ExitLoop = false;
 
-            for (int i = Y - 1; ExitLoop == false; i--)
+            for (int i = Y + 1; ExitLoop == false; i++)
             {
                 if (Coordinates.IsEmpty(X, i) == true)
                 {
