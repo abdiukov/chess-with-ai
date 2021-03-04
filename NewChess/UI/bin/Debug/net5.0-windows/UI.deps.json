@@ -56,16 +56,10 @@
       },
       "LogicLayer/1.0.0": {
         "dependencies": {
-          "ChessBoardAssets": "1.0.0",
-          "Movement": "1.0.0"
+          "ChessBoardAssets": "1.0.0"
         },
         "runtime": {
           "LogicLayer.dll": {}
-        }
-      },
-      "Movement/1.0.0": {
-        "runtime": {
-          "Movement.dll": {}
         }
       }
     }
@@ -103,11 +97,6 @@
       "sha512": ""
     },
     "LogicLayer/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Movement/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

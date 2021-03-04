@@ -68,24 +68,13 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "ChessBoardAssets": "1.0.0",
-          "Movement": "1.0.0"
+          "ChessBoardAssets": "1.0.0"
         },
         "compile": {
           "bin/placeholder/LogicLayer.dll": {}
         },
         "runtime": {
           "bin/placeholder/LogicLayer.dll": {}
-        }
-      },
-      "Movement/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/Movement.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Movement.dll": {}
         }
       }
     }
@@ -188,11 +177,6 @@
       "type": "project",
       "path": "../LogicLayer/LogicLayer.csproj",
       "msbuildProject": "../LogicLayer/LogicLayer.csproj"
-    },
-    "Movement/1.0.0": {
-      "type": "project",
-      "path": "../Movement/Movement.csproj",
-      "msbuildProject": "../Movement/Movement.csproj"
     }
   },
   "projectFileDependencyGroups": {

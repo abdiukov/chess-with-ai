@@ -4,6 +4,7 @@ namespace ChessBoardAssets
 {
     public enum Team { White, Black };
 
+
     public abstract class Piece
     {
         public Team Team;

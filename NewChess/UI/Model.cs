@@ -13,7 +13,7 @@ namespace Chess
         private CommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
         private Controller contr = new Controller();
-        private Square[,] board = Coordinates.board;
+        public static Team currentPlayer = Team.White;
 
         public Model(CommandHandler<ViewCommand> commandHandler)
         {
@@ -22,7 +22,7 @@ namespace Chess
             {
                 for (int j = 0; j < BoardColumns; j++)
                 {
-                    board[i, j] = new Square();
+                    Coordinates.board[i, j] = new Square();
                 }
             }
         }
@@ -52,44 +52,40 @@ namespace Chess
 
         public bool Select(Point coord)
         {
-            Piece piece = board[coord.X, coord.Y].piece;
+            Piece piece = Coordinates.board[coord.X, coord.Y].piece;
 
             if (piece != null)
             {
                 selectedSquare = coord;
                 GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
+                return true;
+            }
+            else if (GUIView.possibleMoves.Contains(coord))
+            {
+                bool success = Move(selectedSquare.Value, coord);
+                selectedSquare = null;
+                GUIView.possibleMoves.Clear();
+                return success;
             }
 
-            //if ((piece != null) && (piece.Team == currentplayer))
-            //{
-            //    selectedsquare = coord;
-            //    return true;
-            //}
-            //else if (selectedsquare != null)
-            //{
-            //    bool success = move(selectedsquare.value, coord);
-            //    selectedsquare = null;
-            //    return success;
-            //}
-            return true;
+
+            return false;
         }
 
 
         private bool Move(Point origin, Point destination)
         {
-            //contr.GetPossibleMoves(Piece,X,y);
-            //if (move != null)
-            //{
-            //    move.Execute();
-            //    board[destination.X, destination.Y].piece = mover;
-            //    board[origin.X, origin.Y].piece = null;
-            //    Update(origin);
-            //    Update(destination);
-            //currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
-            //    return true;
-            //}
-            //return false;
-            return true;
+            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
+            if (GUIView.possibleMoves.Count > 0)
+            {
+                Coordinates.board[destination.X, destination.Y].piece = mover;
+                Coordinates.board[origin.X, origin.Y].piece = null;
+                Update(origin);
+                Update(destination);
+                currentPlayer = currentPlayer == Team.White ? Team.Black : Team.White;
+                return true;
+            }
+            return false;
         }
 
 
@@ -117,13 +113,13 @@ namespace Chess
 
         private void Place(int col, int row, Piece piece)
         {
-            board[row, col].piece = piece;
+            Coordinates.board[row, col].piece = piece;
             Update(new Point(row, col));
         }
 
         private void Update(Point coord)
         {
-            Piece piece = board[coord.X, coord.Y].piece;
+            Piece piece = Coordinates.board[coord.X, coord.Y].piece;
             commandHandler.Handle(new DrawSquareCommand(coord, piece));
         }
     }

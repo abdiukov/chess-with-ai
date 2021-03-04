@@ -37,6 +37,7 @@ namespace Chess
             //if its succcessful, create selected square
             selectedSquare = (selectCommand.Success ? coord : null);
 
+
             this.Invalidate();
         }
 
@@ -70,7 +71,6 @@ namespace Chess
                 Point highlight = selectedSquare.Value;
                 e.Graphics.DrawRectangle(new Pen(Color.Yellow, lineSize), highlight.X * x, highlight.Y * y, x, y);
             }
-
             if (possibleMoves.Count > 0)
             {
                 foreach (var item in possibleMoves)
@@ -80,8 +80,6 @@ namespace Chess
 
                 }
             }
-
-
 
         }
 
@@ -95,11 +93,8 @@ namespace Chess
                 {
                     g.DrawImage(piece, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
                 }
-
-
-
-
             }
+
         }
 
 

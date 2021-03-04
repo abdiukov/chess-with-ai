@@ -64,11 +64,11 @@ namespace LogicLayer
                     }
                 }
             }
-            else if (Coordinates.IsEmpty(X + 1, Y + 1) == false)
+            if (Coordinates.IsEmpty(X + 1, Y + 1) == false)
             {
                 output.Add(new Point(X + 1, Y + 1));
             }
-            else if (Coordinates.IsEmpty(X - 1, Y + 1) == false)
+            if (Coordinates.IsEmpty(X - 1, Y + 1) == false)
             {
                 output.Add(new Point(X - 1, Y + 1));
             }
@@ -90,11 +90,11 @@ namespace LogicLayer
                     }
                 }
             }
-            else if (Coordinates.IsEmpty(X + 1, Y - 1) == false)
+            if (Coordinates.IsEmpty(X + 1, Y - 1) == false)
             {
                 output.Add(new Point(X + 1, Y - 1));
             }
-            else if (Coordinates.IsEmpty(X - 1, Y - 1) == false)
+            if (Coordinates.IsEmpty(X - 1, Y - 1) == false)
             {
                 output.Add(new Point(X - 1, Y - 1));
             }

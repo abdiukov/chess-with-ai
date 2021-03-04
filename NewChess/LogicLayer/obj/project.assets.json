@@ -63,16 +63,6 @@
         "runtime": {
           "bin/placeholder/ChessBoardAssets.dll": {}
         }
-      },
-      "Movement/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/Movement.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Movement.dll": {}
-        }
       }
     }
   },
@@ -169,17 +159,11 @@
       "type": "project",
       "path": "../ChessBoardAssets/ChessBoardAssets.csproj",
       "msbuildProject": "../ChessBoardAssets/ChessBoardAssets.csproj"
-    },
-    "Movement/1.0.0": {
-      "type": "project",
-      "path": "../Movement/Movement.csproj",
-      "msbuildProject": "../Movement/Movement.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "ChessBoardAssets >= 1.0.0",
-      "Movement >= 1.0.0"
+      "ChessBoardAssets >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -216,9 +200,6 @@
           "projectReferences": {
             "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
               "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
-            },
-            "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\Movement\\Movement.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\Movement\\Movement.csproj"
             }
           }
         }
