@@ -7,7 +7,7 @@ namespace Chess
 {
     public partial class GUIView : Form, IView
     {
-
+        private int dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.9);
         private const int bufferDimension = 1024;
         private const int squareDimension = bufferDimension / 8;
         private Model model;
@@ -21,6 +21,16 @@ namespace Chess
             InitGraphics();
             InitModel();
             this.MouseClick += GUIView_MouseClick;
+            this.MaximumSize = new Size(dimension, dimension);
+            this.MaximizeBox = false;
+            this.MinimumSize = new Size(dimension / 2, dimension / 2);
+        }
+
+
+
+        private void GUIView_MaximumSizeChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
 
         public new void Handle(ViewCommand command) { command.Execute(this); }
@@ -48,6 +58,7 @@ namespace Chess
 
         private void InitGraphics()
         {
+            this.Size = new Size(dimension, dimension);
             buffer = new Bitmap(bufferDimension, bufferDimension);
             this.DoubleBuffered = true;
             this.Paint += GUIView_Paint;
@@ -56,6 +67,14 @@ namespace Chess
 
         void GUIView_Resize(object sender, EventArgs e)
         {
+            if (lastSize.Width != this.Width)
+            {
+                this.Height = this.Width;
+            }
+            if (lastSize.Height != this.Height)
+            {
+                this.Width = this.Height;
+            }
             this.Invalidate();
         }
 

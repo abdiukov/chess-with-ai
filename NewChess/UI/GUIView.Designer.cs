@@ -1,4 +1,6 @@
-﻿namespace Chess
+﻿using System.Windows.Forms;
+
+namespace Chess
 {
     partial class GUIView
     {
@@ -34,7 +36,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 496);
+            this.ClientSize = new System.Drawing.Size(1, 1);
             this.Name = "Chess Application";
             this.Text = "Chess Application";
             this.ResumeLayout(false);

@@ -52,26 +52,27 @@ namespace Chess
 
         public bool Select(Point coord)
         {
-            Piece piece = Coordinates.board[coord.X, coord.Y].piece;
+            try
+            {
+                Piece piece = Coordinates.board[coord.X, coord.Y].piece;
 
-            if (piece != null && piece.Team == Information.currentPlayer)
-            {
-                selectedSquare = coord;
-                GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
-                return true;
+                if (piece != null && piece.Team == Information.currentPlayer)
+                {
+                    selectedSquare = coord;
+                    GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
+                    return true;
+                }
+                else if (GUIView.possibleMoves.Contains(coord))
+                {
+                    bool success = Move(selectedSquare.Value, coord);
+                    selectedSquare = null;
+                    GUIView.possibleMoves.Clear();
+                    return success;
+                }
             }
-            else if (GUIView.possibleMoves.Contains(coord))
-            {
-                bool success = Move(selectedSquare.Value, coord);
-                selectedSquare = null;
-                GUIView.possibleMoves.Clear();
-                return success;
-            }
-            else
-            {
-                GUIView.possibleMoves.Clear();
-                return false;
-            }
+            catch (IndexOutOfRangeException) { }
+            GUIView.possibleMoves.Clear();
+            return false;
         }
 
 
