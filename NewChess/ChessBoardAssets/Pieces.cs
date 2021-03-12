@@ -3,8 +3,6 @@ using System.Drawing;
 
 namespace ChessBoardAssets
 {
-
-
     public abstract class Piece
     {
         public Team Team;

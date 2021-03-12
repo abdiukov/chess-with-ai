@@ -5,13 +5,13 @@ namespace Chess
 {
     public abstract class ViewCommand : ICommand<IView>
     {
-        public abstract void execute(IView view);
+        public abstract void Execute(IView view);
     }
 
     public class DrawSquareCommand : ViewCommand
     {
-        private Point coord;
-        private Piece piece;
+        private readonly Point coord;
+        private readonly Piece piece;
 
         public DrawSquareCommand(Point coord, Piece piece)
         {
@@ -19,7 +19,7 @@ namespace Chess
             this.piece = piece;
         }
 
-        public override void execute(IView view)
+        public override void Execute(IView view)
         {
             Image pieceImage = null;
             if (piece != null)
@@ -28,8 +28,5 @@ namespace Chess
             }
             view.DrawSquare(pieceImage, coord);
         }
-
-
-
     }
 }

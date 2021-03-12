@@ -2,9 +2,9 @@
 {
     public interface ICommand<T>
     {
-        void execute(T t);
+        void Execute(T t);
     }
-    public interface CommandHandler<T>
+    public interface ICommandHandler<T>
     {
         void Handle(T command);
     }

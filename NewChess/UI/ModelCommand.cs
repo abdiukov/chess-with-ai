@@ -4,19 +4,13 @@ namespace Chess
 {
     public abstract class ModelCommand : ICommand<Model>
     {
-        private bool success;
-
-        public bool Success
-        {
-            get { return success; }
-            set { success = value; }
-        }
-        public abstract void execute(Model model);
+        public bool Success { get; set; }
+        public abstract void Execute(Model model);
     }
 
     class StartGameCommand : ModelCommand
     {
-        public override void execute(Model model)
+        public override void Execute(Model model)
         {
             model.Start();
         }
@@ -28,7 +22,7 @@ namespace Chess
 
         public SelectSquareCommand(Point coord) { this.coord = coord; }
 
-        public override void execute(Model model)
+        public override void Execute(Model model)
         {
             Success = model.Select(coord);
         }

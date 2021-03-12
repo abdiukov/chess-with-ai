@@ -9,7 +9,7 @@ namespace LogicLayer
 
     public class Controller
     {
-        public static bool ExitLoop = false;
+        private static bool ExitLoop = false;
         public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
         {
             List<Point?> movableSquares = new List<Point?>();
@@ -43,6 +43,7 @@ namespace LogicLayer
                     break;
             }
 
+            //Array array = new dynamic[] {1, 2, 3};
 
             return movableSquares;
             //returns the highlighted squares
@@ -394,7 +395,6 @@ namespace LogicLayer
                     ExitLoop = true;
                     return true;
                 }
-
                 return false;
             }
             catch (IndexOutOfRangeException)

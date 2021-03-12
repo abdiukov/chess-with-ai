@@ -7,14 +7,14 @@ using System.Drawing;
 namespace Chess
 {
 
-    public class Model : CommandHandler<ModelCommand>
+    public class Model : ICommandHandler<ModelCommand>
     {
-        public const int BoardRows = 8;
-        public const int BoardColumns = 8;
-        private CommandHandler<ViewCommand> commandHandler;
+        private const int BoardRows = 8;
+        private const int BoardColumns = 8;
+        private readonly ICommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
-        private Controller contr = new Controller();
-        public Model(CommandHandler<ViewCommand> commandHandler)
+        private readonly Controller contr = new Controller();
+        public Model(ICommandHandler<ViewCommand> commandHandler)
         {
             Information.currentPlayer = Team.White;
             this.commandHandler = commandHandler;
@@ -27,7 +27,7 @@ namespace Chess
             }
         }
 
-        public void Handle(ModelCommand command) { command.execute(this); }
+        public void Handle(ModelCommand command) { command.Execute(this); }
 
         public void Start()
         {
@@ -72,8 +72,6 @@ namespace Chess
                 GUIView.possibleMoves.Clear();
                 return false;
             }
-
-
         }
 
 
