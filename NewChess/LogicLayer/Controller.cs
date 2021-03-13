@@ -9,7 +9,6 @@ namespace LogicLayer
 
     public class Controller
     {
-        private static bool ExitLoop = false;
         public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
         {
             List<Point?> movableSquares = new List<Point?>();
@@ -43,12 +42,8 @@ namespace LogicLayer
                     break;
             }
 
-            //Array array = new dynamic[] {1, 2, 3};
-
-            return movableSquares;
             //returns the highlighted squares
-
-            //the program then looks at these highlighted squares and moves there
+            return movableSquares;
         }
 
 
@@ -56,6 +51,7 @@ namespace LogicLayer
         private List<Point?> GetMovesBlackPawn(int X, int Y)
         {
             List<Point?> output = new List<Point?>();
+
             if (IsEmpty(X, Y + 1) == true)
             {
                 output.Add(new Point(X, Y + 1));
@@ -67,26 +63,15 @@ namespace LogicLayer
                     }
                 }
             }
-            try
+            if (IsEmpty(X + 1, Y + 1) == false)
             {
-                if (Coordinates.board[X + 1, Y + 1].piece is not null)
-                {
-                    if (Coordinates.board[X + 1, Y + 1].piece.Team != Information.currentPlayer)
-                    {
-                        output.Add(new Point(X + 1, Y + 1));
-                    }
-                }
-                if (Coordinates.board[X - 1, Y + 1].piece is not null)
-                {
-                    if (Coordinates.board[X - 1, Y + 1].piece.Team != Information.currentPlayer)
-                    {
-                        output.Add(new Point(X - 1, Y + 1));
-                    }
-                }
+                output.Add(new Point(X + 1, Y + 1));
             }
-            catch (IndexOutOfRangeException) { }
 
-            ExitLoop = false;
+            if (IsEmpty(X - 1, Y + 1) == false)
+            {
+                output.Add(new Point(X - 1, Y + 1));
+            }
 
             return output;
         }
@@ -98,7 +83,6 @@ namespace LogicLayer
             if (IsEmpty(X, Y - 1) == true)
             {
                 output.Add(new Point(X, Y - 1));
-
                 if (Y == 6)
                 {
                     if (IsEmpty(X, Y - 2) == true)
@@ -107,27 +91,16 @@ namespace LogicLayer
                     }
                 }
             }
-            try
+
+            if (IsEmpty(X + 1, Y - 1) == false)
             {
-
-                if (Coordinates.board[X + 1, Y - 1].piece is not null)
-                {
-                    if (Coordinates.board[X + 1, Y - 1].piece.Team != Information.currentPlayer)
-                    {
-                        output.Add(new Point(X + 1, Y - 1));
-                    }
-                }
-
-                if (Coordinates.board[X - 1, Y - 1].piece is not null)
-                {
-                    if (Coordinates.board[X - 1, Y - 1].piece.Team != Information.currentPlayer)
-                    {
-                        output.Add(new Point(X - 1, Y - 1));
-                    }
-                }
+                output.Add(new Point(X + 1, Y - 1));
             }
-            catch (IndexOutOfRangeException) { }
-            ExitLoop = false;
+
+            if (IsEmpty(X - 1, Y - 1) == false)
+            {
+                output.Add(new Point(X - 1, Y - 1));
+            }
 
             return output;
         }
@@ -141,69 +114,83 @@ namespace LogicLayer
             List<Point?> output = new List<Point?>();
 
             //checking moves from the left
-            for (int i = X - 1; ExitLoop == false; i--)
+            for (int i = X - 1, exitLoop = 0; exitLoop == 0; i--)
             {
-                if (IsEmpty(i, Y) == true)
+                switch (IsEmpty(i, Y))
                 {
-                    output.Add(new Point(i, Y));
-                }
-                else
-                {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(i, Y));
+                        break;
+                    case false:
+                        output.Add(new Point(i, Y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
 
             //checking moves from the right
-
-            ExitLoop = false;
-
-            for (int i = X + 1; ExitLoop == false; i++)
+            for (int i = X + 1, exitLoop = 0; exitLoop == 0; i++)
             {
-                if (IsEmpty(i, Y) == true)
+                switch (IsEmpty(i, Y))
                 {
-                    output.Add(new Point(i, Y));
-                }
-                else
-                {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(i, Y));
+                        break;
+                    case false:
+                        output.Add(new Point(i, Y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
 
             //checking moves from above
-            ExitLoop = false;
 
-            for (int i = Y - 1; ExitLoop == false; i--)
+            for (int i = Y - 1, exitLoop = 0; exitLoop == 0; i--)
             {
-                if (IsEmpty(X, i) == true)
+                switch (IsEmpty(i, Y))
                 {
-                    output.Add(new Point(X, i));
-                }
-                else
-                {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(i, Y));
+                        break;
+                    case false:
+                        output.Add(new Point(i, Y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
+
 
             //checking moves from below
-            ExitLoop = false;
-
-            for (int i = Y + 1; ExitLoop == false; i++)
+            for (int i = Y + 1, exitLoop = 0; exitLoop == 0; i++)
             {
-                if (IsEmpty(X, i) == true)
+                switch (IsEmpty(i, Y))
                 {
-                    output.Add(new Point(X, i));
-                }
-                else
-                {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(i, Y));
+                        break;
+                    case false:
+                        output.Add(new Point(i, Y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
-            ExitLoop = false;
-
             //return all the moves
             return output;
-
         }
+
+
         private List<Point?> GetMovesKing(int X, int Y)
         {
             List<Point?> output = new List<Point?>();
@@ -217,28 +204,26 @@ namespace LogicLayer
             //down y+1
 
             //up and down
-            if (IsEmpty(X, Y - 1) == true) { output.Add(new Point(X, Y - 1)); }
+            if (IsEmpty(X, Y - 1) != null) { output.Add(new Point(X, Y - 1)); }
 
-            if (IsEmpty(X, Y + 1) == true) { output.Add(new Point(X, Y + 1)); }
+            if (IsEmpty(X, Y + 1) != null) { output.Add(new Point(X, Y + 1)); }
 
             //left and right
-            if (IsEmpty(X + 1, Y) == true) { output.Add(new Point(X + 1, Y)); }
+            if (IsEmpty(X + 1, Y) != null) { output.Add(new Point(X + 1, Y)); }
 
-            if (IsEmpty(X - 1, Y) == true) { output.Add(new Point(X - 1, Y)); }
-
+            if (IsEmpty(X - 1, Y) != null) { output.Add(new Point(X - 1, Y)); }
 
             //left up
-            if (IsEmpty(X - 1, Y - 1) == true) { output.Add(new Point(X - 1, Y - 1)); }
+            if (IsEmpty(X - 1, Y - 1) != null) { output.Add(new Point(X - 1, Y - 1)); }
 
             //left down
-            if (IsEmpty(X - 1, Y + 1) == true) { output.Add(new Point(X - 1, Y + 1)); }
+            if (IsEmpty(X - 1, Y + 1) != null) { output.Add(new Point(X - 1, Y + 1)); }
 
             //right up
-            if (IsEmpty(X + 1, Y - 1) == true) { output.Add(new Point(X + 1, Y - 1)); }
+            if (IsEmpty(X + 1, Y - 1) != null) { output.Add(new Point(X + 1, Y - 1)); }
 
             //right down
-            if (IsEmpty(X + 1, Y + 1) == true) { output.Add(new Point(X + 1, Y + 1)); }
-            ExitLoop = false;
+            if (IsEmpty(X + 1, Y + 1) != null) { output.Add(new Point(X + 1, Y + 1)); }
 
             return output;
         }
@@ -249,53 +234,79 @@ namespace LogicLayer
 
             //right down
 
-            for (int x = X + 1, y = Y + 1; ExitLoop == false; x++, y++)
+            for (int x = X + 1, y = Y + 1, exitLoop = 0; exitLoop == 0; x++, y++)
             {
-                if (IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
-                else
+                switch (IsEmpty(x, y))
                 {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(x, y));
+                        break;
+                    case false:
+                        output.Add(new Point(x, y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
 
             //right up
-            ExitLoop = false;
-
-            for (int x = X + 1, y = Y - 1; ExitLoop == false; x++, y--)
+            for (int x = X + 1, y = Y - 1, exitLoop = 0; exitLoop == 0; x++, y--)
             {
-                if (IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
-                else
+                switch (IsEmpty(x, y))
                 {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(x, y));
+                        break;
+                    case false:
+                        output.Add(new Point(x, y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
 
 
             //left up
-            ExitLoop = false;
-
-            for (int x = X - 1, y = Y - 1; ExitLoop == false; x--, y--)
+            for (int x = X - 1, y = Y - 1, exitLoop = 0; exitLoop == 0; x--, y--)
             {
-                if (IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
-                else
+
+                switch (IsEmpty(x, y))
                 {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(x, y));
+                        break;
+                    case false:
+                        output.Add(new Point(x, y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
 
             //left down
-            ExitLoop = false;
 
-            for (int x = X - 1, y = Y + 1; ExitLoop == false; x--, y++)
+            for (int x = X - 1, y = Y + 1, exitLoop = 0; exitLoop == 0; x--, y++)
             {
-                if (IsEmpty(x, y) == true) { output.Add(new Point(x, y)); }
-                else
+                switch (IsEmpty(x, y))
                 {
-                    ExitLoop = true;
+                    case true:
+                        output.Add(new Point(x, y));
+                        break;
+                    case false:
+                        output.Add(new Point(x, y));
+                        exitLoop = 1;
+                        break;
+                    case null:
+                        exitLoop = 1;
+                        break;
                 }
             }
-            ExitLoop = false;
-
 
             return output;
         }
@@ -304,68 +315,34 @@ namespace LogicLayer
         {
             List<Point?> output = new List<Point?>();
 
-            //http://www.chesscorner.com/tutorial/basic/knight/knight.htm
-
             //up left
 
-            if (IsEmpty(X - 1, Y - 2) == true) { output.Add(new Point(X - 1, Y - 2)); }
-
-            //y decreases by 2
-            //x decreases by 1
-
+            if (IsEmpty(X - 1, Y - 2) != null) { output.Add(new Point(X - 1, Y - 2)); }
             //up right
 
-            if (IsEmpty(X + 1, Y - 2) == true) { output.Add(new Point(X + 1, Y - 2)); }
-
-            //y decreases by 2
-            //x increases by 1
-
+            if (IsEmpty(X + 1, Y - 2) != null) { output.Add(new Point(X + 1, Y - 2)); }
 
             //down left
 
-            if (IsEmpty(X - 1, Y + 2) == true) { output.Add(new Point(X - 1, Y + 2)); }
-
-
-            //y increases by 2
-            //x decreases by 1
+            if (IsEmpty(X - 1, Y + 2) != null) { output.Add(new Point(X - 1, Y + 2)); }
 
             //down right
 
-            if (IsEmpty(X + 1, Y + 2) == true) { output.Add(new Point(X + 1, Y + 2)); }
-
-
-            //y increases by 2
-            //x incrases by 1
-
+            if (IsEmpty(X + 1, Y + 2) != null) { output.Add(new Point(X + 1, Y + 2)); }
 
             //left up
 
-            if (IsEmpty(X - 2, Y - 1) == true) { output.Add(new Point(X - 2, Y - 1)); }
-
-            //x decreases by 2
-            //y decreases by 1
+            if (IsEmpty(X - 2, Y - 1) != null) { output.Add(new Point(X - 2, Y - 1)); }
 
             //left down
 
-            if (IsEmpty(X - 2, Y + 1) == true) { output.Add(new Point(X - 2, Y + 1)); }
-
-
-            //x decreases by 2
-            //y increases by 1
+            if (IsEmpty(X - 2, Y + 1) != null) { output.Add(new Point(X - 2, Y + 1)); }
 
             //right up
-            if (IsEmpty(X + 2, Y - 1) == true) { output.Add(new Point(X + 2, Y - 1)); }
-
-            //x increases by 2
-            //y decreases by 1
+            if (IsEmpty(X + 2, Y - 1) != null) { output.Add(new Point(X + 2, Y - 1)); }
 
             //right down
-            if (IsEmpty(X + 2, Y + 1) == true) { output.Add(new Point(X + 2, Y + 1)); }
-            ExitLoop = false;
-
-            //x increases by 2
-            //y increases by 1
-
+            if (IsEmpty(X + 2, Y + 1) != null) { output.Add(new Point(X + 2, Y + 1)); }
 
             return output;
         }
@@ -382,7 +359,13 @@ namespace LogicLayer
         }
 
 
-        public static bool? IsEmpty(int x, int y)
+        /// <summary>
+        ///Checks whether the coordinate on the board is empty
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
+        private static bool? IsEmpty(int x, int y)
         {
             try
             {
@@ -392,16 +375,13 @@ namespace LogicLayer
                 }
                 else if (Coordinates.board[x, y].piece.Team != Information.currentPlayer)
                 {
-                    ExitLoop = true;
-                    return true;
+                    return false;
                 }
-                return false;
             }
-            catch (IndexOutOfRangeException)
-            {
-                return null;
-            };
+            catch (IndexOutOfRangeException) { };
+            return null;
         }
+
     }
 
 }
