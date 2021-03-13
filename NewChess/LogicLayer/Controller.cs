@@ -113,6 +113,7 @@ namespace LogicLayer
         {
             List<Point?> output = new List<Point?>();
 
+
             //checking moves from the left
             for (int i = X - 1, exitLoop = 0; exitLoop == 0; i--)
             {
@@ -153,13 +154,13 @@ namespace LogicLayer
 
             for (int i = Y - 1, exitLoop = 0; exitLoop == 0; i--)
             {
-                switch (IsEmpty(i, Y))
+                switch (IsEmpty(X, i))
                 {
                     case true:
-                        output.Add(new Point(i, Y));
+                        output.Add(new Point(X, i));
                         break;
                     case false:
-                        output.Add(new Point(i, Y));
+                        output.Add(new Point(X, i));
                         exitLoop = 1;
                         break;
                     case null:
@@ -172,13 +173,13 @@ namespace LogicLayer
             //checking moves from below
             for (int i = Y + 1, exitLoop = 0; exitLoop == 0; i++)
             {
-                switch (IsEmpty(i, Y))
+                switch (IsEmpty(X, i))
                 {
                     case true:
-                        output.Add(new Point(i, Y));
+                        output.Add(new Point(X, i));
                         break;
                     case false:
-                        output.Add(new Point(i, Y));
+                        output.Add(new Point(X, i));
                         exitLoop = 1;
                         break;
                     case null:
