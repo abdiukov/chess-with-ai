@@ -1,6 +1,5 @@
 ﻿using ChessBoardAssets;
 using GameInfo;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -368,7 +367,7 @@ namespace LogicLayer
         /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
         private static bool? IsEmpty(int x, int y)
         {
-            try
+            if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
             {
                 if (Coordinates.board[x, y].piece is null)
                 {
@@ -379,7 +378,6 @@ namespace LogicLayer
                     return false;
                 }
             }
-            catch (IndexOutOfRangeException) { };
             return null;
         }
 
