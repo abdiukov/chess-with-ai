@@ -7,7 +7,7 @@ namespace Chess
 {
     public partial class GUIView : Form, IView
     {
-        private readonly int dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.90);
+        private readonly int dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
         private const int bufferDimension = 1024;
         private const int squareDimension = bufferDimension / 8;
         private Model model;
@@ -15,6 +15,7 @@ namespace Chess
         private Point? selectedSquare;
         private readonly Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
         public static List<Point?> possibleMoves = new List<Point?>();
+
         public GUIView()
         {
             InitializeComponent();
@@ -60,8 +61,12 @@ namespace Chess
 
         void GUIView_Resize(object sender, EventArgs e)
         {
-            this.Height = this.Width;
-            this.Invalidate();
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                this.Height = this.Width;
+                this.Invalidate();
+            }
+
         }
 
         private void GUIView_Paint(object sender, PaintEventArgs e)

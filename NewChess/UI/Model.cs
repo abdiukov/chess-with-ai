@@ -2,6 +2,7 @@
 using GameInfo;
 using LogicLayer;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Chess
@@ -65,8 +66,52 @@ namespace Chess
                 else if (GUIView.possibleMoves.Contains(coord))
                 {
                     bool success = Move(selectedSquare.Value, coord);
-                    selectedSquare = null;
+
                     GUIView.possibleMoves.Clear();
+
+
+                    //update king's location
+                    switch (Coordinates.board[coord.X, coord.Y].piece)
+                    {
+                        case King:
+                            Information.UpdateKingLocation(coord.X, coord.Y);
+                            break;
+                    }
+
+
+                    for (int i = 0; i < 7; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            Piece tocheck = Coordinates.board[i, j].piece;
+                            if (tocheck != null)
+                            {
+                                //by that point the team has been switched, that is why we are checking current player team
+                                //in reality we are checking opposing team, whether the opposing team can eat my king
+                                if (tocheck.Team == Information.currentPlayer)
+                                {
+                                    List<Point?> getMoves = contr.GetPossibleMoves(tocheck, i, j);
+
+                                    if (getMoves.Contains(Information.GetMyKingLocation()))
+                                    {
+                                        UndoMove(selectedSquare.Value, coord);
+
+                                        switch (Coordinates.board[selectedSquare.Value.X, selectedSquare.Value.Y].piece)
+                                        {
+                                            case King:
+                                                Information.UndoUpdateKingLocation(selectedSquare.Value.X, selectedSquare.Value.Y);
+                                                break;
+                                        }
+
+                                        return success;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    selectedSquare = null;
+
                     return success;
                 }
             }
@@ -75,12 +120,26 @@ namespace Chess
             return false;
         }
 
+        private void UndoMove(Point origin, Point destination)
+        {
+            //origin piece should be same as destination piece
+            //destination piece should be same as saved origin piece
 
+            Coordinates.board[origin.X, origin.Y].piece = Coordinates.board[destination.X, destination.Y].piece;
+            Coordinates.board[destination.X, destination.Y].piece = saved_Piece;
+            Update(origin);
+            Update(destination);
+            Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+        }
+
+
+        private Piece saved_Piece;
         private bool Move(Point origin, Point destination)
         {
             Piece mover = Coordinates.board[origin.X, origin.Y].piece;
             if (GUIView.possibleMoves.Count > 0)
             {
+                saved_Piece = Coordinates.board[destination.X, destination.Y].piece;
                 Coordinates.board[destination.X, destination.Y].piece = mover;
                 Coordinates.board[origin.X, origin.Y].piece = null;
                 Update(origin);
