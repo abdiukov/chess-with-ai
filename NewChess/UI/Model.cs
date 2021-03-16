@@ -80,9 +80,9 @@ namespace Chess
                     }
 
 
-                    for (int i = 0; i < 7; i++)
+                    for (int i = 0; i <= 7; i++)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int j = 0; j <= 7; j++)
                         {
                             Piece tocheck = Coordinates.board[i, j].piece;
                             if (tocheck != null)
