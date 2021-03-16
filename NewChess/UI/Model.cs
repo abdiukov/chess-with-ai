@@ -75,6 +75,7 @@ namespace Chess
                     {
                         case King:
                             Information.UpdateKingLocation(coord.X, coord.Y);
+                            Information.UpdateKingEverMoved();
                             break;
                     }
 
@@ -99,7 +100,8 @@ namespace Chess
                                         switch (Coordinates.board[selectedSquare.Value.X, selectedSquare.Value.Y].piece)
                                         {
                                             case King:
-                                                Information.UndoUpdateKingLocation(selectedSquare.Value.X, selectedSquare.Value.Y);
+                                                Information.UpdateKingLocation(selectedSquare.Value.X, selectedSquare.Value.Y);
+                                                Information.Undo_UpdateKingEverMoved();
                                                 break;
                                         }
 
@@ -109,6 +111,28 @@ namespace Chess
                             }
                         }
                     }
+
+                    switch (Coordinates.board[coord.X, coord.Y].piece)
+                    {
+                        case King:
+                            //if the castling has been done
+                            if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                            {
+                                if (coord.X == 2)
+                                {
+                                    //left side
+                                    ForceMove(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
+                                }
+                                else if (coord.X == 6)
+                                {
+                                    //right side
+                                    ForceMove(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
+                                }
+                            }
+                            break;
+
+                    }
+
 
                     selectedSquare = null;
 
@@ -134,6 +158,17 @@ namespace Chess
 
 
         private Piece saved_Piece;
+
+        private void ForceMove(Point origin, Point destination)
+        {
+            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
+            Coordinates.board[destination.X, destination.Y].piece = mover;
+            Coordinates.board[origin.X, origin.Y].piece = null;
+            Update(origin);
+            Update(destination);
+        }
+
+
         private bool Move(Point origin, Point destination)
         {
             Piece mover = Coordinates.board[origin.X, origin.Y].piece;

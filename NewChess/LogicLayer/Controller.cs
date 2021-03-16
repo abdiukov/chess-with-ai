@@ -225,6 +225,25 @@ namespace LogicLayer
             //right down
             if (IsEmpty(X + 1, Y + 1) != null) { output.Add(new Point(X + 1, Y + 1)); }
 
+            if (Information.HasMyKingMovedBefore() == false && (Y == 7 || Y == 0))
+            {
+                //checking from right side
+                if (IsEmpty(X + 1, Y) == true && IsEmpty(X + 2, Y) == true
+                    && IsFriendlyRook(X + 3, Y) == true)
+                {
+                    output.Add(new Point(X + 2, Y));
+                }
+
+                //checking from left side
+
+                //checking from right side
+                if (IsEmpty(X - 1, Y) == true && IsEmpty(X - 2, Y) == true &&
+                   IsEmpty(X - 3, Y) == true && IsFriendlyRook(X - 4, Y) == true)
+                {
+                    output.Add(new Point(X - 2, Y));
+                }
+            }
+
             return output;
         }
 
@@ -381,6 +400,21 @@ namespace LogicLayer
             return null;
         }
 
-    }
+        private static bool IsFriendlyRook(int x, int y)
+        {
+            if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
+            {
+                if (Coordinates.board[x, y].piece is not null)
+                {
+                    if (Coordinates.board[x, y].piece is Rook
+                        && Coordinates.board[x, y].piece.Team == Information.currentPlayer)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
+    }
 }
