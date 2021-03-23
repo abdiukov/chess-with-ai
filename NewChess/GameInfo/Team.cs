@@ -5,6 +5,7 @@ namespace GameInfo
     public enum Team { White, Black };
     public abstract class Information
     {
+
         public static Team currentPlayer;
 
         private static Point WhiteKingLocation = new(4, 7);
@@ -15,19 +16,12 @@ namespace GameInfo
 
         private static bool hasBlackKingEverMoved = false;
 
-        private static bool hasMoved_backup = false;
-
-
-        public static void Undo_UpdateKingEverMoved()
+        public static void SetDefaultValues()
         {
-            if (currentPlayer == Team.White)
-            {
-                hasWhiteKingEverMoved = hasMoved_backup;
-            }
-            else
-            {
-                hasBlackKingEverMoved = hasMoved_backup;
-            }
+            WhiteKingLocation = new(4, 7);
+            BlackKingLocation = new(4, 0);
+            hasWhiteKingEverMoved = false;
+            hasBlackKingEverMoved = false;
         }
 
 
@@ -36,12 +30,10 @@ namespace GameInfo
         {
             if (currentPlayer != Team.White)
             {
-                hasMoved_backup = hasWhiteKingEverMoved;
                 hasWhiteKingEverMoved = true;
             }
             else
             {
-                hasMoved_backup = hasBlackKingEverMoved;
                 hasBlackKingEverMoved = true;
             }
         }

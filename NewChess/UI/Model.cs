@@ -65,18 +65,21 @@ namespace Chess
                 }
                 else if (GUIView.possibleMoves.Contains(coord))
                 {
+                    bool movingPieceIsKing = false;
+                    Point kingLocation;
                     bool success = Move(selectedSquare.Value, coord);
 
                     GUIView.possibleMoves.Clear();
 
-
-                    //update king's location
-                    switch (Coordinates.board[coord.X, coord.Y].piece)
+                    //if the moving piece is King
+                    if (Coordinates.board[coord.X, coord.Y].piece is King)
                     {
-                        case King:
-                            Information.UpdateKingLocation(coord.X, coord.Y);
-                            Information.UpdateKingEverMoved();
-                            break;
+                        movingPieceIsKing = true;
+                        kingLocation = new(coord.X, coord.Y);
+                    }
+                    else
+                    {
+                        kingLocation = Information.GetMyKingLocation();
                     }
 
 
@@ -93,17 +96,10 @@ namespace Chess
                                 {
                                     List<Point?> getMoves = contr.GetPossibleMoves(tocheck, i, j);
 
-                                    if (getMoves.Contains(Information.GetMyKingLocation()))
+                                    if (getMoves.Contains(kingLocation))
                                     {
                                         UndoMove(selectedSquare.Value, coord);
 
-                                        switch (Coordinates.board[selectedSquare.Value.X, selectedSquare.Value.Y].piece)
-                                        {
-                                            case King:
-                                                Information.UpdateKingLocation(selectedSquare.Value.X, selectedSquare.Value.Y);
-                                                Information.Undo_UpdateKingEverMoved();
-                                                break;
-                                        }
                                         Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
 
                                         return success;
@@ -113,27 +109,27 @@ namespace Chess
                         }
                     }
 
-                    switch (Coordinates.board[coord.X, coord.Y].piece)
+                    if (movingPieceIsKing)
                     {
-                        case King:
-                            //if the castling has been done
-                            if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                        //once we have moved, update the position of the king
+                        Information.UpdateKingLocation(coord.X, coord.Y);
+                        Information.UpdateKingEverMoved();
+
+                        //also if castling has been done, move the rook
+                        if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                        {
+                            if (coord.X == 2)
                             {
-                                if (coord.X == 2)
-                                {
-                                    //left side
-                                    ForceMove(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
-                                }
-                                else if (coord.X == 6)
-                                {
-                                    //right side
-                                    ForceMove(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
-                                }
+                                //left side
+                                ForceMove(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
                             }
-                            break;
-
+                            else if (coord.X == 6)
+                            {
+                                //right side
+                                ForceMove(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
+                            }
+                        }
                     }
-
 
                     selectedSquare = null;
 
