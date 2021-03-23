@@ -91,6 +91,11 @@ namespace Chess
 
         }
 
+        private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.mainMenu.Show();
+        }
+
         public void DrawSquare(Image piece, Point coord)
         {
             Brush brush = (coord.Y % 2 == 0) ? (coord.X % 2 == 0) ? c1 : c2 : (coord.X % 2 == 0) ? c2 : c1;

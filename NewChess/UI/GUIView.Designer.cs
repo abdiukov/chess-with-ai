@@ -34,11 +34,13 @@ namespace Chess
             // 
             // GUIView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1, 1);
-            this.Name = "Chess Application";
+            this.ClientSize = new System.Drawing.Size(140, 1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "GUIView";
             this.Text = "Chess Application";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GUIView_FormClosing);
             this.ResumeLayout(false);
 
         }

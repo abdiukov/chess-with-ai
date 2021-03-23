@@ -26,3 +26,4 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessBoardAssets.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInfo.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInfo.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.MainMenu.resources
