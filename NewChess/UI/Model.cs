@@ -104,6 +104,7 @@ namespace Chess
                                                 Information.Undo_UpdateKingEverMoved();
                                                 break;
                                         }
+                                        Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
 
                                         return success;
                                     }
@@ -153,7 +154,6 @@ namespace Chess
             Coordinates.board[destination.X, destination.Y].piece = saved_Piece;
             Update(origin);
             Update(destination);
-            Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
         }
 
 
