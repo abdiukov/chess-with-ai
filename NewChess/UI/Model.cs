@@ -4,6 +4,7 @@ using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using UI;
 
 namespace Chess
 {
@@ -14,7 +15,7 @@ namespace Chess
         private const int BoardColumns = 8;
         private readonly ICommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
-        private readonly Controller contr = new Controller();
+        private readonly Controller contr = new();
         public Model(ICommandHandler<ViewCommand> commandHandler)
         {
             Information.currentPlayer = Team.White;
@@ -106,6 +107,16 @@ namespace Chess
                                     }
                                 }
                             }
+                        }
+                    }
+
+                    if (Coordinates.board[coord.X, coord.Y].piece is Pawn)
+                    {
+                        if (coord.Y == 0 || coord.Y == 7)
+                        {
+                            PawnUpgrade pageobj = new();
+                            string test = pageobj.GetUserNewPieceChoice();
+                            test += "a";
                         }
                     }
 

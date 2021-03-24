@@ -15,7 +15,7 @@ namespace Chess
         private Bitmap buffer;
         private Point? selectedSquare;
         private readonly Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
-        public static List<Point?> possibleMoves = new List<Point?>();
+        public static List<Point?> possibleMoves = new();
 
         public GUIView()
         {
@@ -30,7 +30,7 @@ namespace Chess
         private void GUIView_MouseClick(object sender, MouseEventArgs e)
         {
             Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
-            SelectSquareCommand selectCommand = new SelectSquareCommand(coord.Value);
+            SelectSquareCommand selectCommand = new(coord.Value);
 
             //creates the command and says to model - go handle that command bro
             model.Handle(selectCommand);

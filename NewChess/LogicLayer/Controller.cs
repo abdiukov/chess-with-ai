@@ -10,7 +10,7 @@ namespace LogicLayer
     {
         public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
         {
-            List<Point?> movableSquares = new List<Point?>();
+            List<Point?> movableSquares = new();
 
             switch (piece)
             {
@@ -49,7 +49,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesBlackPawn(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             if (IsEmpty(X, Y + 1) == true)
             {
@@ -77,7 +77,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesWhitePawn(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             if (IsEmpty(X, Y - 1) == true)
             {
@@ -110,7 +110,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesRook(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
 
             //checking moves from the left
@@ -193,7 +193,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesKing(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             //move right up and down -  from the white side perspective
             //so for example from the black perspective, up would be down, down would be up etc
@@ -249,7 +249,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesBishop(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             //right down
 
@@ -332,7 +332,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesKnight(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             //up left
 
@@ -369,7 +369,7 @@ namespace LogicLayer
 
         private List<Point?> GetMovesQueen(int X, int Y)
         {
-            List<Point?> output = new List<Point?>();
+            List<Point?> output = new();
 
             output.AddRange(GetMovesBishop(X, Y));
             output.AddRange(GetMovesRook(X, Y));

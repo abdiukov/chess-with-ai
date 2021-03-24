@@ -42,7 +42,7 @@ namespace UI
             this.button_PlayAsWhite.Name = "button_PlayAsWhite";
             this.button_PlayAsWhite.Size = new System.Drawing.Size(284, 50);
             this.button_PlayAsWhite.TabIndex = 1;
-            this.button_PlayAsWhite.Text = "Start the game";
+            this.button_PlayAsWhite.Text = "Start new game";
             this.button_PlayAsWhite.UseVisualStyleBackColor = true;
             this.button_PlayAsWhite.Click += new System.EventHandler(this.button_PlayAsWhite_Click);
             // 
