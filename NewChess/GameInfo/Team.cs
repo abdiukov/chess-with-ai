@@ -5,6 +5,7 @@ namespace GameInfo
     public enum Team { White, Black };
     public abstract class Information
     {
+        public static bool PlayAgainstAI = true;
 
         public static Team currentPlayer;
 

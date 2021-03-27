@@ -1,4 +1,5 @@
 ﻿using ChessBoardAssets;
+using ChessCore;
 using GameInfo;
 using LogicLayer;
 using System;
@@ -150,6 +151,16 @@ namespace Chess
                         }
                     }
 
+                    //logic if it is an ai
+
+                    if (Information.PlayAgainstAI == true)
+                    {
+                        //mover coord.x coord.y
+                        //moving plac e- selectedSquare x, selected square y
+                        DoAIMove(selectedSquare.Value.X, selectedSquare.Value.Y, coord.X, coord.Y);
+                    }
+
+
                     selectedSquare = null;
 
                     return success;
@@ -158,6 +169,27 @@ namespace Chess
             catch (IndexOutOfRangeException) { }
             GUIView.possibleMoves.Clear();
             return false;
+        }
+
+
+        private void DoAIMove(int moverX, int moverY, int destinationX, int destinationY)
+        {
+            string outputFromAI = Adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
+
+            if (outputFromAI != "")
+            {
+                int x1 = int.Parse(outputFromAI[0].ToString());
+                int y1 = int.Parse(outputFromAI[1].ToString());
+                int x2 = int.Parse(outputFromAI[2].ToString());
+                int y2 = int.Parse(outputFromAI[3].ToString());
+
+                Point origin = new Point(x1, y1);
+                Point destination = new Point(x2, y2);
+
+                ForceMove(origin, destination);
+                Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+
+            }
         }
 
         private void UndoMove(Point origin, Point destination)

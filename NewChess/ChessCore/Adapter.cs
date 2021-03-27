@@ -3,33 +3,27 @@ using System;
 
 namespace ChessCore
 {
-    class Adapter
+    public class Adapter
     {
-        public static Engine engine = new Engine();
+        private static readonly Engine engine = new Engine();
 
-        private static void MakeMove(byte srcCol, byte srcRow,
+        public static string MakeMove(byte srcCol, byte srcRow,
         byte dstCol, byte dstRow)
         {
             while (true)
             {
                 try
                 {
-                    if (engine.WhoseMove != engine.HumanPlayer)
+                    if (engine.WhoseMove == engine.HumanPlayer)
                     {
-                        MakeEngineMove(engine);
-                    }
-                    else
-                    {
-
                         if (!engine.IsValidMove(srcCol, srcRow, dstCol, dstRow))
                         {
-                            Console.WriteLine("Invalid Move");
-                            continue;
+                            return "";
                         }
 
                         engine.MovePiece(srcCol, srcRow, dstCol, dstRow);
 
-                        MakeEngineMove(engine);
+                        return MakeEngineMove(engine);
                     }
                 }
                 catch (Exception ex)
@@ -38,7 +32,7 @@ namespace ChessCore
                 }
 
                 //exit the while loop
-                return;
+                return "";
 
             }
         }
@@ -60,7 +54,7 @@ namespace ChessCore
             ConvertToMyCustomRows(ref destinationRow);
 
 
-            output = sourceColumn + "-" + srcRow + " " + destinationColumn + "-" + destinationRow;
+            output = sourceColumn.ToString() + srcRow.ToString() + destinationColumn.ToString() + destinationRow.ToString();
 
             return output;
         }

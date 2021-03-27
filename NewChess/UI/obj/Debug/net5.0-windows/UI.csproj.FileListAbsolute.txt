@@ -28,3 +28,11 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInfo.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.MainMenu.resources
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.PawnUpgrade.resources
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.runtimeconfig.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.runtimeconfig.dev.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\nunit.framework.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCoreEngine.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCoreEngine.pdb
