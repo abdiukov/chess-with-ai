@@ -15,8 +15,6 @@ namespace UI
         public PawnUpgrade()
         {
             InitializeComponent();
-
-
             if (Information.currentPlayer == Team.White)
             {
                 //get the black
@@ -33,53 +31,27 @@ namespace UI
                 pictureBox_Knight.Image = Image.FromFile("Knight_W.png");
                 pictureBox_Rook.Image = Image.FromFile("Rook_W.png");
             }
-
-        }
-        public string GetUserNewPieceChoice()
-        {
-            this.Show();
-
-            Sleep();
-
-            this.Close();
-            return userChoice;
         }
 
         private void pictureBox_Queen_Click(object sender, EventArgs e)
         {
-            userChoice = "Queen";
 
-            mrse.Set();
         }
 
         private void pictureBox_Rook_Click(object sender, EventArgs e)
         {
-            userChoice = "Rook";
-
-            mrse.Set();
-
 
         }
 
         private void pictureBox_Bishop_Click(object sender, EventArgs e)
         {
-            userChoice = "Bishop";
-
-            mrse.Set();
 
         }
 
         private void pictureBox_Knight_Click(object sender, EventArgs e)
         {
-            userChoice = "Knight";
-
-            mrse.Set();
 
         }
 
-        private void Sleep()
-        {
-            mrse.WaitOne();
-        }
     }
 }

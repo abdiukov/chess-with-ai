@@ -4,7 +4,6 @@ using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using UI;
 
 namespace Chess
 {
@@ -100,10 +99,18 @@ namespace Chess
                                     if (getMoves.Contains(kingLocation))
                                     {
                                         UndoMove(selectedSquare.Value, coord);
-
                                         Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
-
                                         return success;
+                                    }
+                                    //if we moved king and it contains old king's location
+                                    else if (movingPieceIsKing && getMoves.Contains(Information.GetMyKingLocation()))
+                                    {
+                                        if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                                        {
+                                            UndoMove(selectedSquare.Value, coord);
+                                            Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+                                            return success;
+                                        }
                                     }
                                 }
                             }
@@ -114,9 +121,10 @@ namespace Chess
                     {
                         if (coord.Y == 0 || coord.Y == 7)
                         {
-                            PawnUpgrade pageobj = new();
-                            string test = pageobj.GetUserNewPieceChoice();
-                            test += "a";
+                            //PawnUpgrade pageobj = new();
+                            //pageobj.Show();
+
+                            UpgradePawn(coord.X, coord.Y);
                         }
                     }
 
@@ -173,6 +181,17 @@ namespace Chess
             Coordinates.board[origin.X, origin.Y].piece = null;
             Update(origin);
             Update(destination);
+        }
+
+        public void UpgradePawn(int x, int y)
+        {
+            Team toUpdate = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+
+            Piece upgradedPiece = new Queen(toUpdate);
+
+            Coordinates.board[x, y].piece = upgradedPiece;
+
+            Update(new Point(x, y));
         }
 
 
