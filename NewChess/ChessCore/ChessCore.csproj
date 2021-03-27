@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Version>1.0.1</Version>
+    <Company>3583 Bytes</Company>
+    <Authors>Adam Berent</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChessCoreEngine\ChessCoreEngine.csproj">
+      <Project>{1861FDA3-D8F8-4479-B914-C78B777B93D5}</Project>
+      <Name>ChessCoreEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
