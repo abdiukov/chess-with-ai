@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d9mDR/xjub6sLu2RPe9cLM4YhOPUepvrMEQ7Q1Cbp+V8d8jTLnxzNLobgtoB8wEtKdIMHSEM8x1EkzRCcfxPMQ==",
+  "dgSpecHash": "DE8z1/4aL16t/xVkAAWPclfjZC73fko2TV2jZU27/aQOqwoZp5/sx5Oz6JakOIwbFAX1U5ZClCimm2e0DI0A/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj",
+  "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,6 +1,6 @@
 ﻿using ChessBoardAssets;
 using ChessCore;
-using GameInfo;
+using GameInformation;
 using LogicLayer;
 using System;
 using System.Collections.Generic;

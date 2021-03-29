@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj",
-      "projectName": "GameInfo",
-      "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj",
+      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj",
+      "projectName": "GameInformation",
+      "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj",
       "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\obj\\",
       "projectStyle": "PackageReference",

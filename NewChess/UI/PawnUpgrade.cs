@@ -1,4 +1,4 @@
-﻿using GameInfo;
+﻿using GameInformation;
 using System;
 using System.Drawing;
 using System.Threading;

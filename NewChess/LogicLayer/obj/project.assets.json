@@ -55,7 +55,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "GameInfo": "1.0.0",
+          "GameInformation": "1.0.0",
           "System.Drawing.Common": "5.0.1"
         },
         "compile": {
@@ -65,14 +65,14 @@
           "bin/placeholder/ChessBoardAssets.dll": {}
         }
       },
-      "GameInfo/1.0.0": {
+      "GameInformation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "compile": {
-          "bin/placeholder/GameInfo.dll": {}
+          "bin/placeholder/GameInformation.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GameInfo.dll": {}
+          "bin/placeholder/GameInformation.dll": {}
         }
       }
     }
@@ -171,16 +171,16 @@
       "path": "../ChessBoardAssets/ChessBoardAssets.csproj",
       "msbuildProject": "../ChessBoardAssets/ChessBoardAssets.csproj"
     },
-    "GameInfo/1.0.0": {
+    "GameInformation/1.0.0": {
       "type": "project",
-      "path": "../GameInfo/GameInfo.csproj",
-      "msbuildProject": "../GameInfo/GameInfo.csproj"
+      "path": "../GameInfo/GameInformation.csproj",
+      "msbuildProject": "../GameInfo/GameInformation.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "ChessBoardAssets >= 1.0.0",
-      "GameInfo >= 1.0.0"
+      "GameInformation >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -221,8 +221,8 @@
             "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
               "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
             },
-            "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInfo.csproj"
+            "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj": {
+              "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj"
             }
           }
         }

@@ -1,5 +1,5 @@
 ﻿using ChessBoardAssets;
-using GameInfo;
+using GameInformation;
 using System.Collections.Generic;
 using System.Drawing;
 

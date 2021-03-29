@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "ChessBoardAssets/1.0.0": {
         "dependencies": {
-          "GameInfo": "1.0.0",
+          "GameInformation": "1.0.0",
           "System.Drawing.Common": "5.0.1"
         },
         "runtime": {
@@ -60,9 +60,9 @@
           }
         }
       },
-      "GameInfo/1.0.0": {
+      "GameInformation/1.0.0": {
         "runtime": {
-          "GameInfo.dll": {}
+          "GameInformation.dll": {}
         }
       }
     }
@@ -94,7 +94,7 @@
       "path": "system.drawing.common/5.0.1",
       "hashPath": "system.drawing.common.5.0.1.nupkg.sha512"
     },
-    "GameInfo/1.0.0": {
+    "GameInformation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

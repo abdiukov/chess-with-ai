@@ -24,8 +24,6 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessBoardAssets.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessBoardAssets.pdb
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInfo.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInfo.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.MainMenu.resources
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\obj\Debug\net5.0-windows\UI.PawnUpgrade.resources
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.deps.json
@@ -36,3 +34,5 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-window
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCoreEngine.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCore.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\ChessCoreEngine.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInformation.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\UI\bin\Debug\net5.0-windows\GameInformation.pdb

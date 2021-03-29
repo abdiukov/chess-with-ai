@@ -9,7 +9,7 @@
       "LogicLayer/1.0.0": {
         "dependencies": {
           "ChessBoardAssets": "1.0.0",
-          "GameInfo": "1.0.0"
+          "GameInformation": "1.0.0"
         },
         "runtime": {
           "LogicLayer.dll": {}
@@ -62,16 +62,16 @@
       },
       "ChessBoardAssets/1.0.0": {
         "dependencies": {
-          "GameInfo": "1.0.0",
+          "GameInformation": "1.0.0",
           "System.Drawing.Common": "5.0.1"
         },
         "runtime": {
           "ChessBoardAssets.dll": {}
         }
       },
-      "GameInfo/1.0.0": {
+      "GameInformation/1.0.0": {
         "runtime": {
-          "GameInfo.dll": {}
+          "GameInformation.dll": {}
         }
       }
     }
@@ -108,7 +108,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "GameInfo/1.0.0": {
+    "GameInformation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

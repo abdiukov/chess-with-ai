@@ -1,8 +1,9 @@
 ﻿using System.Drawing;
 
-namespace GameInfo
+namespace GameInformation
 {
     public enum Team { White, Black };
+
     public abstract class Information
     {
         public static bool PlayAgainstAI = true;

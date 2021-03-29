@@ -1,4 +1,4 @@
-﻿using GameInfo;
+﻿using GameInformation;
 using System.Drawing;
 
 namespace ChessBoardAssets
