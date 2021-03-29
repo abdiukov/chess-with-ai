@@ -81,7 +81,7 @@
           }
         }
       },
-      "ChessCore/1.0.1": {
+      "ChessCore/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
@@ -402,7 +402,7 @@
         "version.txt"
       ]
     },
-    "ChessCore/1.0.1": {
+    "ChessCore/1.0.0": {
       "type": "project",
       "path": "../ChessCore/ChessCore.csproj",
       "msbuildProject": "../ChessCore/ChessCore.csproj"
@@ -430,7 +430,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
-      "ChessCore >= 1.0.1",
+      "ChessCore >= 1.0.0",
       "GameBoard >= 1.0.0",
       "GameInformation >= 1.0.0",
       "GameMovement >= 1.0.0"

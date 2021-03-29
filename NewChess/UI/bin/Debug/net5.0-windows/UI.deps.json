@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "UI/1.0.0": {
         "dependencies": {
-          "ChessCore": "1.0.1",
+          "ChessCore": "1.0.0",
           "GameBoard": "1.0.0",
           "GameInformation": "1.0.0",
           "GameMovement": "1.0.0"
@@ -64,7 +64,7 @@
           }
         }
       },
-      "ChessCore/1.0.1": {
+      "ChessCore/1.0.0": {
         "dependencies": {
           "ChessCoreEngine": "1.0.0"
         },
@@ -148,7 +148,7 @@
       "path": "system.drawing.common/5.0.2",
       "hashPath": "system.drawing.common.5.0.2.nupkg.sha512"
     },
-    "ChessCore/1.0.1": {
+    "ChessCore/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

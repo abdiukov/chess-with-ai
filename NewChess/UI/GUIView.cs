@@ -1,5 +1,4 @@
-﻿using GameInformation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -94,7 +93,6 @@ namespace Chess
 
         private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Information.SetDefaultValues();
             Program.mainMenu.Show();
         }
 

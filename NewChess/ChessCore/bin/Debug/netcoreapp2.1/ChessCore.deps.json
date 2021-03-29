@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "ChessCore/1.0.1": {
+      "ChessCore/1.0.0": {
         "dependencies": {
           "ChessCoreEngine": "1.0.0"
         },
@@ -33,7 +33,7 @@
     }
   },
   "libraries": {
-    "ChessCore/1.0.1": {
+    "ChessCore/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

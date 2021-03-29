@@ -5,17 +5,17 @@ namespace GameInformation
 {
     public abstract class Information
     {
-        public static bool PlayAgainstAI = true;
+        public static bool PlayAgainstAI;
 
         public static Team CurrentTeam;
 
-        private static Point WhiteKingLocation = new(4, 7);
+        private static Point WhiteKingLocation;
 
-        private static Point BlackKingLocation = new(4, 0);
+        private static Point BlackKingLocation;
 
-        private static bool hasWhiteKingEverMoved = false;
+        private static bool hasWhiteKingEverMoved;
 
-        private static bool hasBlackKingEverMoved = false;
+        private static bool hasBlackKingEverMoved;
 
         public static void SetDefaultValues()
         {
@@ -23,7 +23,6 @@ namespace GameInformation
             BlackKingLocation = new(4, 0);
             hasWhiteKingEverMoved = false;
             hasBlackKingEverMoved = false;
-            PlayAgainstAI = false;
         }
 
         public static void UpdateKingEverMoved()

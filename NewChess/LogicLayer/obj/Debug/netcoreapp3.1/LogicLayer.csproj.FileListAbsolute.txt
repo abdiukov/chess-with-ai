@@ -1,9 +1,0 @@
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\netcoreapp3.1\LogicLayer.deps.json
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\netcoreapp3.1\LogicLayer.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\netcoreapp3.1\LogicLayer.pdb
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.csprojAssemblyReference.cache
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.AssemblyInfoInputs.cache
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.AssemblyInfo.cs
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.csproj.CoreCompileInputs.cache
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\netcoreapp3.1\LogicLayer.pdb
