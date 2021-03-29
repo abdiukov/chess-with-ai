@@ -56,6 +56,18 @@ namespace ChessCore
         }
 
 
+        public static void StartGame()
+        {
+            engine.NewGame();
+        }
+
+        public static string StartAsBlack()
+        {
+            engine.HumanPlayer = ChessPieceColor.Black;
+            return MakeEngineMove(engine);
+        }
+
+
 
 
     }

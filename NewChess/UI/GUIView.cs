@@ -24,6 +24,12 @@ namespace Chess
             this.MouseClick += GUIView_MouseClick;
         }
 
+        public void StartAsBlackAgainstAI()
+        {
+            model.FirstWhiteMoveAI();
+            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
+        }
+
         public new void Handle(ViewCommand command) { command.Execute(this); }
 
         private void GUIView_MouseClick(object sender, MouseEventArgs e)

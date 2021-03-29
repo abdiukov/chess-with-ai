@@ -171,11 +171,25 @@ namespace Chess
             return false;
         }
 
+        public void FirstWhiteMoveAI()
+        {
+            string outputFromAI = Adapter.StartAsBlack();
+            ProcessAIOutput(outputFromAI);
+
+        }
 
         private void DoAIMove(int moverX, int moverY, int destinationX, int destinationY)
         {
             string outputFromAI = Adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
 
+            ProcessAIOutput(outputFromAI);
+            Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+
+        }
+
+
+        private void ProcessAIOutput(string outputFromAI)
+        {
             if (outputFromAI != "")
             {
                 int x1 = int.Parse(outputFromAI[0].ToString());
@@ -187,8 +201,6 @@ namespace Chess
                 Point destination = new Point(x2, y2);
 
                 ForceMove(origin, destination);
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-
             }
         }
 
