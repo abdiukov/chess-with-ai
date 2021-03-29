@@ -1,7 +1,7 @@
-﻿using ChessBoardAssets;
-using ChessCore;
+﻿using ChessCore;
+using GameBoard;
 using GameInformation;
-using LogicLayer;
+using GameMovement;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,7 +15,7 @@ namespace Chess
         private const int BoardColumns = 8;
         private readonly ICommandHandler<ViewCommand> commandHandler;
         private Point? selectedSquare;
-        private readonly Controller contr = new();
+        private readonly Movement contr = new();
         public Model(ICommandHandler<ViewCommand> commandHandler)
         {
             Information.CurrentTeam = Team.White;

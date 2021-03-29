@@ -2,8 +2,6 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\LogicLayer.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ref\LogicLayer.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\LogicLayer.pdb
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ChessBoardAssets.dll
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\ChessBoardAssets.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.csprojAssemblyReference.cache
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.AssemblyInfoInputs.cache
@@ -15,3 +13,5 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\obj\Debug\net5.0\LogicLayer.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameInformation.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameInformation.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameBoard.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\LogicLayer\bin\Debug\net5.0\GameBoard.pdb

@@ -8,10 +8,10 @@
     ".NETCoreApp,Version=v5.0": {
       "UI/1.0.0": {
         "dependencies": {
-          "ChessBoardAssets": "1.0.0",
           "ChessCore": "1.0.1",
+          "GameBoard": "1.0.0",
           "GameInformation": "1.0.0",
-          "LogicLayer": "1.0.0"
+          "GameMovement": "1.0.0"
         },
         "runtime": {
           "UI.dll": {}
@@ -39,37 +39,29 @@
           }
         }
       },
-      "System.Drawing.Common/5.0.1": {
+      "System.Drawing.Common/5.0.2": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "5.0.0"
         },
         "runtime": {
           "lib/netcoreapp3.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "5.0.0.1",
-            "fileVersion": "5.0.321.7212"
+            "assemblyVersion": "5.0.0.2",
+            "fileVersion": "5.0.421.11614"
           }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": {
             "rid": "unix",
             "assetType": "runtime",
-            "assemblyVersion": "5.0.0.1",
-            "fileVersion": "5.0.321.7212"
+            "assemblyVersion": "5.0.0.2",
+            "fileVersion": "5.0.421.11614"
           },
           "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "5.0.0.1",
-            "fileVersion": "5.0.321.7212"
+            "assemblyVersion": "5.0.0.2",
+            "fileVersion": "5.0.421.11614"
           }
-        }
-      },
-      "ChessBoardAssets/1.0.0": {
-        "dependencies": {
-          "System.Drawing.Common": "5.0.1"
-        },
-        "runtime": {
-          "ChessBoardAssets.dll": {}
         }
       },
       "ChessCore/1.0.1": {
@@ -88,21 +80,29 @@
           "ChessCoreEngine.dll": {}
         }
       },
+      "GameBoard/1.0.0": {
+        "dependencies": {
+          "System.Drawing.Common": "5.0.2"
+        },
+        "runtime": {
+          "GameBoard.dll": {}
+        }
+      },
       "GameInformation/1.0.0": {
         "dependencies": {
-          "ChessBoardAssets": "1.0.0"
+          "GameBoard": "1.0.0"
         },
         "runtime": {
           "GameInformation.dll": {}
         }
       },
-      "LogicLayer/1.0.0": {
+      "GameMovement/1.0.0": {
         "dependencies": {
-          "ChessBoardAssets": "1.0.0",
+          "GameBoard": "1.0.0",
           "GameInformation": "1.0.0"
         },
         "runtime": {
-          "LogicLayer.dll": {}
+          "GameMovement.dll": {}
         }
       }
     }
@@ -141,17 +141,12 @@
       "path": "nunit/3.11.0",
       "hashPath": "nunit.3.11.0.nupkg.sha512"
     },
-    "System.Drawing.Common/5.0.1": {
+    "System.Drawing.Common/5.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3IN8zWk395Qu+7wnoTbebEjdP3izZBBKAahgWuC0jp9tCgTdUFN6KsrqQl0I3L+ptZD/LvwKjgFp1u+x3+p+DA==",
-      "path": "system.drawing.common/5.0.1",
-      "hashPath": "system.drawing.common.5.0.1.nupkg.sha512"
-    },
-    "ChessBoardAssets/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
+      "sha512": "sha512-rvr/M1WPf24ljpvvrVd74+NdjRUJu1bBkspkZcnzSZnmAUQWSvanlQ0k/hVHk+cHufZbZfu7vOh/vYc0q5Uu/A==",
+      "path": "system.drawing.common/5.0.2",
+      "hashPath": "system.drawing.common.5.0.2.nupkg.sha512"
     },
     "ChessCore/1.0.1": {
       "type": "project",
@@ -163,12 +158,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "GameBoard/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "GameInformation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "LogicLayer/1.0.0": {
+    "GameMovement/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

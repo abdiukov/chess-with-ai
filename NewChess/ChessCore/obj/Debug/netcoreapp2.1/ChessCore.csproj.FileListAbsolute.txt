@@ -14,8 +14,6 @@ C:\Users\Ash\Desktop\ChessCore-master\ChessCore\obj\Debug\netcoreapp2.1\ChessCor
 C:\Users\Ash\Desktop\ChessCore-master\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.pdb
 C:\Users\Ash\Desktop\ChessCore-master\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.genruntimeconfig.cache
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCore.deps.json
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCore.runtimeconfig.json
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCore.runtimeconfig.dev.json
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCore.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCore.pdb
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\bin\Debug\netcoreapp2.1\ChessCoreEngine.dll
@@ -27,4 +25,3 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\obj\Debug\netcor
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.csproj.CopyComplete
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.pdb
-C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\ChessCore\obj\Debug\netcoreapp2.1\ChessCore.genruntimeconfig.cache

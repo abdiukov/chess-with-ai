@@ -1,4 +1,4 @@
-﻿using ChessBoardAssets;
+﻿using GameBoard;
 using GameInformation;
 using System.Collections.Generic;
 using System.Drawing;

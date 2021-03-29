@@ -1,4 +1,4 @@
-﻿using ChessBoardAssets;
+﻿using GameBoard;
 using GameInformation;
 using System;
 using System.Drawing;
@@ -11,7 +11,7 @@ namespace UI
     {
         ManualResetEvent mrse = new(false);
 
-        private string userChoice;
+        //  private string userChoice;
 
         public PawnUpgrade()
         {

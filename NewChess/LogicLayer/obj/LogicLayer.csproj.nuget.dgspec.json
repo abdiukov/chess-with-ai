@@ -4,14 +4,14 @@
     "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\LogicLayer\\LogicLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
+    "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\GameBoard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj",
-        "projectName": "ChessBoardAssets",
-        "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj",
+        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\GameBoard.csproj",
+        "projectName": "GameBoard",
+        "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\GameBoard.csproj",
         "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\obj\\",
+        "outputPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -48,7 +48,7 @@
           "dependencies": {
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -100,8 +100,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
-                "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
+              "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\GameBoard.csproj": {
+                "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameBoard\\GameBoard.csproj"
               }
             }
           }
@@ -164,9 +164,6 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
-                "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
-              },
               "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj": {
                 "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj"
               }

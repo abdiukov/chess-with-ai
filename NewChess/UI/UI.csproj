@@ -7,10 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ChessBoardAssets\ChessBoardAssets.csproj" />
 		<ProjectReference Include="..\ChessCore\ChessCore.csproj" />
+		<ProjectReference Include="..\GameBoard\GameBoard.csproj" />
 		<ProjectReference Include="..\GameInfo\GameInformation.csproj" />
-		<ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
+		<ProjectReference Include="..\GameMovement\GameMovement.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

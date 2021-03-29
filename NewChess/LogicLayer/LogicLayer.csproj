@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChessBoardAssets\ChessBoardAssets.csproj" />
     <ProjectReference Include="..\GameInfo\GameInformation.csproj" />
   </ItemGroup>
 

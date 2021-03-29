@@ -29,7 +29,7 @@
           }
         }
       },
-      "System.Drawing.Common/5.0.1": {
+      "System.Drawing.Common/5.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "5.0.0"
@@ -51,24 +51,24 @@
           }
         }
       },
-      "ChessBoardAssets/1.0.0": {
+      "GameBoard/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "System.Drawing.Common": "5.0.1"
+          "System.Drawing.Common": "5.0.2"
         },
         "compile": {
-          "bin/placeholder/ChessBoardAssets.dll": {}
+          "bin/placeholder/GameBoard.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ChessBoardAssets.dll": {}
+          "bin/placeholder/GameBoard.dll": {}
         }
       },
       "GameInformation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "ChessBoardAssets": "1.0.0"
+          "GameBoard": "1.0.0"
         },
         "compile": {
           "bin/placeholder/GameInformation.dll": {}
@@ -126,10 +126,10 @@
         "version.txt"
       ]
     },
-    "System.Drawing.Common/5.0.1": {
-      "sha512": "3IN8zWk395Qu+7wnoTbebEjdP3izZBBKAahgWuC0jp9tCgTdUFN6KsrqQl0I3L+ptZD/LvwKjgFp1u+x3+p+DA==",
+    "System.Drawing.Common/5.0.2": {
+      "sha512": "rvr/M1WPf24ljpvvrVd74+NdjRUJu1bBkspkZcnzSZnmAUQWSvanlQ0k/hVHk+cHufZbZfu7vOh/vYc0q5Uu/A==",
       "type": "package",
-      "path": "system.drawing.common/5.0.1",
+      "path": "system.drawing.common/5.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -162,16 +162,16 @@
         "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
         "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll",
         "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "system.drawing.common.5.0.1.nupkg.sha512",
+        "system.drawing.common.5.0.2.nupkg.sha512",
         "system.drawing.common.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
     },
-    "ChessBoardAssets/1.0.0": {
+    "GameBoard/1.0.0": {
       "type": "project",
-      "path": "../ChessBoardAssets/ChessBoardAssets.csproj",
-      "msbuildProject": "../ChessBoardAssets/ChessBoardAssets.csproj"
+      "path": "../GameBoard/GameBoard.csproj",
+      "msbuildProject": "../GameBoard/GameBoard.csproj"
     },
     "GameInformation/1.0.0": {
       "type": "project",
@@ -181,7 +181,6 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "ChessBoardAssets >= 1.0.0",
       "GameInformation >= 1.0.0"
     ]
   },
@@ -220,9 +219,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
-            },
             "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj": {
               "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj"
             }

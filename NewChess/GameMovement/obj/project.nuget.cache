@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "bVbqd4dlzrVrFYCwSVn5ATbkBhLAw5SFTn9yPo1T4Ng6/6YExJBR4zaBny4omImnbwsPNFRlr3GGQutdx+t//A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameMovement\\GameMovement.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ash\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Ash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\Ash\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

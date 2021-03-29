@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "61e4Hv7YgeepdeOOfUij2zakuMyDpvAXMsDvhxPnu+uDWbasvFY2kbcumfN3RfuvBNP1rGLdAfQ3QZrLzwwTvQ==",
+  "dgSpecHash": "UU+rDvs6hW1vr4UL+Si8o/d08VS60ZC/9bQ1YhY63jJvydJPjXfEhEWhFFyx2Qs0xLf3dNtsASJ54gGQBW5mMw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\LogicLayer\\LogicLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\Ash\\.nuget\\packages\\system.drawing.common\\5.0.1\\system.drawing.common.5.0.1.nupkg.sha512"
+    "C:\\Users\\Ash\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,0 +1,12 @@
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\bin\Debug\net5.0\GameBoard.deps.json
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\bin\Debug\net5.0\GameBoard.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\bin\Debug\net5.0\ref\GameBoard.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\bin\Debug\net5.0\GameBoard.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.csprojAssemblyReference.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.AssemblyInfoInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.AssemblyInfo.cs
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.csproj.CoreCompileInputs.cache
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\ref\GameBoard.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameBoard\obj\Debug\net5.0\GameBoard.pdb
