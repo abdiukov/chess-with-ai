@@ -1,14 +1,13 @@
-﻿using System.Drawing;
+﻿using ChessBoardAssets;
+using System.Drawing;
 
 namespace GameInformation
 {
-    public enum Team { White, Black };
-
     public abstract class Information
     {
         public static bool PlayAgainstAI = true;
 
-        public static Team currentPlayer;
+        public static Team CurrentTeam;
 
         private static Point WhiteKingLocation = new(4, 7);
 
@@ -24,13 +23,12 @@ namespace GameInformation
             BlackKingLocation = new(4, 0);
             hasWhiteKingEverMoved = false;
             hasBlackKingEverMoved = false;
+            PlayAgainstAI = false;
         }
-
-
 
         public static void UpdateKingEverMoved()
         {
-            if (currentPlayer != Team.White)
+            if (CurrentTeam != Team.White)
             {
                 hasWhiteKingEverMoved = true;
             }
@@ -42,7 +40,7 @@ namespace GameInformation
 
         public static bool HasMyKingMovedBefore()
         {
-            if (currentPlayer == Team.White)
+            if (CurrentTeam == Team.White)
             {
                 return hasWhiteKingEverMoved;
             }
@@ -54,7 +52,7 @@ namespace GameInformation
 
         public static Point GetMyKingLocation()
         {
-            if (currentPlayer != Team.White)
+            if (CurrentTeam != Team.White)
             {
                 return WhiteKingLocation;
             }
@@ -68,7 +66,7 @@ namespace GameInformation
 
         public static void UpdateKingLocation(int x, int y)
         {
-            if (currentPlayer != Team.White)
+            if (CurrentTeam != Team.White)
             {
                 WhiteKingLocation.X = x;
                 WhiteKingLocation.Y = y;

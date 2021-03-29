@@ -18,7 +18,7 @@ namespace Chess
         private readonly Controller contr = new();
         public Model(ICommandHandler<ViewCommand> commandHandler)
         {
-            Information.currentPlayer = Team.White;
+            Information.CurrentTeam = Team.White;
             this.commandHandler = commandHandler;
             for (int i = 0; i < BoardRows; i++)
             {
@@ -58,7 +58,7 @@ namespace Chess
             {
                 Piece piece = Coordinates.board[coord.X, coord.Y].piece;
 
-                if (piece != null && piece.Team == Information.currentPlayer)
+                if (piece != null && piece.Team == Information.CurrentTeam)
                 {
                     selectedSquare = coord;
                     GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
@@ -93,14 +93,14 @@ namespace Chess
                             {
                                 //by that point the team has been switched, that is why we are checking current player team
                                 //in reality we are checking opposing team, whether the opposing team can eat my king
-                                if (tocheck.Team == Information.currentPlayer)
+                                if (tocheck.Team == Information.CurrentTeam)
                                 {
                                     List<Point?> getMoves = contr.GetPossibleMoves(tocheck, i, j);
 
                                     if (getMoves.Contains(kingLocation))
                                     {
                                         UndoMove(selectedSquare.Value, coord);
-                                        Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+                                        Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
                                         return success;
                                     }
                                     //if we moved king and it contains old king's location
@@ -109,7 +109,7 @@ namespace Chess
                                         if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
                                         {
                                             UndoMove(selectedSquare.Value, coord);
-                                            Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+                                            Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
                                             return success;
                                         }
                                     }
@@ -187,7 +187,7 @@ namespace Chess
                 Point destination = new Point(x2, y2);
 
                 ForceMove(origin, destination);
-                Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
 
             }
         }
@@ -217,7 +217,7 @@ namespace Chess
 
         public void UpgradePawn(int x, int y)
         {
-            Team toUpdate = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+            Team toUpdate = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
 
             Piece upgradedPiece = new Queen(toUpdate);
 
@@ -237,7 +237,7 @@ namespace Chess
                 Coordinates.board[origin.X, origin.Y].piece = null;
                 Update(origin);
                 Update(destination);
-                Information.currentPlayer = Information.currentPlayer == Team.White ? Team.Black : Team.White;
+                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
                 return true;
             }
             return false;

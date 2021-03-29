@@ -3,10 +3,6 @@
     public class Square
     {
         public Piece piece;
-
-        public Square()
-        {
-
-        }
+        public Square() { }
     }
 }

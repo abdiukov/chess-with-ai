@@ -392,7 +392,7 @@ namespace LogicLayer
                 {
                     return true;
                 }
-                else if (Coordinates.board[x, y].piece.Team != Information.currentPlayer)
+                else if (Coordinates.board[x, y].piece.Team != Information.CurrentTeam)
                 {
                     return false;
                 }
@@ -407,7 +407,7 @@ namespace LogicLayer
                 if (Coordinates.board[x, y].piece is not null)
                 {
                     if (Coordinates.board[x, y].piece is Rook
-                        && Coordinates.board[x, y].piece.Team == Information.currentPlayer)
+                        && Coordinates.board[x, y].piece.Team == Information.CurrentTeam)
                     {
                         return true;
                     }

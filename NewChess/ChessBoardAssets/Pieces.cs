@@ -1,8 +1,8 @@
-﻿using GameInformation;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ChessBoardAssets
 {
+    public enum Team { White, Black };
     public abstract class Piece
     {
         public Team Team;
@@ -18,50 +18,36 @@ namespace ChessBoardAssets
     public class Rook : Piece
     {
         public Rook(Team team)
-            : base(team, "Rook")
-        {
-        }
+            : base(team, "Rook") { }
     }
 
     public class Pawn : Piece
     {
         public Pawn(Team team)
-            : base(team, "Pawn")
-        {
-        }
-
-
+            : base(team, "Pawn") { }
     }
 
     public class Bishop : Piece
     {
         public Bishop(Team team)
-            : base(team, "Bishop")
-        {
-        }
+            : base(team, "Bishop") { }
     }
 
     public class Knight : Piece
     {
         public Knight(Team team)
-            : base(team, "Knight")
-        {
-        }
+            : base(team, "Knight") { }
     }
 
     public class King : Piece
     {
         public King(Team team)
-            : base(team, "King")
-        {
-        }
+            : base(team, "King") { }
     }
 
     public class Queen : Piece
     {
         public Queen(Team team)
-            : base(team, "Queen")
-        {
-        }
+            : base(team, "Queen") { }
     }
 }

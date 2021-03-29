@@ -1,4 +1,5 @@
-﻿using GameInformation;
+﻿using ChessBoardAssets;
+using GameInformation;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -15,7 +16,7 @@ namespace UI
         public PawnUpgrade()
         {
             InitializeComponent();
-            if (Information.currentPlayer == Team.White)
+            if (Information.CurrentTeam == Team.White)
             {
                 //get the black
                 pictureBox_Bishop.Image = Image.FromFile("Bishop_B.png");

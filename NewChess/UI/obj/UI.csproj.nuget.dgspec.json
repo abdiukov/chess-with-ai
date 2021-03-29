@@ -33,11 +33,7 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {
-              "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj": {
-                "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameInfo\\GameInformation.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -237,7 +233,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj": {
+                "projectPath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\ChessBoardAssets\\ChessBoardAssets.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

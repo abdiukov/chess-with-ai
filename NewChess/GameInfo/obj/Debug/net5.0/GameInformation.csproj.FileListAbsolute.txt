@@ -10,3 +10,6 @@ C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\obj\Debug\net5.0\
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\obj\Debug\net5.0\GameInformation.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\obj\Debug\net5.0\ref\GameInformation.dll
 C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\obj\Debug\net5.0\GameInformation.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\bin\Debug\net5.0\ChessBoardAssets.dll
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\bin\Debug\net5.0\ChessBoardAssets.pdb
+C:\Users\Ash\Desktop\skills\ChessApplication\NewChess\GameInfo\obj\Debug\net5.0\GameInformation.csproj.CopyComplete

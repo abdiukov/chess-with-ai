@@ -55,7 +55,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "GameInformation": "1.0.0",
           "System.Drawing.Common": "5.0.1"
         },
         "compile": {
@@ -68,6 +67,9 @@
       "GameInformation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "ChessBoardAssets": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/GameInformation.dll": {}
         },
