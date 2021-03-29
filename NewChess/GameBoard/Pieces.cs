@@ -11,7 +11,7 @@ namespace GameBoard
         public Piece(Team team, string file)
         {
             Team = team;
-            image = Image.FromFile(file + "_" + team.ToString()[0] + ".png");
+            image = Image.FromFile("assets\\" + file + "_" + team.ToString()[0] + ".png");
         }
     }
 

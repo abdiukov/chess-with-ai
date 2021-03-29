@@ -7,6 +7,60 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="assets\Bishop_B.png" />
+		<None Remove="assets\Bishop_W.png" />
+		<None Remove="assets\King_B.png" />
+		<None Remove="assets\King_W.png" />
+		<None Remove="assets\Knight_B.png" />
+		<None Remove="assets\Knight_W.png" />
+		<None Remove="assets\Pawn_B.png" />
+		<None Remove="assets\Pawn_W.png" />
+		<None Remove="assets\Queen_B.png" />
+		<None Remove="assets\Queen_W.png" />
+		<None Remove="assets\Rook_B.png" />
+		<None Remove="assets\Rook_W.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="assets\Bishop_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Bishop_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\King_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\King_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Knight_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Knight_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Pawn_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Pawn_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Queen_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Queen_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Rook_B.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="assets\Rook_W.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\ChessCore\ChessCore.csproj" />
 		<ProjectReference Include="..\GameBoard\GameBoard.csproj" />
 		<ProjectReference Include="..\GameInfo\GameInformation.csproj" />
