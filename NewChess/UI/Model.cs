@@ -201,6 +201,20 @@ namespace Chess
                 Point destination = new Point(x2, y2);
 
                 ForceMove(origin, destination);
+
+                if (Math.Abs(x1 - x2) == 2 && Coordinates.board[x2, y2].piece is King)
+                {
+                    if (x2 == 2)
+                    {
+                        //left side
+                        ForceMove(new Point(0, y2), new Point(3, y2));
+                    }
+                    else if (x2 == 6)
+                    {
+                        //right side
+                        ForceMove(new Point(7, y2), new Point(5, y2));
+                    }
+                }
             }
         }
 

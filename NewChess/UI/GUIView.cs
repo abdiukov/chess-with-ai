@@ -37,7 +37,7 @@ namespace Chess
             Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
             SelectSquareCommand selectCommand = new(coord.Value);
 
-            //creates the command and says to model - go handle that command bro
+            //creates the command and says to model - go handle that command
             model.Handle(selectCommand);
 
             //if its succcessful, create selected square
