@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jkJut8Nmt5fVLi92JP7fOEPXupVZo/hk/Q2js1EUQsrPBgnXuRzJZKYsKOgPAu56fMDFtfn1uGkvyULE+48yjA==",
+  "dgSpecHash": "iq7AgZMyGw5JtoXbY6jhWi7wxz7qfrvYYPDNObJrzmA7wr4rHOmkEeDVHTe4Nm2923Oa3aVTzlt2lNeK6Xkqzw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\UI\\UI.csproj",
+  "projectFilePath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",

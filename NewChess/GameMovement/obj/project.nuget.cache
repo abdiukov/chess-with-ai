@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Em+LP+3XEnzdlPInniSpD+X9NpXOKfb1bTLZAc4ORIRdFsKZVZL4c1VtFB7FIggLEhwx/udZni3Cp0pIwkKLEQ==",
+  "dgSpecHash": "+MgEHJ1djZSGkp6Cm43z1fLfvFBlKXiugWRSMxBHv1Q78fbQZzUbm92w9rMixMkLbdQVWrl6s5BfZMfFej+i5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ash\\Desktop\\skills\\ChessApplication\\NewChess\\GameMovement\\GameMovement.csproj",
+  "projectFilePath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameMovement\\GameMovement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Ash\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
