@@ -44,6 +44,7 @@ namespace Chess
         public void StartAsBlackAgainstAI()
         {
             model.FirstWhiteMoveAI();
+            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
         }
 
         private void InitModel()

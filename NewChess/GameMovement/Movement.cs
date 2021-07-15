@@ -235,8 +235,6 @@ namespace GameMovement
                 }
 
                 //checking from left side
-
-                //checking from right side
                 if (IsEmpty(X - 1, Y) == true && IsEmpty(X - 2, Y) == true &&
                    IsEmpty(X - 3, Y) == true && IsFriendlyRook(X - 4, Y) == true)
                 {

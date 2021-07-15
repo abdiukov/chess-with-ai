@@ -27,7 +27,7 @@ namespace GameInformation
 
         public static void UpdateKingEverMoved()
         {
-            if (CurrentTeam != Team.White)
+            if (CurrentTeam == Team.White)
             {
                 hasWhiteKingEverMoved = true;
             }
@@ -51,7 +51,7 @@ namespace GameInformation
 
         public static Point GetMyKingLocation()
         {
-            if (CurrentTeam != Team.White)
+            if (CurrentTeam == Team.White)
             {
                 return WhiteKingLocation;
             }
@@ -65,7 +65,7 @@ namespace GameInformation
 
         public static void UpdateKingLocation(int x, int y)
         {
-            if (CurrentTeam != Team.White)
+            if (CurrentTeam == Team.White)
             {
                 WhiteKingLocation.X = x;
                 WhiteKingLocation.Y = y;

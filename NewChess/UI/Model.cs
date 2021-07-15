@@ -32,7 +32,16 @@ namespace Chess
         }
         public void Handle(ModelCommand command) { command.Execute(this); }
 
+        //CODE TO START GAME UNDER DIFFERENT CONDITIONS
+
+        public void FirstWhiteMoveAI()
+        {
+            string outputFromAI = Adapter.StartAsBlack();
+            ProcessAIOutput(outputFromAI);
+        }
+
         //CODE TO INITIALISE THE PIECES
+
         public void Start()
         {
             InitPawns(6, Team.White);
@@ -88,7 +97,10 @@ namespace Chess
                 }
                 else if (GUIView.possibleMoves.Contains(coord))
                 {
-                    return ProcessMouseClickMove(coord);
+                    GUIView.possibleMoves.Clear();
+                    ProcessMouseClickMove(coord);
+                    selectedSquare = null;
+                    return true;
                 }
             }
             catch (IndexOutOfRangeException) { }
@@ -97,19 +109,24 @@ namespace Chess
         }
 
 
-        public bool ProcessMouseClickMove(Point coord)
+        public void ProcessMouseClickMove(Point coord)
         {
             bool movingPieceIsKing = false;
+            bool kingIsCastling = false;
             Point kingLocation;
-            bool success = Move(selectedSquare.Value, coord);
-
-            GUIView.possibleMoves.Clear();
+            Move(selectedSquare.Value, coord);
 
             //if the moving piece is King
             if (Coordinates.board[coord.X, coord.Y].piece is King)
             {
                 movingPieceIsKing = true;
                 kingLocation = new(coord.X, coord.Y);
+
+                //if the king is castling
+                if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                {
+                    kingIsCastling = true;
+                }
             }
             else
             {
@@ -121,29 +138,27 @@ namespace Chess
             {
                 for (int j = 0; j <= 7; j++)
                 {
-                    Piece tocheck = Coordinates.board[i, j].piece;
-                    if (tocheck != null)
+                    Piece toCheck = Coordinates.board[i, j].piece;
+                    if (toCheck != null)
                     {
-                        //by that point the team has been switched, that is why we are checking current player team
-                        //in reality we are checking opposing team, whether the opposing team can eat my king
-                        if (tocheck.Team == Information.CurrentTeam)
+                        //checking whether the opposing team can take my king
+                        if (toCheck.Team != Information.CurrentTeam)
                         {
-                            List<Point?> getMoves = contr.GetPossibleMoves(tocheck, i, j);
+                            List<Point?> getMoves = contr.GetPossibleMoves(toCheck, i, j);
 
                             if (getMoves.Contains(kingLocation))
                             {
                                 UndoMove(selectedSquare.Value, coord);
-                                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-                                return success;
+                                return;
                             }
-                            //if we moved king and it contains old king's location
-                            else if (movingPieceIsKing && getMoves.Contains(Information.GetMyKingLocation()))
+
+                            //if we are under check and attempt to castle
+                            else if (movingPieceIsKing && kingIsCastling)
                             {
-                                if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                                if (getMoves.Contains(Information.GetMyKingLocation()))
                                 {
                                     UndoMove(selectedSquare.Value, coord);
-                                    Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-                                    return success;
+                                    return;
                                 }
                             }
                         }
@@ -155,9 +170,6 @@ namespace Chess
             {
                 if (coord.Y == 0 || coord.Y == 7)
                 {
-                    //PawnUpgrade pageobj = new();
-                    //pageobj.Show();
-
                     UpgradePawn(coord.X, coord.Y);
                 }
             }
@@ -169,41 +181,29 @@ namespace Chess
                 Information.UpdateKingEverMoved();
 
                 //also if castling has been done, move the rook
-                if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                if (kingIsCastling)
                 {
                     if (coord.X == 2)
                     {
                         //left side
-                        ForceMove(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
+                        Move(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
                     }
                     else if (coord.X == 6)
                     {
                         //right side
-                        ForceMove(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
+                        Move(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
                     }
                 }
             }
 
+            Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
             //logic if it is an ai
-
-            if (Information.PlayAgainstAI == true)
+            if (Information.PlayAgainstAI)
             {
-                //mover coord.x coord.y
-                //moving plac e- selectedSquare x, selected square y
                 DoAIMove(selectedSquare.Value.X, selectedSquare.Value.Y, coord.X, coord.Y);
             }
-
-            selectedSquare = null;
-            return success;
         }
 
-
-
-        public void FirstWhiteMoveAI()
-        {
-            string outputFromAI = Adapter.StartAsBlack();
-            ProcessAIOutput(outputFromAI);
-        }
 
         private void DoAIMove(int moverX, int moverY, int destinationX, int destinationY)
         {
@@ -230,7 +230,6 @@ namespace Chess
 
         private void ProcessAIOutput(string outputFromAI)
         {
-
             int x1 = int.Parse(outputFromAI[0].ToString());
             int y1 = int.Parse(outputFromAI[1].ToString());
             int x2 = int.Parse(outputFromAI[2].ToString());
@@ -239,22 +238,35 @@ namespace Chess
             Point origin = new Point(x1, y1);
             Point destination = new Point(x2, y2);
 
-            ForceMove(origin, destination);
+            Move(origin, destination);
 
             if (Math.Abs(x1 - x2) == 2 && Coordinates.board[x2, y2].piece is King)
             {
                 if (x2 == 2)
                 {
                     //left side
-                    ForceMove(new Point(0, y2), new Point(3, y2));
+                    Move(new Point(0, y2), new Point(3, y2));
                 }
                 else if (x2 == 6)
                 {
                     //right side
-                    ForceMove(new Point(7, y2), new Point(5, y2));
+                    Move(new Point(7, y2), new Point(5, y2));
                 }
 
             }
+        }
+
+        private Piece savedPiece;
+
+        private void Move(Point origin, Point destination)
+        {
+            savedPiece = Coordinates.board[destination.X, destination.Y].piece;
+
+            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
+            Coordinates.board[destination.X, destination.Y].piece = mover;
+            Coordinates.board[origin.X, origin.Y].piece = null;
+            Update(origin);
+            Update(destination);
         }
 
         private void UndoMove(Point origin, Point destination)
@@ -269,17 +281,6 @@ namespace Chess
         }
 
 
-        private Piece savedPiece;
-
-        private void ForceMove(Point origin, Point destination)
-        {
-            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
-            Coordinates.board[destination.X, destination.Y].piece = mover;
-            Coordinates.board[origin.X, origin.Y].piece = null;
-            Update(origin);
-            Update(destination);
-        }
-
         public void UpgradePawn(int x, int y)
         {
             Team toUpdate = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
@@ -290,24 +291,6 @@ namespace Chess
 
             Update(new Point(x, y));
         }
-
-
-        private bool Move(Point origin, Point destination)
-        {
-            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
-            if (GUIView.possibleMoves.Count > 0)
-            {
-                savedPiece = Coordinates.board[destination.X, destination.Y].piece;
-                Coordinates.board[destination.X, destination.Y].piece = mover;
-                Coordinates.board[origin.X, origin.Y].piece = null;
-                Update(origin);
-                Update(destination);
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-                return true;
-            }
-            return false;
-        }
-
 
         //CODE TO UPDATE THE BOARD
 
