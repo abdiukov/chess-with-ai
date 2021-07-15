@@ -60,9 +60,6 @@ namespace GameInformation
                 return BlackKingLocation;
             }
         }
-
-
-
         public static void UpdateKingLocation(int x, int y)
         {
             if (CurrentTeam == Team.White)

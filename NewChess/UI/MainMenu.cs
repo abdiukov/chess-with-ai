@@ -25,6 +25,7 @@ namespace UI
 
         private void StartGameBlackVSAI()
         {
+            Information.PlayAgainstAI = true;
             Information.SetDefaultValues();
             GUIView pageobj = new();
             pageobj.Show();
@@ -32,21 +33,20 @@ namespace UI
             pageobj.StartAsBlackAgainstAI();
         }
 
-        private void button_StartWhiteVsComputerGame_Click(object sender, System.EventArgs e)
+        private void Button_StartWhiteVsComputerGame_Click(object sender, System.EventArgs e)
         {
             Adapter.StartGame();
             Information.PlayAgainstAI = true;
             StartGame();
         }
 
-        private void button_StartBlackVsComputerGame_Click(object sender, System.EventArgs e)
+        private void Button_StartBlackVsComputerGame_Click(object sender, System.EventArgs e)
         {
             Adapter.StartGame();
-            Information.PlayAgainstAI = true;
             StartGameBlackVSAI();
         }
 
-        private void button_StartHumanGame_Click(object sender, System.EventArgs e)
+        private void Button_StartHumanGame_Click(object sender, System.EventArgs e)
         {
             Adapter.StartGame();
             Information.PlayAgainstAI = false;

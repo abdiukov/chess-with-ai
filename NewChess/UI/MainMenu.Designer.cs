@@ -46,7 +46,7 @@ namespace UI
             this.button_StartBlackVsComputerGame.TabIndex = 3;
             this.button_StartBlackVsComputerGame.Text = "Play as Black vs Computer";
             this.button_StartBlackVsComputerGame.UseVisualStyleBackColor = true;
-            this.button_StartBlackVsComputerGame.Click += new System.EventHandler(this.button_StartBlackVsComputerGame_Click);
+            this.button_StartBlackVsComputerGame.Click += new System.EventHandler(this.Button_StartBlackVsComputerGame_Click);
             // 
             // label1
             // 
@@ -71,7 +71,7 @@ namespace UI
             this.button_StartWhiteVsComputerGame.TabIndex = 2;
             this.button_StartWhiteVsComputerGame.Text = "Play as White vs Computer";
             this.button_StartWhiteVsComputerGame.UseVisualStyleBackColor = true;
-            this.button_StartWhiteVsComputerGame.Click += new System.EventHandler(this.button_StartWhiteVsComputerGame_Click);
+            this.button_StartWhiteVsComputerGame.Click += new System.EventHandler(this.Button_StartWhiteVsComputerGame_Click);
             // 
             // button_StartHumanGame
             // 
@@ -84,7 +84,7 @@ namespace UI
             this.button_StartHumanGame.TabIndex = 1;
             this.button_StartHumanGame.Text = "Play Human vs Human";
             this.button_StartHumanGame.UseVisualStyleBackColor = true;
-            this.button_StartHumanGame.Click += new System.EventHandler(this.button_StartHumanGame_Click);
+            this.button_StartHumanGame.Click += new System.EventHandler(this.Button_StartHumanGame_Click);
             // 
             // MainMenu
             // 

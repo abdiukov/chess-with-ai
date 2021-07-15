@@ -43,8 +43,13 @@ namespace Chess
 
         public void StartAsBlackAgainstAI()
         {
-            model.FirstWhiteMoveAI();
+            model.PlayAsBlackAgainstAI();
             GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
+        }
+
+        public void StartAsWhiteAgainstAI()
+        {
+
         }
 
         private void InitModel()
@@ -75,6 +80,8 @@ namespace Chess
 
         }
 
+        //DRAW GRAPHICS CODE
+
         private void GUIView_Paint(object sender, PaintEventArgs e)
         {
             int x = this.ClientSize.Width / 8;
@@ -97,11 +104,6 @@ namespace Chess
 
         }
 
-        private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Program.mainMenu.Show();
-        }
-
         public void DrawSquare(Image piece, Point coord)
         {
             Brush brush = (coord.Y % 2 == 0) ? (coord.X % 2 == 0) ? c1 : c2 : (coord.X % 2 == 0) ? c2 : c1;
@@ -111,6 +113,13 @@ namespace Chess
             {
                 g.DrawImage(piece, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
             }
+        }
+
+        //NAVIGATION CODE
+
+        private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.mainMenu.Show();
         }
     }
 }

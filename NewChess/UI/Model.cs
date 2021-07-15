@@ -5,6 +5,7 @@ using GameMovement;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Chess
@@ -34,7 +35,7 @@ namespace Chess
 
         //CODE TO START GAME UNDER DIFFERENT CONDITIONS
 
-        public void FirstWhiteMoveAI()
+        public void PlayAsBlackAgainstAI()
         {
             string outputFromAI = Adapter.StartAsBlack();
             ProcessAIOutput(outputFromAI);
@@ -111,28 +112,46 @@ namespace Chess
 
         public void ProcessMouseClickMove(Point coord)
         {
+            bool kingIsCastlingLeft = false;
+            bool kingIsCastlingRight = false;
             bool movingPieceIsKing = false;
-            bool kingIsCastling = false;
-            Point kingLocation;
+            List<Point?> forbiddenSquares = new();
+
             Move(selectedSquare.Value, coord);
 
             //if the moving piece is King
             if (Coordinates.board[coord.X, coord.Y].piece is King)
             {
                 movingPieceIsKing = true;
-                kingLocation = new(coord.X, coord.Y);
+                forbiddenSquares.Add(new(coord.X, coord.Y));
 
                 //if the king is castling
                 if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
                 {
-                    kingIsCastling = true;
+                    //add the squares in between castling to "forbidden squares" - these squares cannot be checked by enemy
+                    if (coord.X == 2)
+                    {
+                        kingIsCastlingLeft = true;
+                        forbiddenSquares.Add(new(3, coord.Y));
+                        forbiddenSquares.Add(new(4, coord.Y));
+                    }
+                    if (coord.X == 6)
+                    {
+                        kingIsCastlingRight = true;
+                        forbiddenSquares.Add(new(4, coord.Y));
+                        forbiddenSquares.Add(new(5, coord.Y));
+                    }
                 }
             }
+            //otherwise, add king to the forbidden squares - the king cannot be checked
             else
             {
-                kingLocation = Information.GetMyKingLocation();
+                forbiddenSquares.Add(Information.GetMyKingLocation());
             }
 
+
+            //check every move to see whether the enemy can check either forbidden squares
+            //if the enemy can, undo the move
 
             for (int i = 0; i <= 7; i++)
             {
@@ -141,25 +160,16 @@ namespace Chess
                     Piece toCheck = Coordinates.board[i, j].piece;
                     if (toCheck != null)
                     {
-                        //checking whether the opposing team can take my king
+                        //the piece has to be from the opposite team
+                        //the piece should be able to check one of the forbidden squares
                         if (toCheck.Team != Information.CurrentTeam)
                         {
                             List<Point?> getMoves = contr.GetPossibleMoves(toCheck, i, j);
 
-                            if (getMoves.Contains(kingLocation))
+                            if (getMoves.Intersect(forbiddenSquares).Any())
                             {
                                 UndoMove(selectedSquare.Value, coord);
                                 return;
-                            }
-
-                            //if we are under check and attempt to castle
-                            else if (movingPieceIsKing && kingIsCastling)
-                            {
-                                if (getMoves.Contains(Information.GetMyKingLocation()))
-                                {
-                                    UndoMove(selectedSquare.Value, coord);
-                                    return;
-                                }
                             }
                         }
                     }
@@ -181,22 +191,18 @@ namespace Chess
                 Information.UpdateKingEverMoved();
 
                 //also if castling has been done, move the rook
-                if (kingIsCastling)
+                if (kingIsCastlingLeft)
                 {
-                    if (coord.X == 2)
-                    {
-                        //left side
-                        Move(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
-                    }
-                    else if (coord.X == 6)
-                    {
-                        //right side
-                        Move(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
-                    }
+                    Move(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
+                }
+                else if (kingIsCastlingRight)
+                {
+                    Move(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
                 }
             }
 
             Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+
             //logic if it is an ai
             if (Information.PlayAgainstAI)
             {
@@ -204,6 +210,8 @@ namespace Chess
             }
         }
 
+
+        //RESPONSE TO AI
 
         private void DoAIMove(int moverX, int moverY, int destinationX, int destinationY)
         {
@@ -224,9 +232,7 @@ namespace Chess
             {
                 MessageBox.Show("Move is invalid. Please try again.");
             }
-
         }
-
 
         private void ProcessAIOutput(string outputFromAI)
         {
@@ -252,9 +258,10 @@ namespace Chess
                     //right side
                     Move(new Point(7, y2), new Point(5, y2));
                 }
-
             }
         }
+
+        //MOVEMENT CODE
 
         private Piece savedPiece;
 
@@ -271,9 +278,6 @@ namespace Chess
 
         private void UndoMove(Point origin, Point destination)
         {
-            //origin piece should be same as destination piece
-            //destination piece should be same as saved origin piece
-
             Coordinates.board[origin.X, origin.Y].piece = Coordinates.board[destination.X, destination.Y].piece;
             Coordinates.board[destination.X, destination.Y].piece = savedPiece;
             Update(origin);
@@ -283,9 +287,7 @@ namespace Chess
 
         public void UpgradePawn(int x, int y)
         {
-            Team toUpdate = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-
-            Piece upgradedPiece = new Queen(toUpdate);
+            Piece upgradedPiece = new Queen(Information.CurrentTeam);
 
             Coordinates.board[x, y].piece = upgradedPiece;
 

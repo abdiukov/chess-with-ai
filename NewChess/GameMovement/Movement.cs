@@ -7,15 +7,16 @@ namespace GameMovement
 {
     public class Movement
     {
-
+        private Team pieceTeam;
         public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
         {
             List<Point?> movableSquares = new();
+            pieceTeam = piece.Team;
 
             switch (piece)
             {
                 case Pawn:
-                    if (piece.Team == Team.White)
+                    if (pieceTeam == Team.White)
                     {
                         movableSquares = GetMovesWhitePawn(X, Y);
                     }
@@ -382,7 +383,7 @@ namespace GameMovement
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
-        private static bool? IsEmpty(int x, int y)
+        private bool? IsEmpty(int x, int y)
         {
             if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
             {
@@ -390,7 +391,7 @@ namespace GameMovement
                 {
                     return true;
                 }
-                else if (Coordinates.board[x, y].piece.Team != Information.CurrentTeam)
+                else if (Coordinates.board[x, y].piece.Team != pieceTeam)
                 {
                     return false;
                 }
@@ -398,14 +399,14 @@ namespace GameMovement
             return null;
         }
 
-        private static bool IsFriendlyRook(int x, int y)
+        private bool IsFriendlyRook(int x, int y)
         {
             if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
             {
                 if (Coordinates.board[x, y].piece is not null)
                 {
                     if (Coordinates.board[x, y].piece is Rook
-                        && Coordinates.board[x, y].piece.Team == Information.CurrentTeam)
+                        && Coordinates.board[x, y].piece.Team == pieceTeam)
                     {
                         return true;
                     }
