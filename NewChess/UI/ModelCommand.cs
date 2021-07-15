@@ -26,7 +26,5 @@ namespace Chess
         {
             Success = model.Select(coord);
         }
-
-
     }
 }

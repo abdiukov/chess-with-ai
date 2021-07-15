@@ -24,11 +24,6 @@ namespace Chess
             this.MouseClick += GUIView_MouseClick;
         }
 
-        public void StartAsBlackAgainstAI()
-        {
-            model.FirstWhiteMoveAI();
-            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
-        }
 
         public new void Handle(ViewCommand command) { command.Execute(this); }
 
@@ -43,8 +38,12 @@ namespace Chess
             //if its succcessful, create selected square
             selectedSquare = (selectCommand.Success ? coord : null);
 
-
             this.Invalidate();
+        }
+
+        public void StartAsBlackAgainstAI()
+        {
+            model.FirstWhiteMoveAI();
         }
 
         private void InitModel()

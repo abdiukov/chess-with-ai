@@ -4,8 +4,5 @@
     <Compile Update="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PawnUpgrade.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
