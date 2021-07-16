@@ -5,9 +5,9 @@ namespace GameInformation
 {
     public abstract class Information
     {
-        public static bool PlayAgainstAI;
+        public static bool PlayAgainstAI { get; set; }
 
-        public static Team CurrentTeam;
+        public static Team CurrentTeam { get; set; }
 
         private static Point WhiteKingLocation;
 

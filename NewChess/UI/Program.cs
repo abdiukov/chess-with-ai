@@ -7,6 +7,7 @@ namespace Chess
     static class Program
     {
         public static MainMenu mainMenu = new();
+        public static GUIView gameWindow;
         [STAThread]
         static void Main()
         {

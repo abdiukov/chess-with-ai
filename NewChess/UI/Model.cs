@@ -93,19 +93,23 @@ namespace Chess
                 if (piece != null && piece.Team == Information.CurrentTeam)
                 {
                     selectedSquare = coord;
-                    GUIView.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
+                    Program.gameWindow.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
                     return true;
                 }
-                else if (GUIView.possibleMoves.Contains(coord))
+                else if (Program.gameWindow.possibleMoves.Contains(coord))
                 {
-                    GUIView.possibleMoves.Clear();
+                    Program.gameWindow.possibleMoves.Clear();
                     ProcessMouseClickMove(coord);
+                    if (Information.PlayAgainstAI == true)
+                    {
+
+                    }
                     selectedSquare = null;
                     return true;
                 }
             }
             catch (IndexOutOfRangeException) { }
-            GUIView.possibleMoves.Clear();
+            Program.gameWindow.possibleMoves.Clear();
             return false;
         }
 
@@ -225,7 +229,7 @@ namespace Chess
             else if (outputFromAI.Length > 4)
             {
                 ProcessAIOutput(outputFromAI.Substring(0, 4));
-                MessageBox.Show(outputFromAI.Substring(4), "Game over!");
+                MessageBox.Show(outputFromAI[4..], "Game over!");
                 Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
             }
             else
@@ -241,8 +245,8 @@ namespace Chess
             int x2 = int.Parse(outputFromAI[2].ToString());
             int y2 = int.Parse(outputFromAI[3].ToString());
 
-            Point origin = new Point(x1, y1);
-            Point destination = new Point(x2, y2);
+            Point origin = new(x1, y1);
+            Point destination = new(x2, y2);
 
             Move(origin, destination);
 

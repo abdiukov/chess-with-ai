@@ -83,8 +83,6 @@ namespace ChessCore
 
             return output;
         }
-
-
         public static void StartGame()
         {
             engine.NewGame();
@@ -95,9 +93,6 @@ namespace ChessCore
             engine.HumanPlayer = ChessPieceColor.Black;
             return MakeEngineMove(engine);
         }
-
-
-
 
     }
 }

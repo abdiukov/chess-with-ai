@@ -14,7 +14,10 @@ namespace Chess
         private Bitmap buffer;
         private Point? selectedSquare;
         private readonly Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
-        public static List<Point?> possibleMoves = new();
+
+        public List<Point?> possibleMoves = new();
+
+        //INITIALISATION CODE
 
         public GUIView()
         {
@@ -22,34 +25,7 @@ namespace Chess
             InitGraphics();
             InitModel();
             this.MouseClick += GUIView_MouseClick;
-        }
-
-
-        public new void Handle(ViewCommand command) { command.Execute(this); }
-
-        private void GUIView_MouseClick(object sender, MouseEventArgs e)
-        {
-            Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
-            SelectSquareCommand selectCommand = new(coord.Value);
-
-            //creates the command and says to model - go handle that command
-            model.Handle(selectCommand);
-
-            //if its succcessful, create selected square
-            selectedSquare = (selectCommand.Success ? coord : null);
-
-            this.Invalidate();
-        }
-
-        public void StartAsBlackAgainstAI()
-        {
-            model.PlayAsBlackAgainstAI();
-            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
-        }
-
-        public void StartAsWhiteAgainstAI()
-        {
-
+            Program.gameWindow = this;
         }
 
         private void InitModel()
@@ -70,14 +46,40 @@ namespace Chess
             this.Resize += GUIView_Resize;
         }
 
-        void GUIView_Resize(object sender, EventArgs e)
+        //DIFFERENT START CONDITIONS CODE
+
+        public void StartAsBlackAgainstAI()
+        {
+            model.PlayAsBlackAgainstAI();
+            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
+        }
+
+        //RESPOND TO USER INPUT CODE
+
+        public new void Handle(ViewCommand command) { command.Execute(this); }
+
+        private void GUIView_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
+            SelectSquareCommand selectCommand = new(coord.Value);
+
+            //creates the command and says to model - go handle that command
+            model.Handle(selectCommand);
+
+            //if its succcessful, create selected square
+            selectedSquare = (selectCommand.Success ? coord : null);
+
+            this.Invalidate();
+        }
+
+        //RESIZE CODE
+        private void GUIView_Resize(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
             {
                 this.Height = this.Width;
                 this.Invalidate();
             }
-
         }
 
         //DRAW GRAPHICS CODE
@@ -93,15 +95,11 @@ namespace Chess
                 Point highlight = selectedSquare.Value;
                 e.Graphics.DrawRectangle(new Pen(Color.Yellow, lineSize), highlight.X * x, highlight.Y * y, x, y);
             }
-            if (possibleMoves.Count > 0)
+            foreach (var item in possibleMoves)
             {
-                foreach (var item in possibleMoves)
-                {
-                    Point highlight = (Point)item;
-                    e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
-                }
+                Point highlight = (Point)item;
+                e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
             }
-
         }
 
         public void DrawSquare(Image piece, Point coord)
