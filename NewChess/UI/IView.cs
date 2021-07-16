@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-namespace Chess
+namespace View
 {
     public interface IView : ICommandHandler<ViewCommand>
     {

@@ -51,17 +51,17 @@
           }
         }
       },
-      "GameBoard/1.0.0": {
+      "Model/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "System.Drawing.Common": "5.0.2"
         },
         "compile": {
-          "bin/placeholder/GameBoard.dll": {}
+          "bin/placeholder/Model.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GameBoard.dll": {}
+          "bin/placeholder/Model.dll": {}
         }
       }
     }
@@ -155,15 +155,15 @@
         "version.txt"
       ]
     },
-    "GameBoard/1.0.0": {
+    "Model/1.0.0": {
       "type": "project",
-      "path": "../GameBoard/GameBoard.csproj",
-      "msbuildProject": "../GameBoard/GameBoard.csproj"
+      "path": "../GameBoard/Model.csproj",
+      "msbuildProject": "../GameBoard/Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "GameBoard >= 1.0.0"
+      "Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -203,8 +203,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj"
+            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj": {
+              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj"
             }
           }
         }

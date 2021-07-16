@@ -1,4 +1,4 @@
-﻿using GameBoard;
+﻿using Model;
 using System.Drawing;
 
 namespace GameInformation
@@ -6,15 +6,10 @@ namespace GameInformation
     public abstract class Information
     {
         public static bool PlayAgainstAI { get; set; }
-
         public static Team CurrentTeam { get; set; }
-
         private static Point WhiteKingLocation;
-
         private static Point BlackKingLocation;
-
         private static bool hasWhiteKingEverMoved;
-
         private static bool hasBlackKingEverMoved;
 
         public static void SetDefaultValues()

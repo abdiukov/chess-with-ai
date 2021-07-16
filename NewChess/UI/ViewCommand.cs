@@ -1,7 +1,7 @@
-using GameBoard;
+using Model;
 using System.Drawing;
 
-namespace Chess
+namespace View
 {
     public abstract class ViewCommand : ICommand<IView>
     {

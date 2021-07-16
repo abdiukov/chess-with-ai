@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GameBoard
+namespace Model
 {
     public enum Team { White, Black };
     public abstract class Piece

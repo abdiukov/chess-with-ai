@@ -157,9 +157,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj",
-      "projectName": "GameBoard",
-      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj",
+      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj",
+      "projectName": "Model",
+      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj",
       "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\obj\\",
       "projectStyle": "PackageReference",

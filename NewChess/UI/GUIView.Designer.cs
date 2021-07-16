@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Chess
+namespace View
 {
     partial class GUIView
     {

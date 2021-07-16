@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj": {}
+    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj": {}
   },
   "projects": {
     "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj": {
@@ -340,12 +340,12 @@
         }
       }
     },
-    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj": {
+    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj",
-        "projectName": "UI",
-        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj",
+        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj",
+        "projectName": "View",
+        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj",
         "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\obj\\",
         "projectStyle": "PackageReference",

@@ -1,4 +1,4 @@
-﻿namespace GameBoard
+﻿namespace Model
 {
     public class Square
     {

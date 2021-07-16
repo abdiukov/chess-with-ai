@@ -81,19 +81,6 @@
           }
         }
       },
-      "ChessCore/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "ChessCoreEngine": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ChessCore.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ChessCore.dll": {}
-        }
-      },
       "ChessCoreEngine/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -107,24 +94,24 @@
           "bin/placeholder/ChessCoreEngine.dll": {}
         }
       },
-      "GameBoard/1.0.0": {
+      "ChessCoreEngineAdapter/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "System.Drawing.Common": "5.0.2"
+          "ChessCoreEngine": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/GameBoard.dll": {}
+          "bin/placeholder/ChessCoreEngineAdapter.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GameBoard.dll": {}
+          "bin/placeholder/ChessCoreEngineAdapter.dll": {}
         }
       },
       "GameInformation/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "GameBoard": "1.0.0"
+          "Model": "1.0.0"
         },
         "compile": {
           "bin/placeholder/GameInformation.dll": {}
@@ -137,14 +124,27 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "GameBoard": "1.0.0",
-          "GameInformation": "1.0.0"
+          "GameInformation": "1.0.0",
+          "Model": "1.0.0"
         },
         "compile": {
           "bin/placeholder/GameMovement.dll": {}
         },
         "runtime": {
           "bin/placeholder/GameMovement.dll": {}
+        }
+      },
+      "Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "System.Drawing.Common": "5.0.2"
+        },
+        "compile": {
+          "bin/placeholder/Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Model.dll": {}
         }
       }
     }
@@ -402,20 +402,15 @@
         "version.txt"
       ]
     },
-    "ChessCore/1.0.0": {
-      "type": "project",
-      "path": "../ChessCore/ChessCore.csproj",
-      "msbuildProject": "../ChessCore/ChessCore.csproj"
-    },
     "ChessCoreEngine/1.0.0": {
       "type": "project",
       "path": "../ChessCoreEngine/ChessCoreEngine.csproj",
       "msbuildProject": "../ChessCoreEngine/ChessCoreEngine.csproj"
     },
-    "GameBoard/1.0.0": {
+    "ChessCoreEngineAdapter/1.0.0": {
       "type": "project",
-      "path": "../GameBoard/GameBoard.csproj",
-      "msbuildProject": "../GameBoard/GameBoard.csproj"
+      "path": "../ChessCore/ChessCoreEngineAdapter.csproj",
+      "msbuildProject": "../ChessCore/ChessCoreEngineAdapter.csproj"
     },
     "GameInformation/1.0.0": {
       "type": "project",
@@ -426,14 +421,19 @@
       "type": "project",
       "path": "../GameMovement/GameMovement.csproj",
       "msbuildProject": "../GameMovement/GameMovement.csproj"
+    },
+    "Model/1.0.0": {
+      "type": "project",
+      "path": "../GameBoard/Model.csproj",
+      "msbuildProject": "../GameBoard/Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
-      "ChessCore >= 1.0.0",
-      "GameBoard >= 1.0.0",
+      "ChessCoreEngineAdapter >= 1.0.0",
       "GameInformation >= 1.0.0",
-      "GameMovement >= 1.0.0"
+      "GameMovement >= 1.0.0",
+      "Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -445,9 +445,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj",
-      "projectName": "UI",
-      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\UI.csproj",
+      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj",
+      "projectName": "View",
+      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\View.csproj",
       "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\UI\\obj\\",
       "projectStyle": "PackageReference",
@@ -473,11 +473,11 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "projectReferences": {
-            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCore.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCore.csproj"
+            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj": {
+              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj"
             },
-            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj": {
-              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\GameBoard.csproj"
+            "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj": {
+              "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj"
             },
             "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj": {
               "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj"

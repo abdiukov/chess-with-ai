@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj": {}
+    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj": {
+    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj",
-        "projectName": "Model",
-        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj",
+        "projectName": "ChessCoreEngine",
+        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj",
         "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\obj\\",
+        "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -25,15 +25,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "netcoreapp2.1": {
+            "targetAlias": "netcoreapp2.1",
             "projectReferences": {}
           }
         },
@@ -44,12 +44,18 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp2.1": {
+          "targetAlias": "netcoreapp2.1",
           "dependencies": {
-            "System.Drawing.Common": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.11.0, )"
             }
           },
           "imports": [
@@ -62,23 +68,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj": {
+    "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj",
-        "projectName": "GameInformation",
-        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\GameInformation.csproj",
+        "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj",
+        "projectName": "ChessCoreEngineAdapter",
+        "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj",
         "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameInfo\\obj\\",
+        "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -92,18 +93,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "netcoreapp2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "netcoreapp2.1": {
+            "targetAlias": "netcoreapp2.1",
             "projectReferences": {
-              "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj": {
-                "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\GameBoard\\Model.csproj"
+              "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj": {
+                "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCoreEngine\\ChessCoreEngine.csproj"
               }
             }
           }
@@ -115,8 +116,16 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp2.1": {
+          "targetAlias": "netcoreapp2.1",
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -127,11 +136,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }

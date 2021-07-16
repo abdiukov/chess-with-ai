@@ -765,9 +765,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCore.csproj",
-      "projectName": "ChessCore",
-      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCore.csproj",
+      "projectUniqueName": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj",
+      "projectName": "ChessCoreEngineAdapter",
+      "projectPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\ChessCoreEngineAdapter.csproj",
       "packagesPath": "C:\\Users\\Ash\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Ash\\Desktop\\GitHub\\chess-with-ai\\NewChess\\ChessCore\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,5 +1,5 @@
-﻿using Chess;
-using ChessCore;
+﻿using View;
+using ChessCoreEngineAdapter;
 using GameInformation;
 using System.Windows.Forms;
 

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using UI;
 
-namespace Chess
+namespace View
 {
     static class Program
     {

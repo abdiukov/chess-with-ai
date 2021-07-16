@@ -1,4 +1,4 @@
-﻿namespace Chess
+﻿namespace View
 {
     public interface ICommand<T>
     {

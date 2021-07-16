@@ -1,5 +1,5 @@
-﻿using GameBoard;
-using GameInformation;
+﻿using GameInformation;
+using Model;
 using System.Collections.Generic;
 using System.Drawing;
 

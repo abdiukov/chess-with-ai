@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Chess
+namespace View
 {
     public partial class GUIView : Form, IView
     {
         private readonly int dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
         private const int bufferDimension = 1024;
         private const int squareDimension = bufferDimension / 8;
-        private Model model;
+        private Controller controller;
         private Bitmap buffer;
         private Point? selectedSquare;
         private readonly Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
@@ -30,8 +30,8 @@ namespace Chess
 
         private void InitModel()
         {
-            model = new Model(this);
-            model.Handle(new StartGameCommand());
+            controller = new Controller(this);
+            controller.Handle(new StartGameCommand());
         }
 
         private void InitGraphics()
@@ -50,8 +50,8 @@ namespace Chess
 
         public void StartAsBlackAgainstAI()
         {
-            model.PlayAsBlackAgainstAI();
-            GameInformation.Information.CurrentTeam = GameBoard.Team.Black;
+            controller.PlayAsBlackAgainstAI();
+            GameInformation.Information.CurrentTeam = Model.Team.Black;
         }
 
         //RESPOND TO USER INPUT CODE
@@ -64,7 +64,7 @@ namespace Chess
             SelectSquareCommand selectCommand = new(coord.Value);
 
             //creates the command and says to model - go handle that command
-            model.Handle(selectCommand);
+            controller.Handle(selectCommand);
 
             //if its succcessful, create selected square
             selectedSquare = (selectCommand.Success ? coord : null);

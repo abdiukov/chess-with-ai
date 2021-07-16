@@ -1,17 +1,16 @@
-﻿using ChessCore;
-using GameBoard;
+﻿using ChessCoreEngineAdapter;
 using GameInformation;
 using GameMovement;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Chess
+namespace View
 {
-
-    public class Model : ICommandHandler<ModelCommand>
+    public class Controller : ICommandHandler<ControllerCommand>
     {
         private const int BoardRows = 8;
         private const int BoardColumns = 8;
@@ -19,7 +18,7 @@ namespace Chess
         private Point? selectedSquare;
         private readonly Movement contr = new();
 
-        public Model(ICommandHandler<ViewCommand> commandHandler)
+        public Controller(ICommandHandler<ViewCommand> commandHandler)
         {
             this.commandHandler = commandHandler;
 
@@ -31,7 +30,7 @@ namespace Chess
                 }
             }
         }
-        public void Handle(ModelCommand command) { command.Execute(this); }
+        public void Handle(ControllerCommand command) { command.Execute(this); }
 
         //CODE TO START GAME UNDER DIFFERENT CONDITIONS
 
@@ -100,10 +99,6 @@ namespace Chess
                 {
                     Program.gameWindow.possibleMoves.Clear();
                     ProcessMouseClickMove(coord);
-                    if (Information.PlayAgainstAI == true)
-                    {
-
-                    }
                     selectedSquare = null;
                     return true;
                 }

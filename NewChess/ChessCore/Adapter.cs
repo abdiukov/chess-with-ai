@@ -1,7 +1,7 @@
 ﻿using ChessEngine.Engine;
 using System;
 
-namespace ChessCore
+namespace ChessCoreEngineAdapter
 {
     public class Adapter
     {
