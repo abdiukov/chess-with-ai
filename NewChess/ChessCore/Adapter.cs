@@ -86,6 +86,7 @@ namespace ChessCoreEngineAdapter
         public static void StartGame()
         {
             engine.NewGame();
+            engine.GameDifficulty = Engine.Difficulty.Easy;
         }
 
         public static string StartAsBlack()

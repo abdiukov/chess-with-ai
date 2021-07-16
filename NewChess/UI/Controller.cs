@@ -50,12 +50,14 @@ namespace View
             Information.SetDefaultValues();
             Information.PlayAgainstAI = true;
             Adapter.StartGame();
+            Information.CurrentTeam = Team.White;
         }
 
         public void StartAsWhiteAgainstPlayer()
         {
             Information.SetDefaultValues();
             Information.PlayAgainstAI = false;
+            Information.CurrentTeam = Team.White;
         }
 
         //CODE TO INITIALISE THE PIECES

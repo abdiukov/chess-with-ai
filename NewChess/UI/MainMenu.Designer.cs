@@ -97,6 +97,7 @@ namespace UI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_StartBlackVsComputerGame);
             this.Name = "MainMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.ResumeLayout(false);
 
