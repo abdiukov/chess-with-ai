@@ -51,7 +51,16 @@ namespace View
         public void StartAsBlackAgainstAI()
         {
             controller.PlayAsBlackAgainstAI();
-            GameInformation.Information.CurrentTeam = Model.Team.Black;
+        }
+
+        public void StartAsWhiteAgainstAI()
+        {
+            controller.StartAsWhiteAgainstAI();
+        }
+
+        public void StartAsWhiteAgainstPlayer()
+        {
+            controller.StartAsWhiteAgainstPlayer();
         }
 
         //RESPOND TO USER INPUT CODE

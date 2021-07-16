@@ -36,8 +36,26 @@ namespace View
 
         public void PlayAsBlackAgainstAI()
         {
+            Information.SetDefaultValues();
+            Information.PlayAgainstAI = true;
+            Adapter.StartGame();
+
             string outputFromAI = Adapter.StartAsBlack();
             ProcessAIOutput(outputFromAI);
+            Information.CurrentTeam = Team.Black;
+        }
+
+        public void StartAsWhiteAgainstAI()
+        {
+            Information.SetDefaultValues();
+            Information.PlayAgainstAI = true;
+            Adapter.StartGame();
+        }
+
+        public void StartAsWhiteAgainstPlayer()
+        {
+            Information.SetDefaultValues();
+            Information.PlayAgainstAI = false;
         }
 
         //CODE TO INITIALISE THE PIECES
@@ -61,6 +79,7 @@ namespace View
                 }
             }
         }
+
         private void InitPawns(int row, Team team)
         {
             for (int i = 0; i < 8; i++)
