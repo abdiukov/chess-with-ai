@@ -11,5 +11,5 @@ The project is based on the MVC model and does not require an internet connectio
 
 ## Credits
 
-- The chess engine - > https://github.com/3583Bytes/ChessCore. by Adam Berent. MIT Licence.
-- The chess piece icons - > https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces. by Cburnett. BSD Licence.
+- The chess engine - > https://github.com/3583Bytes/ChessCore by Adam Berent. MIT License.
+- The chess piece icons - > https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces by Cburnett. BSD License.
