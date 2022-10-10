@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "UI\View.csproj", "{FF3BA6BE-9389-49D0-BF15-F96D63B014FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame", "ChessGame\ChessGame.csproj", "{FF3BA6BE-9389-49D0-BF15-F96D63B014FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessCoreEngine", "ChessCoreEngine\ChessCoreEngine.csproj", "{A38F56E8-5E30-406F-9DED-E39F5B0DFCC4}"
 EndProject
