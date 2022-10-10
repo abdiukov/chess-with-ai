@@ -61,10 +61,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ChessCore\ChessCoreEngineAdapter.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="GUIView.cs">
 			<SubType>Form</SubType>
 		</Compile>
