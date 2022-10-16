@@ -1,9 +1,9 @@
 ﻿using System;
 using ChessEngine.Engine;
 
-namespace ChessGame.services;
+namespace ChessGame.Service;
 
-public class Adapter
+public class ChessCoreEngineAdapterService
 {
     private static readonly Engine Engine = new();
 

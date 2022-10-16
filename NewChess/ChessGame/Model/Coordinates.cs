@@ -1,4 +1,4 @@
-﻿namespace ChessGame.models;
+﻿namespace ChessGame.Model;
 
 public struct Coordinates
 {

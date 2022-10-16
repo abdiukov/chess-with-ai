@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ChessGame.models;
+namespace ChessGame.Model;
 
 public enum Team { White, Black }
 public abstract class Piece

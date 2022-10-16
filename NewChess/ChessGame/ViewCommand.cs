@@ -1,5 +1,5 @@
 using System.Drawing;
-using ChessGame.models;
+using ChessGame.Model;
 
 namespace ChessGame;
 

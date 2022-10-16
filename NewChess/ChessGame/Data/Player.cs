@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
-using ChessGame.models;
+using ChessGame.Model;
 
-namespace ChessGame.gamedata;
+namespace ChessGame.Data;
 
 public abstract class Information
 {

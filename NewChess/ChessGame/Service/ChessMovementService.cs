@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using ChessGame.gamedata;
-using ChessGame.models;
+using ChessGame.Data;
+using ChessGame.Model;
 
-namespace ChessGame.services;
+namespace ChessGame.Service;
 
-public class Movement
+public class ChessMovementService
 {
     private Team _pieceTeam;
     public List<Point?> GetPossibleMoves(Piece piece, int x, int y)

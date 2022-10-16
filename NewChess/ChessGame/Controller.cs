@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ChessGame.gamedata;
-using ChessGame.models;
-using ChessGame.services;
+using ChessGame.Data;
+using ChessGame.Model;
+using ChessGame.Service;
 
 namespace ChessGame;
 
@@ -15,7 +15,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     private const int BoardColumns = 8;
     private readonly ICommandHandler<ViewCommand> _commandHandler;
     private Point? _selectedSquare;
-    private readonly Movement _controller = new();
+    private readonly ChessMovementService _controller = new();
 
     public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
@@ -37,9 +37,9 @@ public class Controller : ICommandHandler<ControllerCommand>
     {
         Information.SetDefaultValues();
         Information.PlayAgainstAi = true;
-        Adapter.StartGame();
+        ChessCoreEngineAdapterService.StartGame();
 
-        var outputFromAi = Adapter.StartAsBlack();
+        var outputFromAi = ChessCoreEngineAdapterService.StartAsBlack();
         ProcessAiOutput(outputFromAi);
         Information.CurrentTeam = Team.Black;
     }
@@ -48,7 +48,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     {
         Information.SetDefaultValues();
         Information.PlayAgainstAi = true;
-        Adapter.StartGame();
+        ChessCoreEngineAdapterService.StartGame();
         Information.CurrentTeam = Team.White;
     }
 
@@ -236,7 +236,7 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     private void DoAiMove(int moverX, int moverY, int destinationX, int destinationY)
     {
-        var outputFromAi = Adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
+        var outputFromAi = ChessCoreEngineAdapterService.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
 
         switch (outputFromAi.Length)
         {

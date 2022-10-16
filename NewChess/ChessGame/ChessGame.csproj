@@ -7,55 +7,55 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="assets\Bishop_B.png" />
-		<None Remove="assets\Bishop_W.png" />
-		<None Remove="assets\King_B.png" />
-		<None Remove="assets\King_W.png" />
-		<None Remove="assets\Knight_B.png" />
-		<None Remove="assets\Knight_W.png" />
-		<None Remove="assets\Pawn_B.png" />
-		<None Remove="assets\Pawn_W.png" />
-		<None Remove="assets\Queen_B.png" />
-		<None Remove="assets\Queen_W.png" />
-		<None Remove="assets\Rook_B.png" />
-		<None Remove="assets\Rook_W.png" />
+		<None Remove="Asset\Bishop_B.png" />
+		<None Remove="Asset\Bishop_W.png" />
+		<None Remove="Asset\King_B.png" />
+		<None Remove="Asset\King_W.png" />
+		<None Remove="Asset\Knight_B.png" />
+		<None Remove="Asset\Knight_W.png" />
+		<None Remove="Asset\Pawn_B.png" />
+		<None Remove="Asset\Pawn_W.png" />
+		<None Remove="Asset\Queen_B.png" />
+		<None Remove="Asset\Queen_W.png" />
+		<None Remove="Asset\Rook_B.png" />
+		<None Remove="Asset\Rook_W.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="assets\Bishop_B.png">
+		<Content Include="Asset\Bishop_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Bishop_W.png">
+		<Content Include="Asset\Bishop_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\King_B.png">
+		<Content Include="Asset\King_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\King_W.png">
+		<Content Include="Asset\King_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Knight_B.png">
+		<Content Include="Asset\Knight_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Knight_W.png">
+		<Content Include="Asset\Knight_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Pawn_B.png">
+		<Content Include="Asset\Pawn_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Pawn_W.png">
+		<Content Include="Asset\Pawn_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Queen_B.png">
+		<Content Include="Asset\Queen_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Queen_W.png">
+		<Content Include="Asset\Queen_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Rook_B.png">
+		<Content Include="Asset\Rook_B.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="assets\Rook_W.png">
+		<Content Include="Asset\Rook_W.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
