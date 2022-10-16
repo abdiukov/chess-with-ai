@@ -1,13 +1,13 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
 
-namespace View
+namespace ChessGame
 {
-    partial class GUIView
+    partial class GuiView
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -39,7 +39,7 @@ namespace View
             this.ClientSize = new System.Drawing.Size(140, 1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "GUIView";
+            this.Name = "GuiView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chess Application";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GUIView_FormClosing);

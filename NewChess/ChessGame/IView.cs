@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-namespace View
+
+namespace ChessGame;
+
+public interface IView : ICommandHandler<ViewCommand>
 {
-    public interface IView : ICommandHandler<ViewCommand>
-    {
-        void DrawSquare(Image piece, Point coord);
-    }
+    void DrawSquare(Image piece, Point coordinate);
 }

@@ -1,331 +1,332 @@
-﻿using ChessCoreEngineAdapter;
-using GameInformation;
-using GameMovement;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ChessGame.gamedata;
+using ChessGame.models;
+using ChessGame.services;
 
-namespace View
+namespace ChessGame;
+
+public class Controller : ICommandHandler<ControllerCommand>
 {
-    public class Controller : ICommandHandler<ControllerCommand>
+    private const int BoardRows = 8;
+    private const int BoardColumns = 8;
+    private readonly ICommandHandler<ViewCommand> _commandHandler;
+    private Point? _selectedSquare;
+    private readonly Movement _controller = new();
+
+    public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
-        private const int BoardRows = 8;
-        private const int BoardColumns = 8;
-        private readonly ICommandHandler<ViewCommand> commandHandler;
-        private Point? selectedSquare;
-        private readonly Movement contr = new();
+        _commandHandler = commandHandler;
 
-        public Controller(ICommandHandler<ViewCommand> commandHandler)
+        for (var i = 0; i < BoardRows; i++)
         {
-            this.commandHandler = commandHandler;
-
-            for (int i = 0; i < BoardRows; i++)
+            for (var j = 0; j < BoardColumns; j++)
             {
-                for (int j = 0; j < BoardColumns; j++)
-                {
-                    Coordinates.board[i, j] = new Square();
-                }
+                Coordinates.Board[i, j] = new Square();
             }
         }
-        public void Handle(ControllerCommand command) { command.Execute(this); }
+    }
+    public void Handle(ControllerCommand command) { command.Execute(this); }
 
-        //CODE TO START GAME UNDER DIFFERENT CONDITIONS
+    //CODE TO START GAME UNDER DIFFERENT CONDITIONS
 
-        public void PlayAsBlackAgainstAI()
+    public void PlayAsBlackAgainstAi()
+    {
+        Information.SetDefaultValues();
+        Information.PlayAgainstAi = true;
+        Adapter.StartGame();
+
+        var outputFromAi = Adapter.StartAsBlack();
+        ProcessAiOutput(outputFromAi);
+        Information.CurrentTeam = Team.Black;
+    }
+
+    public void StartAsWhiteAgainstAi()
+    {
+        Information.SetDefaultValues();
+        Information.PlayAgainstAi = true;
+        Adapter.StartGame();
+        Information.CurrentTeam = Team.White;
+    }
+
+    public void StartAsWhiteAgainstPlayer()
+    {
+        Information.SetDefaultValues();
+        Information.PlayAgainstAi = false;
+        Information.CurrentTeam = Team.White;
+    }
+
+    //CODE TO INITIALISE THE PIECES
+
+    public void Start()
+    {
+        InitPawns(6, Team.White);
+        InitBackRow(7, Team.White);
+        InitPawns(1, Team.Black);
+        InitBackRow(0, Team.Black);
+        UpdateAll();
+    }
+
+    private void UpdateAll()
+    {
+        for (var i = 0; i < BoardRows; i++)
         {
-            Information.SetDefaultValues();
-            Information.PlayAgainstAI = true;
-            Adapter.StartGame();
-
-            string outputFromAI = Adapter.StartAsBlack();
-            ProcessAIOutput(outputFromAI);
-            Information.CurrentTeam = Team.Black;
-        }
-
-        public void StartAsWhiteAgainstAI()
-        {
-            Information.SetDefaultValues();
-            Information.PlayAgainstAI = true;
-            Adapter.StartGame();
-            Information.CurrentTeam = Team.White;
-        }
-
-        public void StartAsWhiteAgainstPlayer()
-        {
-            Information.SetDefaultValues();
-            Information.PlayAgainstAI = false;
-            Information.CurrentTeam = Team.White;
-        }
-
-        //CODE TO INITIALISE THE PIECES
-
-        public void Start()
-        {
-            InitPawns(6, Team.White);
-            InitBackRow(7, Team.White);
-            InitPawns(1, Team.Black);
-            InitBackRow(0, Team.Black);
-            UpdateAll();
-        }
-
-        private void UpdateAll()
-        {
-            for (int i = 0; i < BoardRows; i++)
+            for (var j = 0; j < BoardColumns; j++)
             {
-                for (int j = 0; j < BoardColumns; j++)
-                {
-                    Update(new Point(i, j));
-                }
+                Update(new Point(i, j));
             }
         }
+    }
 
-        private void InitPawns(int row, Team team)
+    private void InitPawns(int row, Team team)
+    {
+        for (var i = 0; i < 8; i++)
         {
-            for (int i = 0; i < 8; i++)
+            Place(row, i, new Pawn(team));
+        }
+    }
+
+    private void InitBackRow(int row, Team team)
+    {
+        Place(row, 0, new Rook(team));
+        Place(row, 1, new Knight(team));
+        Place(row, 2, new Bishop(team));
+        Place(row, 3, new Queen(team));
+        Place(row, 4, new King(team));
+        Place(row, 5, new Bishop(team));
+        Place(row, 6, new Knight(team));
+        Place(row, 7, new Rook(team));
+    }
+
+    //RESPONSE TO USER INPUT CODE
+
+    public bool Select(Point coordinate)
+    {
+        try
+        {
+            var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
+
+            if (piece != null && piece.Team == Information.CurrentTeam)
             {
-                Place(row, i, new Pawn(team));
+                _selectedSquare = coordinate;
+                Program.GameWindow.PossibleMoves = _controller.GetPossibleMoves(piece, coordinate.X, coordinate.Y);
+                return true;
+            }
+
+            if (Program.GameWindow.PossibleMoves.Contains(coordinate))
+            {
+                Program.GameWindow.PossibleMoves.Clear();
+                ProcessMouseClickMove(coordinate);
+                _selectedSquare = null;
+                return true;
             }
         }
+        catch (IndexOutOfRangeException) { }
+        Program.GameWindow.PossibleMoves.Clear();
+        return false;
+    }
 
-        private void InitBackRow(int row, Team team)
+
+    public void ProcessMouseClickMove(Point coordinate)
+    {
+        var kingIsCastlingLeft = false;
+        var kingIsCastlingRight = false;
+        var movingPieceIsKing = false;
+        List<Point?> forbiddenSquares = new();
+
+        Move(_selectedSquare.Value, coordinate);
+
+        //if the moving piece is King
+        if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is King)
         {
-            Place(row, 0, new Rook(team));
-            Place(row, 1, new Knight(team));
-            Place(row, 2, new Bishop(team));
-            Place(row, 3, new Queen(team));
-            Place(row, 4, new King(team));
-            Place(row, 5, new Bishop(team));
-            Place(row, 6, new Knight(team));
-            Place(row, 7, new Rook(team));
-        }
+            movingPieceIsKing = true;
+            forbiddenSquares.Add(new Point(coordinate.X, coordinate.Y));
 
-        //RESPONSE TO USER INPUT CODE
-
-        public bool Select(Point coord)
-        {
-            try
+            //if the king is castling
+            if (Math.Abs(_selectedSquare.Value.X - coordinate.X) == 2)
             {
-                Piece piece = Coordinates.board[coord.X, coord.Y].piece;
-
-                if (piece != null && piece.Team == Information.CurrentTeam)
-                {
-                    selectedSquare = coord;
-                    Program.gameWindow.possibleMoves = contr.GetPossibleMoves(piece, coord.X, coord.Y);
-                    return true;
-                }
-                else if (Program.gameWindow.possibleMoves.Contains(coord))
-                {
-                    Program.gameWindow.possibleMoves.Clear();
-                    ProcessMouseClickMove(coord);
-                    selectedSquare = null;
-                    return true;
-                }
-            }
-            catch (IndexOutOfRangeException) { }
-            Program.gameWindow.possibleMoves.Clear();
-            return false;
-        }
-
-
-        public void ProcessMouseClickMove(Point coord)
-        {
-            bool kingIsCastlingLeft = false;
-            bool kingIsCastlingRight = false;
-            bool movingPieceIsKing = false;
-            List<Point?> forbiddenSquares = new();
-
-            Move(selectedSquare.Value, coord);
-
-            //if the moving piece is King
-            if (Coordinates.board[coord.X, coord.Y].piece is King)
-            {
-                movingPieceIsKing = true;
-                forbiddenSquares.Add(new(coord.X, coord.Y));
-
-                //if the king is castling
-                if (Math.Abs(selectedSquare.Value.X - coord.X) == 2)
+                switch (coordinate.X)
                 {
                     //add the squares in between castling to "forbidden squares" - these squares cannot be checked by enemy
-                    if (coord.X == 2)
-                    {
+                    case 2:
                         kingIsCastlingLeft = true;
-                        forbiddenSquares.Add(new(3, coord.Y));
-                        forbiddenSquares.Add(new(4, coord.Y));
-                    }
-                    if (coord.X == 6)
-                    {
+                        forbiddenSquares.Add(coordinate with { X = 3 });
+                        forbiddenSquares.Add(coordinate with { X = 4 });
+                        break;
+                    case 6:
                         kingIsCastlingRight = true;
-                        forbiddenSquares.Add(new(4, coord.Y));
-                        forbiddenSquares.Add(new(5, coord.Y));
-                    }
+                        forbiddenSquares.Add(coordinate with { X = 4 });
+                        forbiddenSquares.Add(coordinate with { X = 5 });
+                        break;
                 }
             }
-            //otherwise, add king to the forbidden squares - the king cannot be checked
-            else
-            {
-                forbiddenSquares.Add(Information.GetMyKingLocation());
-            }
-
-
-            //check every move to see whether the enemy can check either forbidden squares
-            //if the enemy can, undo the move
-
-            for (int i = 0; i <= 7; i++)
-            {
-                for (int j = 0; j <= 7; j++)
-                {
-                    Piece toCheck = Coordinates.board[i, j].piece;
-                    if (toCheck != null)
-                    {
-                        //the piece has to be from the opposite team
-                        //the piece should be able to check one of the forbidden squares
-                        if (toCheck.Team != Information.CurrentTeam)
-                        {
-                            List<Point?> getMoves = contr.GetPossibleMoves(toCheck, i, j);
-
-                            if (getMoves.Intersect(forbiddenSquares).Any())
-                            {
-                                UndoMove(selectedSquare.Value, coord);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (Coordinates.board[coord.X, coord.Y].piece is Pawn)
-            {
-                if (coord.Y == 0 || coord.Y == 7)
-                {
-                    UpgradePawn(coord.X, coord.Y);
-                }
-            }
-
-            if (movingPieceIsKing)
-            {
-                //once we have moved, update the position of the king
-                Information.UpdateKingLocation(coord.X, coord.Y);
-                Information.UpdateKingEverMoved();
-
-                //also if castling has been done, move the rook
-                if (kingIsCastlingLeft)
-                {
-                    Move(new Point(0, selectedSquare.Value.Y), new Point(3, selectedSquare.Value.Y));
-                }
-                else if (kingIsCastlingRight)
-                {
-                    Move(new Point(7, selectedSquare.Value.Y), new Point(5, selectedSquare.Value.Y));
-                }
-            }
-
-            Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
-
-            //logic if it is an ai
-            if (Information.PlayAgainstAI)
-            {
-                DoAIMove(selectedSquare.Value.X, selectedSquare.Value.Y, coord.X, coord.Y);
-            }
+        }
+        //otherwise, add king to the forbidden squares - the king cannot be checked
+        else
+        {
+            forbiddenSquares.Add(Information.GetMyKingLocation());
         }
 
 
-        //RESPONSE TO AI
+        //check every move to see whether the enemy can check either forbidden squares
+        //if the enemy can, undo the move
 
-        private void DoAIMove(int moverX, int moverY, int destinationX, int destinationY)
+        for (var i = 0; i <= 7; i++)
         {
-            string outputFromAI = Adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
+            for (var j = 0; j <= 7; j++)
+            {
+                var toCheck = Coordinates.Board[i, j].Piece;
+                if (toCheck == null) 
+                    continue;
+                
+                //the piece has to be from the opposite team
+                //the piece should be able to check one of the forbidden squares
+                if (toCheck.Team == Information.CurrentTeam) 
+                    continue;
 
-            if (outputFromAI.Length == 4)
-            {
-                ProcessAIOutput(outputFromAI);
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                var getMoves = _controller.GetPossibleMoves(toCheck, i, j);
+
+                if (!getMoves.Intersect(forbiddenSquares).Any()) 
+                    continue;
+                
+                UndoMove(_selectedSquare.Value, coordinate);
+                return;
             }
-            else if (outputFromAI.Length > 4)
+        }
+
+        if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is Pawn)
+        {
+            if (coordinate.Y is 0 or 7)
             {
-                ProcessAIOutput(outputFromAI.Substring(0, 4));
-                MessageBox.Show(outputFromAI[4..], "Game over!");
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                UpgradePawn(coordinate.X, coordinate.Y);
             }
-            else
+        }
+
+        if (movingPieceIsKing)
+        {
+            //once we have moved, update the position of the king
+            Information.UpdateKingLocation(coordinate.X, coordinate.Y);
+            Information.UpdateKingEverMoved();
+
+            //also if castling has been done, move the rook
+            if (kingIsCastlingLeft)
             {
+                Move(_selectedSquare.Value with { X = 0 }, _selectedSquare.Value with { X = 3 });
+            }
+            else if (kingIsCastlingRight)
+            {
+                Move(_selectedSquare.Value with { X = 7 }, _selectedSquare.Value with { X = 5 });
+            }
+        }
+
+        Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+
+        //logic if it is an ai
+        if (Information.PlayAgainstAi)
+        {
+            DoAiMove(_selectedSquare.Value.X, _selectedSquare.Value.Y, coordinate.X, coordinate.Y);
+        }
+    }
+
+
+    //RESPONSE TO AI
+
+    private void DoAiMove(int moverX, int moverY, int destinationX, int destinationY)
+    {
+        var outputFromAi = Adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
+
+        switch (outputFromAi.Length)
+        {
+            case 4:
+                ProcessAiOutput(outputFromAi);
+                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                break;
+            case > 4:
+                ProcessAiOutput(outputFromAi[..4]);
+                MessageBox.Show(outputFromAi[4..], "Game over!");
+                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                break;
+            default:
                 MessageBox.Show("Move is invalid. Please try again.");
-            }
+                break;
         }
+    }
 
-        private void ProcessAIOutput(string outputFromAI)
+    private void ProcessAiOutput(string outputFromAi)
+    {
+        var x1 = int.Parse(outputFromAi[0].ToString());
+        var y1 = int.Parse(outputFromAi[1].ToString());
+        var x2 = int.Parse(outputFromAi[2].ToString());
+        var y2 = int.Parse(outputFromAi[3].ToString());
+
+        Point origin = new(x1, y1);
+        Point destination = new(x2, y2);
+
+        Move(origin, destination);
+
+        if (Math.Abs(x1 - x2) != 2 || Coordinates.Board[x2, y2].Piece is not King) 
+            return;
+        
+        switch (x2)
         {
-            int x1 = int.Parse(outputFromAI[0].ToString());
-            int y1 = int.Parse(outputFromAI[1].ToString());
-            int x2 = int.Parse(outputFromAI[2].ToString());
-            int y2 = int.Parse(outputFromAI[3].ToString());
-
-            Point origin = new(x1, y1);
-            Point destination = new(x2, y2);
-
-            Move(origin, destination);
-
-            if (Math.Abs(x1 - x2) == 2 && Coordinates.board[x2, y2].piece is King)
-            {
-                if (x2 == 2)
-                {
-                    //left side
-                    Move(new Point(0, y2), new Point(3, y2));
-                }
-                else if (x2 == 6)
-                {
-                    //right side
-                    Move(new Point(7, y2), new Point(5, y2));
-                }
-            }
+            case 2:
+                //left side
+                Move(new Point(0, y2), new Point(3, y2));
+                break;
+            case 6:
+                //right side
+                Move(new Point(7, y2), new Point(5, y2));
+                break;
         }
+    }
 
-        //MOVEMENT CODE
+    //MOVEMENT CODE
 
-        private Piece savedPiece;
+    private Piece _savedPiece;
 
-        private void Move(Point origin, Point destination)
-        {
-            savedPiece = Coordinates.board[destination.X, destination.Y].piece;
+    private void Move(Point origin, Point destination)
+    {
+        _savedPiece = Coordinates.Board[destination.X, destination.Y].Piece;
 
-            Piece mover = Coordinates.board[origin.X, origin.Y].piece;
-            Coordinates.board[destination.X, destination.Y].piece = mover;
-            Coordinates.board[origin.X, origin.Y].piece = null;
-            Update(origin);
-            Update(destination);
-        }
+        var mover = Coordinates.Board[origin.X, origin.Y].Piece;
+        Coordinates.Board[destination.X, destination.Y].Piece = mover;
+        Coordinates.Board[origin.X, origin.Y].Piece = null;
+        Update(origin);
+        Update(destination);
+    }
 
-        private void UndoMove(Point origin, Point destination)
-        {
-            Coordinates.board[origin.X, origin.Y].piece = Coordinates.board[destination.X, destination.Y].piece;
-            Coordinates.board[destination.X, destination.Y].piece = savedPiece;
-            Update(origin);
-            Update(destination);
-        }
+    private void UndoMove(Point origin, Point destination)
+    {
+        Coordinates.Board[origin.X, origin.Y].Piece = Coordinates.Board[destination.X, destination.Y].Piece;
+        Coordinates.Board[destination.X, destination.Y].Piece = _savedPiece;
+        Update(origin);
+        Update(destination);
+    }
 
 
-        public void UpgradePawn(int x, int y)
-        {
-            Piece upgradedPiece = new Queen(Information.CurrentTeam);
+    public void UpgradePawn(int x, int y)
+    {
+        Piece upgradedPiece = new Queen(Information.CurrentTeam);
 
-            Coordinates.board[x, y].piece = upgradedPiece;
+        Coordinates.Board[x, y].Piece = upgradedPiece;
 
-            Update(new Point(x, y));
-        }
+        Update(new Point(x, y));
+    }
 
-        //CODE TO UPDATE THE BOARD
+    //CODE TO UPDATE THE BOARD
 
-        private void Place(int col, int row, Piece piece)
-        {
-            Coordinates.board[row, col].piece = piece;
-            Update(new Point(row, col));
-        }
+    private void Place(int col, int row, Piece piece)
+    {
+        Coordinates.Board[row, col].Piece = piece;
+        Update(new Point(row, col));
+    }
 
-        private void Update(Point coord)
-        {
-            Piece piece = Coordinates.board[coord.X, coord.Y].piece;
-            commandHandler.Handle(new DrawSquareCommand(coord, piece));
-        }
+    private void Update(Point coordinate)
+    {
+        var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
+        _commandHandler.Handle(new DrawSquareCommand(coordinate, piece));
     }
 }

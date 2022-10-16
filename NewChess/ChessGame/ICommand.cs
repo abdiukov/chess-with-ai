@@ -1,11 +1,10 @@
-﻿namespace View
+﻿namespace ChessGame;
+
+public interface ICommand<in T>
 {
-    public interface ICommand<T>
-    {
-        void Execute(T t);
-    }
-    public interface ICommandHandler<T>
-    {
-        void Handle(T command);
-    }
+    void Execute(T t);
+}
+public interface ICommandHandler<in T>
+{
+    void Handle(T command);
 }

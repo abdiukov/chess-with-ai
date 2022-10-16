@@ -1,8 +1,6 @@
-﻿namespace Model
+﻿namespace ChessGame.models;
+
+public class Square
 {
-    public class Square
-    {
-        public Piece piece;
-        public Square() { }
-    }
+    public Piece Piece;
 }

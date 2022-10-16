@@ -3,130 +3,128 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace View
+namespace ChessGame;
+
+public partial class GuiView : Form, IView
 {
-    public partial class GUIView : Form, IView
+    private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
+    private const int BufferDimension = 1024;
+    private const int SquareDimension = BufferDimension / 8;
+    private Controller _controller;
+    private Bitmap _buffer;
+    private Point? _selectedSquare;
+    private readonly Brush _c1 = Brushes.BlanchedAlmond, _c2 = Brushes.Silver;
+
+    public List<Point?> PossibleMoves = new();
+
+    //INITIALIZATION CODE
+
+    public GuiView()
     {
-        private readonly int dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
-        private const int bufferDimension = 1024;
-        private const int squareDimension = bufferDimension / 8;
-        private Controller controller;
-        private Bitmap buffer;
-        private Point? selectedSquare;
-        private readonly Brush c1 = Brushes.BlanchedAlmond, c2 = Brushes.Silver;
+        InitializeComponent();
+        InitGraphics();
+        InitModel();
+        MouseClick += GUIView_MouseClick;
+        Program.GameWindow = this;
+    }
 
-        public List<Point?> possibleMoves = new();
+    private void InitModel()
+    {
+        _controller = new Controller(this);
+        _controller.Handle(new StartGameCommand());
+    }
 
-        //INITIALISATION CODE
+    private void InitGraphics()
+    {
+        MaximizeBox = false;
+        MaximumSize = new Size(_dimension, _dimension);
+        MinimumSize = new Size(_dimension / 2, _dimension / 2);
+        Size = new Size(_dimension, _dimension);
+        _buffer = new Bitmap(BufferDimension, BufferDimension);
+        DoubleBuffered = true;
+        Paint += GUIView_Paint;
+        Resize += GUIView_Resize;
+    }
 
-        public GUIView()
+    //DIFFERENT START CONDITIONS CODE
+
+    public void StartAsBlackAgainstAi()
+    {
+        _controller.PlayAsBlackAgainstAi();
+    }
+
+    public void StartAsWhiteAgainstAi()
+    {
+        _controller.StartAsWhiteAgainstAi();
+    }
+
+    public void StartAsWhiteAgainstPlayer()
+    {
+        _controller.StartAsWhiteAgainstPlayer();
+    }
+
+    //RESPOND TO USER INPUT CODE
+
+    public new void Handle(ViewCommand command) { command.Execute(this); }
+
+    private void GUIView_MouseClick(object sender, MouseEventArgs e)
+    {
+        Point? coordinate = new Point(e.X / (ClientSize.Width / 8), e.Y / (ClientSize.Height / 8));
+        SelectSquareCommand selectCommand = new(coordinate.Value);
+
+        //creates the command and says to model - go handle that command
+        _controller.Handle(selectCommand);
+
+        //if its successful, create selected square
+        _selectedSquare = selectCommand.Success ? coordinate : null;
+
+        Invalidate();
+    }
+
+    //RESIZE CODE
+    private void GUIView_Resize(object sender, EventArgs e)
+    {
+        if (WindowState == FormWindowState.Minimized) 
+            return;
+
+        Height = Width;
+        Invalidate();
+    }
+
+    //DRAW GRAPHICS CODE
+
+    private void GUIView_Paint(object sender, PaintEventArgs e)
+    {
+        var x = ClientSize.Width / 8;
+        var y = ClientSize.Height / 8;
+        var lineSize = (x + y / 2) / 25;
+        e.Graphics.DrawImage(_buffer, 0, 0, ClientSize.Width, ClientSize.Height);
+        if (_selectedSquare != null)
         {
-            InitializeComponent();
-            InitGraphics();
-            InitModel();
-            this.MouseClick += GUIView_MouseClick;
-            Program.gameWindow = this;
+            var highlight = _selectedSquare.Value;
+            e.Graphics.DrawRectangle(new Pen(Color.Yellow, lineSize), highlight.X * x, highlight.Y * y, x, y);
         }
-
-        private void InitModel()
+        foreach (Point highlight in PossibleMoves)
         {
-            controller = new Controller(this);
-            controller.Handle(new StartGameCommand());
+            e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
         }
+    }
 
-        private void InitGraphics()
+    public void DrawSquare(Image piece, Point coordinate)
+    {
+        var brush = coordinate.Y % 2 == 0 ? coordinate.X % 2 == 0 ? _c1 : _c2 : coordinate.X % 2 == 0 ? _c2 : _c1;
+        using var g = Graphics.FromImage(_buffer);
+        g.FillRectangle(brush, coordinate.X * SquareDimension, coordinate.Y * SquareDimension, SquareDimension, SquareDimension);
+        if (piece != null)
         {
-            this.MaximizeBox = false;
-            this.MaximumSize = new Size(dimension, dimension);
-            this.MinimumSize = new Size(dimension / 2, dimension / 2);
-            this.Size = new Size(dimension, dimension);
-            buffer = new Bitmap(bufferDimension, bufferDimension);
-            this.DoubleBuffered = true;
-            this.Paint += GUIView_Paint;
-            this.Resize += GUIView_Resize;
+            g.DrawImage(piece, coordinate.X * SquareDimension, coordinate.Y * SquareDimension, SquareDimension, SquareDimension);
         }
+    }
 
-        //DIFFERENT START CONDITIONS CODE
+    //NAVIGATION CODE
 
-        public void StartAsBlackAgainstAI()
-        {
-            controller.PlayAsBlackAgainstAI();
-        }
-
-        public void StartAsWhiteAgainstAI()
-        {
-            controller.StartAsWhiteAgainstAI();
-        }
-
-        public void StartAsWhiteAgainstPlayer()
-        {
-            controller.StartAsWhiteAgainstPlayer();
-        }
-
-        //RESPOND TO USER INPUT CODE
-
-        public new void Handle(ViewCommand command) { command.Execute(this); }
-
-        private void GUIView_MouseClick(object sender, MouseEventArgs e)
-        {
-            Point? coord = new Point(e.X / (this.ClientSize.Width / 8), e.Y / (this.ClientSize.Height / 8));
-            SelectSquareCommand selectCommand = new(coord.Value);
-
-            //creates the command and says to model - go handle that command
-            controller.Handle(selectCommand);
-
-            //if its succcessful, create selected square
-            selectedSquare = (selectCommand.Success ? coord : null);
-
-            this.Invalidate();
-        }
-
-        //RESIZE CODE
-        private void GUIView_Resize(object sender, EventArgs e)
-        {
-            if (this.WindowState != FormWindowState.Minimized)
-            {
-                this.Height = this.Width;
-                this.Invalidate();
-            }
-        }
-
-        //DRAW GRAPHICS CODE
-
-        private void GUIView_Paint(object sender, PaintEventArgs e)
-        {
-            int x = this.ClientSize.Width / 8;
-            int y = this.ClientSize.Height / 8;
-            int lineSize = (x + y / 2) / 25;
-            e.Graphics.DrawImage(buffer, 0, 0, this.ClientSize.Width, this.ClientSize.Height);
-            if (selectedSquare != null)
-            {
-                Point highlight = selectedSquare.Value;
-                e.Graphics.DrawRectangle(new Pen(Color.Yellow, lineSize), highlight.X * x, highlight.Y * y, x, y);
-            }
-            foreach (var item in possibleMoves)
-            {
-                Point highlight = (Point)item;
-                e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
-            }
-        }
-
-        public void DrawSquare(Image piece, Point coord)
-        {
-            Brush brush = (coord.Y % 2 == 0) ? (coord.X % 2 == 0) ? c1 : c2 : (coord.X % 2 == 0) ? c2 : c1;
-            using Graphics g = Graphics.FromImage(buffer);
-            g.FillRectangle(brush, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
-            if (piece != null)
-            {
-                g.DrawImage(piece, coord.X * squareDimension, coord.Y * squareDimension, squareDimension, squareDimension);
-            }
-        }
-
-        //NAVIGATION CODE
-
-        private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Program.mainMenu.Show();
-        }
+    private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        Program.MainMenu.Show();
     }
 }

@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
-using UI;
 
-namespace View
+namespace ChessGame;
+
+internal static class Program
 {
-    static class Program
+    public static MainMenu MainMenu = new();
+    public static GuiView GameWindow;
+    [STAThread]
+    private static void Main()
     {
-        public static MainMenu mainMenu = new();
-        public static GUIView gameWindow;
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(mainMenu);
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(MainMenu);
     }
 }

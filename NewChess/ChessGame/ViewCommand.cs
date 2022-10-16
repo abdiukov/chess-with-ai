@@ -1,32 +1,31 @@
-using Model;
 using System.Drawing;
+using ChessGame.models;
 
-namespace View
+namespace ChessGame;
+
+public abstract class ViewCommand : ICommand<IView>
 {
-    public abstract class ViewCommand : ICommand<IView>
+    public abstract void Execute(IView view);
+}
+
+public class DrawSquareCommand : ViewCommand
+{
+    private readonly Point _coordinate;
+    private readonly Piece _piece;
+
+    public DrawSquareCommand(Point coordinate, Piece piece)
     {
-        public abstract void Execute(IView view);
+        _coordinate = coordinate;
+        _piece = piece;
     }
 
-    public class DrawSquareCommand : ViewCommand
+    public override void Execute(IView view)
     {
-        private readonly Point coord;
-        private readonly Piece piece;
-
-        public DrawSquareCommand(Point coord, Piece piece)
+        Image pieceImage = null;
+        if (_piece != null)
         {
-            this.coord = coord;
-            this.piece = piece;
+            pieceImage = _piece.Image;
         }
-
-        public override void Execute(IView view)
-        {
-            Image pieceImage = null;
-            if (piece != null)
-            {
-                pieceImage = piece.image;
-            }
-            view.DrawSquare(pieceImage, coord);
-        }
+        view.DrawSquare(pieceImage, _coordinate);
     }
 }

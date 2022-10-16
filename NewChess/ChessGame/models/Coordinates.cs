@@ -1,7 +1,6 @@
-﻿namespace Model
+﻿namespace ChessGame.models;
+
+public struct Coordinates
 {
-    public struct Coordinates
-    {
-        public static readonly Square[,] board = new Square[8, 8];
-    }
+    public static readonly Square[,] Board = new Square[8, 8];
 }

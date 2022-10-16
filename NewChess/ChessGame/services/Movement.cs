@@ -1,419 +1,395 @@
-﻿using GameInformation;
-using Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using ChessGame.gamedata;
+using ChessGame.models;
 
-namespace GameMovement
+namespace ChessGame.services;
+
+public class Movement
 {
-    public class Movement
+    private Team _pieceTeam;
+    public List<Point?> GetPossibleMoves(Piece piece, int x, int y)
     {
-        private Team pieceTeam;
-        public List<Point?> GetPossibleMoves(Piece piece, int X, int Y)
-        {
-            List<Point?> movableSquares = new();
-            pieceTeam = piece.Team;
+        List<Point?> movableSquares = new();
+        _pieceTeam = piece.Team;
 
-            switch (piece)
+        movableSquares = piece switch
+        {
+            Pawn => _pieceTeam == Team.White ? GetMovesWhitePawn(x, y) : GetMovesBlackPawn(x, y),
+            Knight => GetMovesKnight(x, y),
+            Rook => GetMovesRook(x, y),
+            Bishop => GetMovesBishop(x, y),
+            King => GetMovesKing(x, y),
+            Queen => GetMovesQueen(x, y),
+            _ => movableSquares
+        };
+
+        //returns the highlighted squares
+        return movableSquares;
+    }
+
+
+
+    private List<Point?> GetMovesBlackPawn(int x, int y)
+    {
+        List<Point?> output = new();
+
+        if (IsEmpty(x, y + 1) == true)
+        {
+            output.Add(new Point(x, y + 1));
+            if (y == 1)
             {
-                case Pawn:
-                    if (pieceTeam == Team.White)
-                    {
-                        movableSquares = GetMovesWhitePawn(X, Y);
-                    }
-                    else
-                    {
-                        movableSquares = GetMovesBlackPawn(X, Y);
-                    }
+                if (IsEmpty(x, y + 2) == true)
+                {
+                    output.Add(new Point(x, y + 2));
+                }
+            }
+        }
+        if (IsEmpty(x + 1, y + 1) == false)
+        {
+            output.Add(new Point(x + 1, y + 1));
+        }
+
+        if (IsEmpty(x - 1, y + 1) == false)
+        {
+            output.Add(new Point(x - 1, y + 1));
+        }
+
+        return output;
+    }
+
+    private List<Point?> GetMovesWhitePawn(int x, int y)
+    {
+        List<Point?> output = new();
+
+        if (IsEmpty(x, y - 1) == true)
+        {
+            output.Add(new Point(x, y - 1));
+            if (y == 6)
+            {
+                if (IsEmpty(x, y - 2) == true)
+                {
+                    output.Add(new Point(x, y - 2));
+                }
+            }
+        }
+
+        if (IsEmpty(x + 1, y - 1) == false)
+        {
+            output.Add(new Point(x + 1, y - 1));
+        }
+
+        if (IsEmpty(x - 1, y - 1) == false)
+        {
+            output.Add(new Point(x - 1, y - 1));
+        }
+
+        return output;
+    }
+
+
+
+
+
+    private List<Point?> GetMovesRook(int x, int y)
+    {
+        List<Point?> output = new();
+
+
+        //checking moves from the left
+        for (int i = x - 1, exitLoop = 0; exitLoop == 0; i--)
+        {
+            switch (IsEmpty(i, y))
+            {
+                case true:
+                    output.Add(new Point(i, y));
                     break;
-                case Knight:
-                    movableSquares = GetMovesKnight(X, Y);
+                case false:
+                    output.Add(new Point(i, y));
+                    exitLoop = 1;
                     break;
-                case Rook:
-                    movableSquares = GetMovesRook(X, Y);
-                    break;
-                case Bishop:
-                    movableSquares = GetMovesBishop(X, Y);
-                    break;
-                case King:
-                    movableSquares = GetMovesKing(X, Y);
-                    break;
-                case Queen:
-                    movableSquares = GetMovesQueen(X, Y);
+                case null:
+                    exitLoop = 1;
                     break;
             }
+        }
 
-            //returns the highlighted squares
-            return movableSquares;
+        //checking moves from the right
+        for (int i = x + 1, exitLoop = 0; exitLoop == 0; i++)
+        {
+            switch (IsEmpty(i, y))
+            {
+                case true:
+                    output.Add(new Point(i, y));
+                    break;
+                case false:
+                    output.Add(new Point(i, y));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
+            }
+        }
+
+        //checking moves from above
+
+        for (int i = y - 1, exitLoop = 0; exitLoop == 0; i--)
+        {
+            switch (IsEmpty(x, i))
+            {
+                case true:
+                    output.Add(new Point(x, i));
+                    break;
+                case false:
+                    output.Add(new Point(x, i));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
+            }
         }
 
 
-
-        private List<Point?> GetMovesBlackPawn(int X, int Y)
+        //checking moves from below
+        for (int i = y + 1, exitLoop = 0; exitLoop == 0; i++)
         {
-            List<Point?> output = new();
-
-            if (IsEmpty(X, Y + 1) == true)
+            switch (IsEmpty(x, i))
             {
-                output.Add(new Point(X, Y + 1));
-                if (Y == 1)
-                {
-                    if (IsEmpty(X, Y + 2) == true)
-                    {
-                        output.Add(new Point(X, Y + 2));
-                    }
-                }
+                case true:
+                    output.Add(new Point(x, i));
+                    break;
+                case false:
+                    output.Add(new Point(x, i));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
             }
-            if (IsEmpty(X + 1, Y + 1) == false)
-            {
-                output.Add(new Point(X + 1, Y + 1));
-            }
+        }
+        //return all the moves
+        return output;
+    }
 
-            if (IsEmpty(X - 1, Y + 1) == false)
-            {
-                output.Add(new Point(X - 1, Y + 1));
-            }
 
-            return output;
+    private List<Point?> GetMovesKing(int x, int y)
+    {
+        List<Point?> output = new();
+
+        //move right up and down -  from the white side perspective
+        //so for example from the black perspective, up would be down, down would be up etc
+
+        //right = x+1
+        //left = x-1
+        //up y-1
+        //down y+1
+
+        //up and down
+        if (IsEmpty(x, y - 1) != null) { output.Add(new Point(x, y - 1)); }
+
+        if (IsEmpty(x, y + 1) != null) { output.Add(new Point(x, y + 1)); }
+
+        //left and right
+        if (IsEmpty(x + 1, y) != null) { output.Add(new Point(x + 1, y)); }
+
+        if (IsEmpty(x - 1, y) != null) { output.Add(new Point(x - 1, y)); }
+
+        //left up
+        if (IsEmpty(x - 1, y - 1) != null) { output.Add(new Point(x - 1, y - 1)); }
+
+        //left down
+        if (IsEmpty(x - 1, y + 1) != null) { output.Add(new Point(x - 1, y + 1)); }
+
+        //right up
+        if (IsEmpty(x + 1, y - 1) != null) { output.Add(new Point(x + 1, y - 1)); }
+
+        //right down
+        if (IsEmpty(x + 1, y + 1) != null) { output.Add(new Point(x + 1, y + 1)); }
+
+        if (Information.HasMyKingMovedBefore() || (y != 7 && y != 0)) return output;
+        //checking from right side
+        if (IsEmpty(x + 1, y) == true && IsEmpty(x + 2, y) == true
+                                      && IsFriendlyRook(x + 3, y))
+        {
+            output.Add(new Point(x + 2, y));
         }
 
-        private List<Point?> GetMovesWhitePawn(int X, int Y)
+        //checking from left side
+        if (IsEmpty(x - 1, y) == true && IsEmpty(x - 2, y) == true &&
+            IsEmpty(x - 3, y) == true && IsFriendlyRook(x - 4, y))
         {
-            List<Point?> output = new();
-
-            if (IsEmpty(X, Y - 1) == true)
-            {
-                output.Add(new Point(X, Y - 1));
-                if (Y == 6)
-                {
-                    if (IsEmpty(X, Y - 2) == true)
-                    {
-                        output.Add(new Point(X, Y - 2));
-                    }
-                }
-            }
-
-            if (IsEmpty(X + 1, Y - 1) == false)
-            {
-                output.Add(new Point(X + 1, Y - 1));
-            }
-
-            if (IsEmpty(X - 1, Y - 1) == false)
-            {
-                output.Add(new Point(X - 1, Y - 1));
-            }
-
-            return output;
+            output.Add(new Point(x - 2, y));
         }
 
+        return output;
+    }
 
+    private List<Point?> GetMovesBishop(int x, int y)
+    {
+        List<Point?> output = new();
 
+        //right down
 
-
-        private List<Point?> GetMovesRook(int X, int Y)
+        for (int xValue = x + 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue++, yValue++)
         {
-            List<Point?> output = new();
-
-
-            //checking moves from the left
-            for (int i = X - 1, exitLoop = 0; exitLoop == 0; i--)
+            switch (IsEmpty(xValue, yValue))
             {
-                switch (IsEmpty(i, Y))
-                {
-                    case true:
-                        output.Add(new Point(i, Y));
-                        break;
-                    case false:
-                        output.Add(new Point(i, Y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
+                case true:
+                    output.Add(new Point(xValue, yValue));
+                    break;
+                case false:
+                    output.Add(new Point(xValue, yValue));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
             }
+        }
 
-            //checking moves from the right
-            for (int i = X + 1, exitLoop = 0; exitLoop == 0; i++)
+        //right up
+        for (int xValue = x + 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue++, yValue--)
+        {
+            switch (IsEmpty(xValue, yValue))
             {
-                switch (IsEmpty(i, Y))
-                {
-                    case true:
-                        output.Add(new Point(i, Y));
-                        break;
-                    case false:
-                        output.Add(new Point(i, Y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
+                case true:
+                    output.Add(new Point(xValue, yValue));
+                    break;
+                case false:
+                    output.Add(new Point(xValue, yValue));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
             }
-
-            //checking moves from above
-
-            for (int i = Y - 1, exitLoop = 0; exitLoop == 0; i--)
-            {
-                switch (IsEmpty(X, i))
-                {
-                    case true:
-                        output.Add(new Point(X, i));
-                        break;
-                    case false:
-                        output.Add(new Point(X, i));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
-            }
-
-
-            //checking moves from below
-            for (int i = Y + 1, exitLoop = 0; exitLoop == 0; i++)
-            {
-                switch (IsEmpty(X, i))
-                {
-                    case true:
-                        output.Add(new Point(X, i));
-                        break;
-                    case false:
-                        output.Add(new Point(X, i));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
-            }
-            //return all the moves
-            return output;
         }
 
 
-        private List<Point?> GetMovesKing(int X, int Y)
+        //left up
+        for (int xValue = x - 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue--, yValue--)
         {
-            List<Point?> output = new();
 
-            //move right up and down -  from the white side perspective
-            //so for example from the black perspective, up would be down, down would be up etc
-
-            //right = x+1
-            //left = x-1
-            //up y-1
-            //down y+1
-
-            //up and down
-            if (IsEmpty(X, Y - 1) != null) { output.Add(new Point(X, Y - 1)); }
-
-            if (IsEmpty(X, Y + 1) != null) { output.Add(new Point(X, Y + 1)); }
-
-            //left and right
-            if (IsEmpty(X + 1, Y) != null) { output.Add(new Point(X + 1, Y)); }
-
-            if (IsEmpty(X - 1, Y) != null) { output.Add(new Point(X - 1, Y)); }
-
-            //left up
-            if (IsEmpty(X - 1, Y - 1) != null) { output.Add(new Point(X - 1, Y - 1)); }
-
-            //left down
-            if (IsEmpty(X - 1, Y + 1) != null) { output.Add(new Point(X - 1, Y + 1)); }
-
-            //right up
-            if (IsEmpty(X + 1, Y - 1) != null) { output.Add(new Point(X + 1, Y - 1)); }
-
-            //right down
-            if (IsEmpty(X + 1, Y + 1) != null) { output.Add(new Point(X + 1, Y + 1)); }
-
-            if (Information.HasMyKingMovedBefore() == false && (Y == 7 || Y == 0))
+            switch (IsEmpty(xValue, yValue))
             {
-                //checking from right side
-                if (IsEmpty(X + 1, Y) == true && IsEmpty(X + 2, Y) == true
-                    && IsFriendlyRook(X + 3, Y) == true)
-                {
-                    output.Add(new Point(X + 2, Y));
-                }
-
-                //checking from left side
-                if (IsEmpty(X - 1, Y) == true && IsEmpty(X - 2, Y) == true &&
-                   IsEmpty(X - 3, Y) == true && IsFriendlyRook(X - 4, Y) == true)
-                {
-                    output.Add(new Point(X - 2, Y));
-                }
+                case true:
+                    output.Add(new Point(xValue, yValue));
+                    break;
+                case false:
+                    output.Add(new Point(xValue, yValue));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
             }
-
-            return output;
         }
 
-        private List<Point?> GetMovesBishop(int X, int Y)
+        //left down
+
+        for (int xValue = x - 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue--, yValue++)
         {
-            List<Point?> output = new();
-
-            //right down
-
-            for (int x = X + 1, y = Y + 1, exitLoop = 0; exitLoop == 0; x++, y++)
+            switch (IsEmpty(xValue, yValue))
             {
-                switch (IsEmpty(x, y))
-                {
-                    case true:
-                        output.Add(new Point(x, y));
-                        break;
-                    case false:
-                        output.Add(new Point(x, y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
+                case true:
+                    output.Add(new Point(xValue, yValue));
+                    break;
+                case false:
+                    output.Add(new Point(xValue, yValue));
+                    exitLoop = 1;
+                    break;
+                case null:
+                    exitLoop = 1;
+                    break;
             }
-
-            //right up
-            for (int x = X + 1, y = Y - 1, exitLoop = 0; exitLoop == 0; x++, y--)
-            {
-                switch (IsEmpty(x, y))
-                {
-                    case true:
-                        output.Add(new Point(x, y));
-                        break;
-                    case false:
-                        output.Add(new Point(x, y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
-            }
-
-
-            //left up
-            for (int x = X - 1, y = Y - 1, exitLoop = 0; exitLoop == 0; x--, y--)
-            {
-
-                switch (IsEmpty(x, y))
-                {
-                    case true:
-                        output.Add(new Point(x, y));
-                        break;
-                    case false:
-                        output.Add(new Point(x, y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
-            }
-
-            //left down
-
-            for (int x = X - 1, y = Y + 1, exitLoop = 0; exitLoop == 0; x--, y++)
-            {
-                switch (IsEmpty(x, y))
-                {
-                    case true:
-                        output.Add(new Point(x, y));
-                        break;
-                    case false:
-                        output.Add(new Point(x, y));
-                        exitLoop = 1;
-                        break;
-                    case null:
-                        exitLoop = 1;
-                        break;
-                }
-            }
-
-            return output;
         }
 
-        private List<Point?> GetMovesKnight(int X, int Y)
-        {
-            List<Point?> output = new();
+        return output;
+    }
 
-            //up left
+    private List<Point?> GetMovesKnight(int x, int y)
+    {
+        List<Point?> output = new();
 
-            if (IsEmpty(X - 1, Y - 2) != null) { output.Add(new Point(X - 1, Y - 2)); }
-            //up right
+        //up left
 
-            if (IsEmpty(X + 1, Y - 2) != null) { output.Add(new Point(X + 1, Y - 2)); }
+        if (IsEmpty(x - 1, y - 2) != null) { output.Add(new Point(x - 1, y - 2)); }
+        //up right
 
-            //down left
+        if (IsEmpty(x + 1, y - 2) != null) { output.Add(new Point(x + 1, y - 2)); }
 
-            if (IsEmpty(X - 1, Y + 2) != null) { output.Add(new Point(X - 1, Y + 2)); }
+        //down left
 
-            //down right
+        if (IsEmpty(x - 1, y + 2) != null) { output.Add(new Point(x - 1, y + 2)); }
 
-            if (IsEmpty(X + 1, Y + 2) != null) { output.Add(new Point(X + 1, Y + 2)); }
+        //down right
 
-            //left up
+        if (IsEmpty(x + 1, y + 2) != null) { output.Add(new Point(x + 1, y + 2)); }
 
-            if (IsEmpty(X - 2, Y - 1) != null) { output.Add(new Point(X - 2, Y - 1)); }
+        //left up
 
-            //left down
+        if (IsEmpty(x - 2, y - 1) != null) { output.Add(new Point(x - 2, y - 1)); }
 
-            if (IsEmpty(X - 2, Y + 1) != null) { output.Add(new Point(X - 2, Y + 1)); }
+        //left down
 
-            //right up
-            if (IsEmpty(X + 2, Y - 1) != null) { output.Add(new Point(X + 2, Y - 1)); }
+        if (IsEmpty(x - 2, y + 1) != null) { output.Add(new Point(x - 2, y + 1)); }
 
-            //right down
-            if (IsEmpty(X + 2, Y + 1) != null) { output.Add(new Point(X + 2, Y + 1)); }
+        //right up
+        if (IsEmpty(x + 2, y - 1) != null) { output.Add(new Point(x + 2, y - 1)); }
 
-            return output;
-        }
+        //right down
+        if (IsEmpty(x + 2, y + 1) != null) { output.Add(new Point(x + 2, y + 1)); }
 
-
-        private List<Point?> GetMovesQueen(int X, int Y)
-        {
-            List<Point?> output = new();
-
-            output.AddRange(GetMovesBishop(X, Y));
-            output.AddRange(GetMovesRook(X, Y));
-
-            return output;
-        }
+        return output;
+    }
 
 
-        /// <summary>
-        ///Checks whether the coordinate on the board is empty
-        /// </summary>
-        /// <param name="x">X coordinate</param>
-        /// <param name="y">Y coordinate</param>
-        /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
-        private bool? IsEmpty(int x, int y)
-        {
-            if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
-            {
-                if (Coordinates.board[x, y].piece is null)
-                {
-                    return true;
-                }
-                else if (Coordinates.board[x, y].piece.Team != pieceTeam)
-                {
-                    return false;
-                }
-            }
+    private List<Point?> GetMovesQueen(int x, int y)
+    {
+        List<Point?> output = new();
+
+        output.AddRange(GetMovesBishop(x, y));
+        output.AddRange(GetMovesRook(x, y));
+
+        return output;
+    }
+
+
+    /// <summary>
+    ///Checks whether the coordinate on the board is empty
+    /// </summary>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
+    private bool? IsEmpty(int x, int y)
+    {
+        if (x is < 0 or > 7 || y is < 0 or > 7) 
             return null;
+
+        if (Coordinates.Board[x, y].Piece is null)
+        {
+            return true;
         }
 
-        private bool IsFriendlyRook(int x, int y)
+        if (Coordinates.Board[x, y].Piece.Team != _pieceTeam)
         {
-            if (x >= 0 && x <= 7 && y >= 0 && y <= 7)
-            {
-                if (Coordinates.board[x, y].piece is not null)
-                {
-                    if (Coordinates.board[x, y].piece is Rook
-                        && Coordinates.board[x, y].piece.Team == pieceTeam)
-                    {
-                        return true;
-                    }
-                }
-            }
             return false;
         }
-
+        return null;
     }
+
+    private bool IsFriendlyRook(int x, int y)
+    {
+        if (x is < 0 or > 7 || y is < 0 or > 7) 
+            return false;
+
+        if (Coordinates.Board[x, y].Piece is null) 
+            return false;
+
+        return Coordinates.Board[x, y].Piece is Rook
+               && Coordinates.Board[x, y].Piece.Team == _pieceTeam;
+    }
+
 }

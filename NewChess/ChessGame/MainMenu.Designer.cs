@@ -1,12 +1,15 @@
 ﻿
-namespace UI
+using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ChessGame
 {
     partial class MainMenu
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -104,9 +107,9 @@ namespace UI
         }
 
         #endregion
-        private System.Windows.Forms.Button button_StartBlackVsComputerGame;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_StartWhiteVsComputerGame;
-        private System.Windows.Forms.Button button_StartHumanGame;
+        private Button button_StartBlackVsComputerGame;
+        private Label label1;
+        private Button button_StartWhiteVsComputerGame;
+        private Button button_StartHumanGame;
     }
 }

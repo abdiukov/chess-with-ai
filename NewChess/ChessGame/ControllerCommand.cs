@@ -1,30 +1,29 @@
 using System.Drawing;
 
-namespace View
+namespace ChessGame;
+
+public abstract class ControllerCommand : ICommand<Controller>
 {
-    public abstract class ControllerCommand : ICommand<Controller>
+    public bool Success { get; set; }
+    public abstract void Execute(Controller controller);
+}
+
+internal class StartGameCommand : ControllerCommand
+{
+    public override void Execute(Controller controller)
     {
-        public bool Success { get; set; }
-        public abstract void Execute(Controller controller);
+        controller.Start();
     }
+}
 
-    class StartGameCommand : ControllerCommand
+internal class SelectSquareCommand : ControllerCommand
+{
+    private readonly Point _coordinate;
+
+    public SelectSquareCommand(Point coordinate) { _coordinate = coordinate; }
+
+    public override void Execute(Controller controller)
     {
-        public override void Execute(Controller controller)
-        {
-            controller.Start();
-        }
-    }
-
-    class SelectSquareCommand : ControllerCommand
-    {
-        private Point coord;
-
-        public SelectSquareCommand(Point coord) { this.coord = coord; }
-
-        public override void Execute(Controller controller)
-        {
-            Success = controller.Select(coord);
-        }
+        Success = controller.Select(_coordinate);
     }
 }
