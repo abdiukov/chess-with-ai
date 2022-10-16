@@ -3,56 +3,55 @@ using ChessGame.Model;
 
 namespace ChessGame.Data;
 
-public abstract class Information
+public class Information
 {
-    public static bool PlayAgainstAi { get; set; }
-    public static Team CurrentTeam { get; set; }
-    private static Point _whiteKingLocation;
-    private static Point _blackKingLocation;
-    private static bool _hasWhiteKingEverMoved;
-    private static bool _hasBlackKingEverMoved;
+    public bool PlayAgainstAi { get; set; }
+    public Team CurrentTeam { get; set; }
+    public Point WhiteKingLocation { get; set; } 
+    public Point BlackKingLocation { get; set; } 
+    public bool HasWhiteKingEverMoved { get; set; }
+    public bool HasBlackKingEverMoved { get; set; }
 
-    public static void SetDefaultValues()
+    public Information()
     {
-        _whiteKingLocation = new Point(4, 7);
-        _blackKingLocation = new Point(4, 0);
-        _hasWhiteKingEverMoved = false;
-        _hasBlackKingEverMoved = false;
+        WhiteKingLocation = new Point(4, 7);
+        BlackKingLocation = new Point(4, 0);
+        HasBlackKingEverMoved = false;
+        HasWhiteKingEverMoved = false;
+
     }
 
-    public static void UpdateKingEverMoved()
+    public void UpdateKingEverMoved()
+    {
+        if (CurrentTeam == Team.White)
+            HasWhiteKingEverMoved = true;
+        
+        else
+            HasBlackKingEverMoved = true;
+    }
+
+    public bool HasMyKingMovedBefore()
+    {
+        return CurrentTeam == Team.White ? HasWhiteKingEverMoved : HasBlackKingEverMoved;
+    }
+
+    public Point GetMyKingLocation()
+    {
+        return CurrentTeam == Team.White ? WhiteKingLocation : BlackKingLocation;
+    }
+    public void UpdateKingLocation(int x, int y)
     {
         if (CurrentTeam == Team.White)
         {
-            _hasWhiteKingEverMoved = true;
+            var whiteKingLocation = WhiteKingLocation;
+            whiteKingLocation.X = x;
+            whiteKingLocation.Y = y;
         }
         else
         {
-            _hasBlackKingEverMoved = true;
+            var blackKingLocation = BlackKingLocation;
+            blackKingLocation.X = x;
+            blackKingLocation.Y = y;
         }
     }
-
-    public static bool HasMyKingMovedBefore()
-    {
-        return CurrentTeam == Team.White ? _hasWhiteKingEverMoved : _hasBlackKingEverMoved;
-    }
-
-    public static Point GetMyKingLocation()
-    {
-        return CurrentTeam == Team.White ? _whiteKingLocation : _blackKingLocation;
-    }
-    public static void UpdateKingLocation(int x, int y)
-    {
-        if (CurrentTeam == Team.White)
-        {
-            _whiteKingLocation.X = x;
-            _whiteKingLocation.Y = y;
-        }
-        else
-        {
-            _blackKingLocation.X = x;
-            _blackKingLocation.Y = y;
-        }
-    }
-
 }

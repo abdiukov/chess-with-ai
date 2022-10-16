@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ChessEngine.Engine;
 using ChessGame.Data;
 using ChessGame.Model;
 using ChessGame.Service;
+using Microsoft.VisualBasic;
+using Information = ChessGame.Data.Information;
 
 namespace ChessGame;
 
@@ -16,7 +19,8 @@ public class Controller : ICommandHandler<ControllerCommand>
     private readonly ICommandHandler<ViewCommand> _commandHandler;
     private Point? _selectedSquare;
     private readonly ChessMovementService _controller = new();
-
+    private Information _information;
+    private readonly ChessCoreEngineAdapterService _adapter= new();
     public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
         _commandHandler = commandHandler;
@@ -35,28 +39,28 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     public void PlayAsBlackAgainstAi()
     {
-        Information.SetDefaultValues();
-        Information.PlayAgainstAi = true;
-        ChessCoreEngineAdapterService.StartGame();
+        _information = new();
+        _information.PlayAgainstAi = true;
+        _adapter.StartGame(ChessPieceColor.Black,null);
 
-        var outputFromAi = ChessCoreEngineAdapterService.StartAsBlack();
+        var outputFromAi = _adapter.MakeEngineMove();
         ProcessAiOutput(outputFromAi);
-        Information.CurrentTeam = Team.Black;
+        _information.CurrentTeam = Team.Black;
     }
 
     public void StartAsWhiteAgainstAi()
     {
-        Information.SetDefaultValues();
-        Information.PlayAgainstAi = true;
-        ChessCoreEngineAdapterService.StartGame();
-        Information.CurrentTeam = Team.White;
+        _information = new();
+        _information.PlayAgainstAi = true;
+        _adapter.StartGame(null,null);
+        _information.CurrentTeam = Team.White;
     }
 
     public void StartAsWhiteAgainstPlayer()
     {
-        Information.SetDefaultValues();
-        Information.PlayAgainstAi = false;
-        Information.CurrentTeam = Team.White;
+        _information = new();
+        _information.PlayAgainstAi = false;
+        _information.CurrentTeam = Team.White;
     }
 
     //CODE TO INITIALISE THE PIECES
@@ -109,7 +113,7 @@ public class Controller : ICommandHandler<ControllerCommand>
         {
             var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
 
-            if (piece != null && piece.Team == Information.CurrentTeam)
+            if (piece != null && piece.Team == _information.CurrentTeam)
             {
                 _selectedSquare = coordinate;
                 Program.GameWindow.PossibleMoves = _controller.GetPossibleMoves(piece, coordinate.X, coordinate.Y);
@@ -167,7 +171,7 @@ public class Controller : ICommandHandler<ControllerCommand>
         //otherwise, add king to the forbidden squares - the king cannot be checked
         else
         {
-            forbiddenSquares.Add(Information.GetMyKingLocation());
+            forbiddenSquares.Add(_information.GetMyKingLocation());
         }
 
 
@@ -184,7 +188,7 @@ public class Controller : ICommandHandler<ControllerCommand>
                 
                 //the piece has to be from the opposite team
                 //the piece should be able to check one of the forbidden squares
-                if (toCheck.Team == Information.CurrentTeam) 
+                if (toCheck.Team == _information.CurrentTeam) 
                     continue;
 
                 var getMoves = _controller.GetPossibleMoves(toCheck, i, j);
@@ -208,8 +212,8 @@ public class Controller : ICommandHandler<ControllerCommand>
         if (movingPieceIsKing)
         {
             //once we have moved, update the position of the king
-            Information.UpdateKingLocation(coordinate.X, coordinate.Y);
-            Information.UpdateKingEverMoved();
+            _information.UpdateKingLocation(coordinate.X, coordinate.Y);
+            _information.UpdateKingEverMoved();
 
             //also if castling has been done, move the rook
             if (kingIsCastlingLeft)
@@ -222,10 +226,10 @@ public class Controller : ICommandHandler<ControllerCommand>
             }
         }
 
-        Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+        _information.CurrentTeam = _information.CurrentTeam == Team.White ? Team.Black : Team.White;
 
         //logic if it is an ai
-        if (Information.PlayAgainstAi)
+        if (_information.PlayAgainstAi)
         {
             DoAiMove(_selectedSquare.Value.X, _selectedSquare.Value.Y, coordinate.X, coordinate.Y);
         }
@@ -236,18 +240,18 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     private void DoAiMove(int moverX, int moverY, int destinationX, int destinationY)
     {
-        var outputFromAi = ChessCoreEngineAdapterService.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
+        var outputFromAi = _adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
 
         switch (outputFromAi.Length)
         {
             case 4:
                 ProcessAiOutput(outputFromAi);
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                _information.CurrentTeam = _information.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             case > 4:
                 ProcessAiOutput(outputFromAi[..4]);
                 MessageBox.Show(outputFromAi[4..], "Game over!");
-                Information.CurrentTeam = Information.CurrentTeam == Team.White ? Team.Black : Team.White;
+                _information.CurrentTeam = _information.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             default:
                 MessageBox.Show("Move is invalid. Please try again.");
@@ -309,7 +313,7 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     public void UpgradePawn(int x, int y)
     {
-        Piece upgradedPiece = new Queen(Information.CurrentTeam);
+        Piece upgradedPiece = new Queen(_information.CurrentTeam);
 
         Coordinates.Board[x, y].Piece = upgradedPiece;
 

@@ -15,7 +15,7 @@ public partial class GuiView : Form, IView
     private Point? _selectedSquare;
     private readonly Brush _c1 = Brushes.BlanchedAlmond, _c2 = Brushes.Silver;
 
-    public List<Point?> PossibleMoves = new();
+    public IList<Point?> PossibleMoves = new List<Point?>();
 
     //INITIALIZATION CODE
 
