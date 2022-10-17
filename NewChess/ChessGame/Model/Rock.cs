@@ -12,7 +12,6 @@ public class Rook : Piece
     {
         var moves = new List<Point?>();
 
-
         //checking moves from the left
         for (int i = x - 1, exitLoop = 0; exitLoop == 0; i--)
         {
@@ -50,7 +49,6 @@ public class Rook : Piece
         }
 
         //checking moves from above
-
         for (int i = y - 1, exitLoop = 0; exitLoop == 0; i--)
         {
             switch (IsEmpty(x, i, this))

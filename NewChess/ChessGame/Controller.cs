@@ -4,10 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ChessEngine.Engine;
-using ChessGame.Data;
 using ChessGame.Model;
 using ChessGame.Service;
-using Microsoft.VisualBasic;
 using Information = ChessGame.Data.Information;
 
 namespace ChessGame;
@@ -18,9 +16,8 @@ public class Controller : ICommandHandler<ControllerCommand>
     private const int BoardColumns = 8;
     private readonly ICommandHandler<ViewCommand> _commandHandler;
     private Point? _selectedSquare;
-    private readonly ChessMovementService _controller = new();
     private Information _information;
-    private readonly ChessCoreEngineAdapterService _adapter= new();
+    private readonly ChessCoreEngineAdapterService _adapter = new();
     public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
         _commandHandler = commandHandler;
@@ -41,7 +38,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     {
         _information = new();
         _information.PlayAgainstAi = true;
-        _adapter.StartGame(ChessPieceColor.Black,null);
+        _adapter.StartGame(ChessPieceColor.Black);
 
         var outputFromAi = _adapter.MakeEngineMove();
         ProcessAiOutput(outputFromAi);
@@ -52,7 +49,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     {
         _information = new();
         _information.PlayAgainstAi = true;
-        _adapter.StartGame(null,null);
+        _adapter.StartGame();
         _information.CurrentTeam = Team.White;
     }
 
@@ -116,7 +113,7 @@ public class Controller : ICommandHandler<ControllerCommand>
             if (piece != null && piece.Team == _information.CurrentTeam)
             {
                 _selectedSquare = coordinate;
-                Program.GameWindow.PossibleMoves = _controller.GetPossibleMoves(piece, coordinate.X, coordinate.Y);
+                Program.GameWindow.PossibleMoves = piece.GetMoves(coordinate.X, coordinate.Y); //_controller.GetPossibleMoves(piece, coordinate.X, coordinate.Y);
                 return true;
             }
 
@@ -183,19 +180,19 @@ public class Controller : ICommandHandler<ControllerCommand>
             for (var j = 0; j <= 7; j++)
             {
                 var toCheck = Coordinates.Board[i, j].Piece;
-                if (toCheck == null) 
+                if (toCheck == null)
                     continue;
-                
+
                 //the piece has to be from the opposite team
                 //the piece should be able to check one of the forbidden squares
-                if (toCheck.Team == _information.CurrentTeam) 
+                if (toCheck.Team == _information.CurrentTeam)
                     continue;
 
-                var getMoves = _controller.GetPossibleMoves(toCheck, i, j);
+                var getMoves = toCheck.GetMoves(i, j);
 
-                if (!getMoves.Intersect(forbiddenSquares).Any()) 
+                if (!getMoves.Intersect(forbiddenSquares).Any())
                     continue;
-                
+
                 UndoMove(_selectedSquare.Value, coordinate);
                 return;
             }
@@ -211,9 +208,11 @@ public class Controller : ICommandHandler<ControllerCommand>
 
         if (movingPieceIsKing)
         {
+            var king = Coordinates.Board[coordinate.X, coordinate.Y].Piece as King;
+            king.HasMoved = true;
+
             //once we have moved, update the position of the king
             _information.UpdateKingLocation(coordinate.X, coordinate.Y);
-            _information.UpdateKingEverMoved();
 
             //also if castling has been done, move the rook
             if (kingIsCastlingLeft)
@@ -271,9 +270,9 @@ public class Controller : ICommandHandler<ControllerCommand>
 
         Move(origin, destination);
 
-        if (Math.Abs(x1 - x2) != 2 || Coordinates.Board[x2, y2].Piece is not King) 
+        if (Math.Abs(x1 - x2) != 2 || Coordinates.Board[x2, y2].Piece is not King)
             return;
-        
+
         switch (x2)
         {
             case 2:

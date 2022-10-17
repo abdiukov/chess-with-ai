@@ -1,8 +1,7 @@
-﻿using System;
-using ChessEngine.Engine;
+﻿using ChessEngine.Engine;
 
 namespace ChessGame.Service;
-
+#nullable enable
 public class ChessCoreEngineAdapterService
 {
     private readonly Engine _engine;
@@ -16,12 +15,12 @@ public class ChessCoreEngineAdapterService
     {
         while (true)
         {
-            if (_engine.WhoseMove != _engine.HumanPlayer) 
+            if (_engine.WhoseMove != _engine.HumanPlayer)
                 return null;
-            
+
             if (!_engine.IsValidMove(sourceColumn, sourceRow, destinationColumn, destinationRow))
                 return null;
-            
+
             _engine.MovePiece(sourceColumn, sourceRow, destinationColumn, destinationRow);
             var output = MakeEngineMove();
 
@@ -29,22 +28,22 @@ public class ChessCoreEngineAdapterService
             {
                 if (_engine.InsufficientMaterial)
                     output += "Draw by insufficient material!";
-                
+
                 else if (_engine.RepeatedMove)
                     output += "Draw by repetition!";
-                
+
                 else if (_engine.FiftyMove)
                     output += "Draw by fifty move rule";
-                
+
                 else
                     output += "Stalemate!";
             }
             else if (_engine.GetWhiteMate())
                 output += "Black player has successfully checkmated white!";
-            
+
             else if (_engine.GetBlackMate())
                 output += "White player has successfully checkmated black!";
-            
+
             return output;
         }
     }
@@ -62,10 +61,11 @@ public class ChessCoreEngineAdapterService
         return $"{sourceColumn}{sourceRow}{destinationColumn}{destinationRow}";
     }
 
-    public void StartGame(ChessPieceColor? humanPlayer, Engine.Difficulty? gameDifficulty)
+    public void StartGame(ChessPieceColor humanPlayer = ChessPieceColor.White,
+        Engine.Difficulty gameDifficulty = Engine.Difficulty.Easy)
     {
-        _engine.GameDifficulty = gameDifficulty ?? Engine.Difficulty.Easy;
-        _engine.HumanPlayer = humanPlayer ?? ChessPieceColor.White;
+        _engine.GameDifficulty = gameDifficulty;
+        _engine.HumanPlayer = humanPlayer;
         _engine.NewGame();
     }
 }

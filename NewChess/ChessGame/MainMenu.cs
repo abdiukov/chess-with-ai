@@ -5,10 +5,7 @@ namespace ChessGame;
 
 public partial class MainMenu : Form
 {
-    public MainMenu()
-    {
-        InitializeComponent();
-    }
+    public MainMenu() => InitializeComponent();
 
     private void Button_StartWhiteVsComputerGame_Click(object sender, EventArgs e)
     {

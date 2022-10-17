@@ -7,14 +7,11 @@ public class Bishop : Piece
 {
     public Bishop(Team team)
         : base(team, "Bishop") { }
-
-
     public override IList<Point?> GetMoves(int x, int y)
     {
         List<Point?> output = new();
 
         //right down
-
         for (int xValue = x + 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue++, yValue++)
         {
             switch (IsEmpty(xValue, yValue, this))
@@ -71,7 +68,6 @@ public class Bishop : Piece
         }
 
         //left down
-
         for (int xValue = x - 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue--, yValue++)
         {
             switch (IsEmpty(xValue, yValue, this))

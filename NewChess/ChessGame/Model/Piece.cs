@@ -5,7 +5,6 @@ namespace ChessGame.Model;
 public enum Team { White, Black }
 
 // TODO: Team should have the following properties
-// HasKingMoved
 // KingLocation
 
 public abstract class Piece
@@ -33,14 +32,12 @@ public abstract class Piece
             return null;
 
         if (Coordinates.Board[x, y].Piece is null)
-        {
             return true;
-        }
+
 
         if (Coordinates.Board[x, y].Piece.Team != piece.Team)
-        {
             return false;
-        }
+
         return null;
     }
 
