@@ -34,7 +34,6 @@ public abstract class Piece
         if (Coordinates.Board[x, y].Piece is null)
             return true;
 
-
         if (Coordinates.Board[x, y].Piece.Team != piece.Team)
             return false;
 

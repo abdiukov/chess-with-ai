@@ -14,75 +14,66 @@ public class Bishop : Piece
         //right down
         for (int xValue = x + 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue++, yValue++)
         {
-            switch (IsEmpty(xValue, yValue, this))
+            var isEmpty = IsEmpty(xValue, yValue, this);
+
+            if (isEmpty == true)
+                output.Add(new Point(xValue, yValue));
+            else if (isEmpty == false)
             {
-                case true:
-                    output.Add(new Point(xValue, yValue));
-                    break;
-                case false:
-                    output.Add(new Point(xValue, yValue));
-                    exitLoop = 1;
-                    break;
-                case null:
-                    exitLoop = 1;
-                    break;
+                output.Add(new Point(xValue, yValue));
+                break;
             }
+            else
+                break;
         }
 
         //right up
         for (int xValue = x + 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue++, yValue--)
         {
-            switch (IsEmpty(xValue, yValue, this))
+            var isEmpty = IsEmpty(xValue, yValue, this);
+
+            if (isEmpty == true)
+                output.Add(new Point(xValue, yValue));
+            else if (isEmpty == false)
             {
-                case true:
-                    output.Add(new Point(xValue, yValue));
-                    break;
-                case false:
-                    output.Add(new Point(xValue, yValue));
-                    exitLoop = 1;
-                    break;
-                case null:
-                    exitLoop = 1;
-                    break;
+                output.Add(new Point(xValue, yValue));
+                break;
             }
+            else
+                break;
         }
 
 
         //left up
         for (int xValue = x - 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue--, yValue--)
         {
+            var isEmpty = IsEmpty(xValue, yValue, this);
 
-            switch (IsEmpty(xValue, yValue, this))
+            if (isEmpty == true)
+                output.Add(new Point(xValue, yValue));
+            else if (isEmpty == false)
             {
-                case true:
-                    output.Add(new Point(xValue, yValue));
-                    break;
-                case false:
-                    output.Add(new Point(xValue, yValue));
-                    exitLoop = 1;
-                    break;
-                case null:
-                    exitLoop = 1;
-                    break;
+                output.Add(new Point(xValue, yValue));
+                break;
             }
+            else
+                break;
         }
 
         //left down
         for (int xValue = x - 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue--, yValue++)
         {
-            switch (IsEmpty(xValue, yValue, this))
+            var isEmpty = IsEmpty(xValue, yValue, this);
+
+            if (isEmpty == true)
+                output.Add(new Point(xValue, yValue));
+            else if (isEmpty == false)
             {
-                case true:
-                    output.Add(new Point(xValue, yValue));
-                    break;
-                case false:
-                    output.Add(new Point(xValue, yValue));
-                    exitLoop = 1;
-                    break;
-                case null:
-                    exitLoop = 1;
-                    break;
+                output.Add(new Point(xValue, yValue));
+                break;
             }
+            else
+                break;
         }
 
         return output;
