@@ -22,10 +22,10 @@ public class DrawSquareCommand : ViewCommand
     public override void Execute(IView view)
     {
         Image pieceImage = null;
+
         if (_piece != null)
-        {
             pieceImage = _piece.Image;
-        }
+
         view.DrawSquare(pieceImage, _coordinate);
     }
 }

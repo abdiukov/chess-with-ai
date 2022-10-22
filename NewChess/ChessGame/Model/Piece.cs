@@ -15,7 +15,7 @@ public abstract class Piece
     protected Piece(Team team, string file)
     {
         Team = team;
-        Image = Image.FromFile($"Asset/{file}_{team.ToString()[0]}.png");
+        Image = Image.FromFile($"Asset/{file}_{team}.png");
     }
 
     public abstract IList<Point?> GetMoves(int x, int y);

@@ -18,6 +18,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     private Point? _selectedSquare;
     private Information _information;
     private readonly ChessCoreEngineAdapterService _adapter = new();
+
     public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
         _commandHandler = commandHandler;
@@ -30,6 +31,7 @@ public class Controller : ICommandHandler<ControllerCommand>
             }
         }
     }
+
     public void Handle(ControllerCommand command) { command.Execute(this); }
 
     //CODE TO START GAME UNDER DIFFERENT CONDITIONS
@@ -85,9 +87,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     private void InitPawns(int row, Team team)
     {
         for (var i = 0; i < 8; i++)
-        {
             Place(row, i, new Pawn(team));
-        }
     }
 
     private void InitBackRow(int row, Team team)
@@ -113,7 +113,7 @@ public class Controller : ICommandHandler<ControllerCommand>
             if (piece != null && piece.Team == _information.CurrentTeam)
             {
                 _selectedSquare = coordinate;
-                Program.GameWindow.PossibleMoves = piece.GetMoves(coordinate.X, coordinate.Y); //_controller.GetPossibleMoves(piece, coordinate.X, coordinate.Y);
+                Program.GameWindow.PossibleMoves = piece.GetMoves(coordinate.X, coordinate.Y);
                 return true;
             }
 
@@ -148,7 +148,6 @@ public class Controller : ICommandHandler<ControllerCommand>
 
             //if the king is castling
             if (Math.Abs(_selectedSquare.Value.X - coordinate.X) == 2)
-            {
                 switch (coordinate.X)
                 {
                     //add the squares in between castling to "forbidden squares" - these squares cannot be checked by enemy
@@ -163,14 +162,10 @@ public class Controller : ICommandHandler<ControllerCommand>
                         forbiddenSquares.Add(coordinate with { X = 5 });
                         break;
                 }
-            }
         }
         //otherwise, add king to the forbidden squares - the king cannot be checked
         else
-        {
             forbiddenSquares.Add(_information.GetMyKingLocation());
-        }
-
 
         //check every move to see whether the enemy can check either forbidden squares
         //if the enemy can, undo the move
@@ -199,12 +194,8 @@ public class Controller : ICommandHandler<ControllerCommand>
         }
 
         if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is Pawn)
-        {
             if (coordinate.Y is 0 or 7)
-            {
                 UpgradePawn(coordinate.X, coordinate.Y);
-            }
-        }
 
         if (movingPieceIsKing)
         {
@@ -216,22 +207,19 @@ public class Controller : ICommandHandler<ControllerCommand>
 
             //also if castling has been done, move the rook
             if (kingIsCastlingLeft)
-            {
                 Move(_selectedSquare.Value with { X = 0 }, _selectedSquare.Value with { X = 3 });
-            }
+
             else if (kingIsCastlingRight)
-            {
                 Move(_selectedSquare.Value with { X = 7 }, _selectedSquare.Value with { X = 5 });
-            }
+
         }
 
         _information.CurrentTeam = _information.CurrentTeam == Team.White ? Team.Black : Team.White;
 
         //logic if it is an ai
         if (_information.PlayAgainstAi)
-        {
             DoAiMove(_selectedSquare.Value.X, _selectedSquare.Value.Y, coordinate.X, coordinate.Y);
-        }
+
     }
 
 
@@ -249,11 +237,11 @@ public class Controller : ICommandHandler<ControllerCommand>
                 break;
             case > 4:
                 ProcessAiOutput(outputFromAi[..4]);
-                MessageBox.Show(outputFromAi[4..], "Game over!");
+                MessageBox.Show(outputFromAi[4..], @"Game over!");
                 _information.CurrentTeam = _information.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             default:
-                MessageBox.Show("Move is invalid. Please try again.");
+                MessageBox.Show(@"Move is invalid. Please try again.");
                 break;
         }
     }
@@ -309,7 +297,6 @@ public class Controller : ICommandHandler<ControllerCommand>
         Update(destination);
     }
 
-
     public void UpgradePawn(int x, int y)
     {
         Piece upgradedPiece = new Queen(_information.CurrentTeam);
@@ -320,7 +307,6 @@ public class Controller : ICommandHandler<ControllerCommand>
     }
 
     //CODE TO UPDATE THE BOARD
-
     private void Place(int col, int row, Piece piece)
     {
         Coordinates.Board[row, col].Piece = piece;

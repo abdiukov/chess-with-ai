@@ -14,7 +14,6 @@ public partial class GuiView : Form, IView
     private Bitmap _buffer;
     private Point? _selectedSquare;
     private readonly Brush _c1 = Brushes.BlanchedAlmond, _c2 = Brushes.Silver;
-
     public IList<Point?> PossibleMoves = new List<Point?>();
 
     //INITIALIZATION CODE
@@ -84,7 +83,7 @@ public partial class GuiView : Form, IView
     //RESIZE CODE
     private void GUIView_Resize(object sender, EventArgs e)
     {
-        if (WindowState == FormWindowState.Minimized) 
+        if (WindowState == FormWindowState.Minimized)
             return;
 
         Height = Width;
@@ -99,11 +98,13 @@ public partial class GuiView : Form, IView
         var y = ClientSize.Height / 8;
         var lineSize = (x + y / 2) / 25;
         e.Graphics.DrawImage(_buffer, 0, 0, ClientSize.Width, ClientSize.Height);
+
         if (_selectedSquare != null)
         {
             var highlight = _selectedSquare.Value;
             e.Graphics.DrawRectangle(new Pen(Color.Yellow, lineSize), highlight.X * x, highlight.Y * y, x, y);
         }
+
         foreach (Point highlight in PossibleMoves)
         {
             e.Graphics.DrawRectangle(new Pen(Color.Green, lineSize), highlight.X * x, highlight.Y * y, x, y);
@@ -115,6 +116,7 @@ public partial class GuiView : Form, IView
         var brush = coordinate.Y % 2 == 0 ? coordinate.X % 2 == 0 ? _c1 : _c2 : coordinate.X % 2 == 0 ? _c2 : _c1;
         using var g = Graphics.FromImage(_buffer);
         g.FillRectangle(brush, coordinate.X * SquareDimension, coordinate.Y * SquareDimension, SquareDimension, SquareDimension);
+
         if (piece != null)
         {
             g.DrawImage(piece, coordinate.X * SquareDimension, coordinate.Y * SquareDimension, SquareDimension, SquareDimension);

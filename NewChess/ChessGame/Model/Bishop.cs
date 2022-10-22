@@ -12,7 +12,7 @@ public class Bishop : Piece
         List<Point?> output = new();
 
         //right down
-        for (int xValue = x + 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue++, yValue++)
+        for (int xValue = x + 1, yValue = y + 1; ; xValue++, yValue++)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -28,7 +28,7 @@ public class Bishop : Piece
         }
 
         //right up
-        for (int xValue = x + 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue++, yValue--)
+        for (int xValue = x + 1, yValue = y - 1; ; xValue++, yValue--)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -45,7 +45,7 @@ public class Bishop : Piece
 
 
         //left up
-        for (int xValue = x - 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue--, yValue--)
+        for (int xValue = x - 1, yValue = y - 1; ; xValue--, yValue--)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -61,7 +61,7 @@ public class Bishop : Piece
         }
 
         //left down
-        for (int xValue = x - 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue--, yValue++)
+        for (int xValue = x - 1, yValue = y + 1; ; xValue--, yValue++)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
