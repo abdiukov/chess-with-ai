@@ -3,7 +3,7 @@ using ChessGame.Model;
 
 namespace ChessGame.Data;
 
-public class Information
+public class Information : IInformation
 {
     public bool PlayAgainstAi { get; set; }
     public Team CurrentTeam { get; set; }

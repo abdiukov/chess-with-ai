@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ChessEngine.Engine;
+using ChessGame.Data;
 using ChessGame.Model;
 using ChessGame.Service;
-using Information = ChessGame.Data.Information;
 
 namespace ChessGame;
 
@@ -16,7 +16,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     private const int BoardColumns = 8;
     private readonly ICommandHandler<ViewCommand> _commandHandler;
     private Point? _selectedSquare;
-    private Information _information;
+    private IInformation _information;
     private readonly ChessCoreEngineAdapterService _adapter = new();
 
     public Controller(ICommandHandler<ViewCommand> commandHandler)
@@ -38,8 +38,11 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     public void PlayAsBlackAgainstAi()
     {
-        _information = new();
-        _information.PlayAgainstAi = true;
+        _information = new Information
+        {
+            PlayAgainstAi = true
+        };
+
         _adapter.StartGame(ChessPieceColor.Black);
 
         var outputFromAi = _adapter.MakeEngineMove();
@@ -49,17 +52,21 @@ public class Controller : ICommandHandler<ControllerCommand>
 
     public void StartAsWhiteAgainstAi()
     {
-        _information = new();
-        _information.PlayAgainstAi = true;
+        _information = new Information
+        {
+            PlayAgainstAi = true
+        };
         _adapter.StartGame();
         _information.CurrentTeam = Team.White;
     }
 
     public void StartAsWhiteAgainstPlayer()
     {
-        _information = new();
-        _information.PlayAgainstAi = false;
-        _information.CurrentTeam = Team.White;
+        _information = new Information
+        {
+            PlayAgainstAi = false,
+            CurrentTeam = Team.White
+        };
     }
 
     //CODE TO INITIALISE THE PIECES

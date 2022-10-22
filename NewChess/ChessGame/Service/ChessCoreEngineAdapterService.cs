@@ -2,7 +2,7 @@
 
 namespace ChessGame.Service;
 #nullable enable
-public class ChessCoreEngineAdapterService
+public class ChessCoreEngineAdapterService : IEngineAdapterService
 {
     private readonly Engine _engine;
 
