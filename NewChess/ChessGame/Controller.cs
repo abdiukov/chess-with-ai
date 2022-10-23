@@ -17,26 +17,24 @@ public class Controller : ICommandHandler<ControllerCommand>
     private readonly ICommandHandler<ViewCommand> _commandHandler;
     private Point? _selectedSquare;
     private IInformation _information;
-    private readonly ChessCoreEngineAdapterService _adapter = new();
+    private readonly IEngineAdapterService _adapter = new ChessCoreEngineAdapterService();
 
     public Controller(ICommandHandler<ViewCommand> commandHandler)
     {
         _commandHandler = commandHandler;
 
         for (var i = 0; i < BoardRows; i++)
-        {
             for (var j = 0; j < BoardColumns; j++)
-            {
                 Coordinates.Board[i, j] = new Square();
-            }
-        }
+
+
     }
 
     public void Handle(ControllerCommand command) { command.Execute(this); }
 
     //CODE TO START GAME UNDER DIFFERENT CONDITIONS
 
-    public void PlayAsBlackAgainstAi()
+    public void StartAsBlackAgainstAi()
     {
         _information = new Information
         {
@@ -83,12 +81,10 @@ public class Controller : ICommandHandler<ControllerCommand>
     private void UpdateAll()
     {
         for (var i = 0; i < BoardRows; i++)
-        {
             for (var j = 0; j < BoardColumns; j++)
-            {
                 Update(new Point(i, j));
-            }
-        }
+
+
     }
 
     private void InitPawns(int row, Team team)
@@ -143,7 +139,7 @@ public class Controller : ICommandHandler<ControllerCommand>
         var kingIsCastlingLeft = false;
         var kingIsCastlingRight = false;
         var movingPieceIsKing = false;
-        List<Point?> forbiddenSquares = new();
+        var forbiddenSquares = new List<Point?>();
 
         Move(_selectedSquare.Value, coordinate);
 
@@ -178,7 +174,6 @@ public class Controller : ICommandHandler<ControllerCommand>
         //if the enemy can, undo the move
 
         for (var i = 0; i <= 7; i++)
-        {
             for (var j = 0; j <= 7; j++)
             {
                 var toCheck = Coordinates.Board[i, j].Piece;
@@ -198,7 +193,7 @@ public class Controller : ICommandHandler<ControllerCommand>
                 UndoMove(_selectedSquare.Value, coordinate);
                 return;
             }
-        }
+
 
         if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is Pawn)
             if (coordinate.Y is 0 or 7)
@@ -226,7 +221,6 @@ public class Controller : ICommandHandler<ControllerCommand>
         //logic if it is an ai
         if (_information.PlayAgainstAi)
             DoAiMove(_selectedSquare.Value.X, _selectedSquare.Value.Y, coordinate.X, coordinate.Y);
-
     }
 
 
@@ -260,8 +254,8 @@ public class Controller : ICommandHandler<ControllerCommand>
         var x2 = int.Parse(outputFromAi[2].ToString());
         var y2 = int.Parse(outputFromAi[3].ToString());
 
-        Point origin = new(x1, y1);
-        Point destination = new(x2, y2);
+        var origin = new Point(x1, y1);
+        var destination = new Point(x2, y2);
 
         Move(origin, destination);
 

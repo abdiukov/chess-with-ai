@@ -10,55 +10,38 @@ public partial class GuiView : Form, IView
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;
     private const int SquareDimension = BufferDimension / 8;
-    private Controller _controller;
     private Bitmap _buffer;
     private Point? _selectedSquare;
-    private readonly Brush _colorOne = Brushes.BlanchedAlmond;
-    private readonly Brush _colorTwo = Brushes.Silver;
+    private readonly Brush _brushColorOne;
+    private readonly Brush _brushColorTwo;
     public IList<Point?> PossibleMoves = new List<Point?>();
+    public Controller Controller { get; set; }
 
     //INITIALIZATION CODE
 
-    public GuiView()
+    public GuiView(Controller controller = null,
+        Brush brushColorOne = null, Brush brushColorTwo = null)
     {
+        Controller = controller ?? new Controller(this);
+        _brushColorOne = brushColorOne ?? Brushes.BlanchedAlmond;
+        _brushColorTwo = brushColorTwo ?? Brushes.Silver;
+
         InitializeComponent();
-        InitGraphics();
-        InitModel();
+        InitializeGraphics();
+        Controller.Handle(new StartGameCommand());
+
         MouseClick += GUIView_MouseClick;
         Program.GameWindow = this;
     }
 
-    private void InitModel()
-    {
-        _controller = new Controller(this);
-        _controller.Handle(new StartGameCommand());
-    }
-
-    private void InitGraphics()
+    private void InitializeGraphics()
     {
         MaximumSize = new Size(_dimension, _dimension);
         MinimumSize = new Size(_dimension / 2, _dimension / 2);
-        Size = new Size(_dimension, _dimension);
         _buffer = new Bitmap(BufferDimension, BufferDimension);
+        Size = MaximumSize;
         Paint += GUIView_Paint;
         Resize += GUIView_Resize;
-    }
-
-    //DIFFERENT START CONDITIONS CODE
-
-    public void StartAsBlackAgainstAi()
-    {
-        _controller.PlayAsBlackAgainstAi();
-    }
-
-    public void StartAsWhiteAgainstAi()
-    {
-        _controller.StartAsWhiteAgainstAi();
-    }
-
-    public void StartAsWhiteAgainstPlayer()
-    {
-        _controller.StartAsWhiteAgainstPlayer();
     }
 
     //RESPOND TO USER INPUT CODE
@@ -72,7 +55,7 @@ public partial class GuiView : Form, IView
         SelectSquareCommand selectCommand = new(coordinate.Value);
 
         //creates the command and says to model - go handle that command
-        _controller.Handle(selectCommand);
+        Controller.Handle(selectCommand);
 
         //if its successful, create selected square
         _selectedSquare = selectCommand.Success ? coordinate : null;
@@ -117,8 +100,8 @@ public partial class GuiView : Form, IView
     {
         var brush = coordinate.Y % 2 == 0
             ? coordinate.X % 2 == 0
-                ? _colorOne : _colorTwo : coordinate.X % 2 == 0
-                ? _colorTwo : _colorOne;
+                ? _brushColorOne : _brushColorTwo : coordinate.X % 2 == 0
+                ? _brushColorTwo : _brushColorOne;
 
         using var graphics = Graphics.FromImage(_buffer);
         graphics.FillRectangle(brush, coordinate.X * SquareDimension, coordinate.Y * SquareDimension,
@@ -132,9 +115,5 @@ public partial class GuiView : Form, IView
     }
 
     //NAVIGATION CODE
-
-    private void GUIView_FormClosing(object sender, FormClosingEventArgs e)
-    {
-        Program.MainMenu.Show();
-    }
+    private void GUIView_FormClosing(object sender, FormClosingEventArgs e) => Program.MainMenu.Show();
 }

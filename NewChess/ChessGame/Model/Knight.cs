@@ -9,7 +9,7 @@ public class Knight : Piece
 
     public override List<Point?> GetMoves(int x, int y)
     {
-        List<Point?> output = new();
+        var output = new List<Point?>();
 
         //up right and left
         if (IsEmpty(x + 1, y - 2, this) != null)

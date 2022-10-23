@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace ChessGame.Model;
@@ -63,7 +62,7 @@ public class Queen : Piece
         }
 
         //checking moves from below
-        for (int i = y + 1, exitLoop = 0; exitLoop == 0; i++)
+        for (var i = y + 1;; i++)
         {
             var isEmpty = IsEmpty(i, y, this);
 
@@ -78,7 +77,7 @@ public class Queen : Piece
                 break;
         }
 
-        for (int xValue = x + 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue++, yValue++)
+        for (int xValue = x + 1, yValue = y + 1;; xValue++, yValue++)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -94,7 +93,7 @@ public class Queen : Piece
         }
 
         //right up
-        for (int xValue = x + 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue++, yValue--)
+        for (int xValue = x + 1, yValue = y - 1;; xValue++, yValue--)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -111,7 +110,7 @@ public class Queen : Piece
 
 
         //left up
-        for (int xValue = x - 1, yValue = y - 1, exitLoop = 0; exitLoop == 0; xValue--, yValue--)
+        for (int xValue = x - 1, yValue = y - 1;; xValue--, yValue--)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 
@@ -127,7 +126,7 @@ public class Queen : Piece
         }
 
         //left down
-        for (int xValue = x - 1, yValue = y + 1, exitLoop = 0; exitLoop == 0; xValue--, yValue++)
+        for (int xValue = x - 1, yValue = y + 1;; xValue--, yValue++)
         {
             var isEmpty = IsEmpty(xValue, yValue, this);
 

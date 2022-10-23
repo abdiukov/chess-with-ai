@@ -15,7 +15,7 @@ public class Pawn : Piece
 
     private List<Point?> GetMovesBlackPawn(int x, int y)
     {
-        List<Point?> output = new();
+        var output = new List<Point?>();
 
         if (IsEmpty(x, y + 1, this) == true)
         {
@@ -35,7 +35,7 @@ public class Pawn : Piece
     }
     private List<Point?> GetMovesWhitePawn(int x, int y)
     {
-        List<Point?> output = new();
+        var output = new List<Point?>();
 
         if (IsEmpty(x, y - 1, this) == true)
         {

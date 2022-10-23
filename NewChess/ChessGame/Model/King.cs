@@ -11,7 +11,7 @@ public class King : Piece
 
     public override IList<Point?> GetMoves(int x, int y)
     {
-        List<Point?> output = new();
+        var output = new List<Point?>();
 
         //up and down
         if (IsEmpty(x, y - 1, this) != null)

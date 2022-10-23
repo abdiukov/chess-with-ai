@@ -9,25 +9,28 @@ public partial class MainMenu : Form
 
     private void Button_StartWhiteVsComputerGame_Click(object sender, EventArgs e)
     {
-        GuiView page = new();
+        var page = new GuiView();
+        page.Controller.StartAsWhiteAgainstAi();
         page.Show();
+
         Hide();
-        page.StartAsWhiteAgainstAi();
     }
 
     private void Button_StartBlackVsComputerGame_Click(object sender, EventArgs e)
     {
-        GuiView page = new();
+        var page = new GuiView();
+        page.Controller.StartAsBlackAgainstAi();
         page.Show();
+
         Hide();
-        page.StartAsBlackAgainstAi();
     }
 
     private void Button_StartHumanGame_Click(object sender, EventArgs e)
     {
-        GuiView page = new();
+        var page = new GuiView();
+        page.Controller.StartAsWhiteAgainstPlayer();
         page.Show();
+
         Hide();
-        page.StartAsWhiteAgainstPlayer();
     }
 }
