@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using ChessGame.Data;
 
 namespace ChessGame;
 
@@ -14,22 +15,21 @@ public partial class GuiView : Form, IView
     private Point? _selectedSquare;
     private readonly Brush _brushColorOne;
     private readonly Brush _brushColorTwo;
+    private readonly IController _controller;
     public IList<Point?> PossibleMoves = new List<Point?>();
-    public Controller Controller { get; set; }
 
     //INITIALIZATION CODE
 
-    public GuiView(Controller controller = null,
+    public GuiView(IInformation information,
         Brush brushColorOne = null, Brush brushColorTwo = null)
     {
-        Controller = controller ?? new Controller(this);
+        InitializeComponent();
+        InitializeGraphics();
         _brushColorOne = brushColorOne ?? Brushes.BlanchedAlmond;
         _brushColorTwo = brushColorTwo ?? Brushes.Silver;
 
-        InitializeComponent();
-        InitializeGraphics();
-        Controller.Handle(new StartGameCommand());
-
+        _controller = new Controller(this, information);
+        _controller.Handle(new StartGameCommand());
         MouseClick += GUIView_MouseClick;
         Program.GameWindow = this;
     }
@@ -55,7 +55,7 @@ public partial class GuiView : Form, IView
         SelectSquareCommand selectCommand = new(coordinate.Value);
 
         //creates the command and says to model - go handle that command
-        Controller.Handle(selectCommand);
+        _controller.Handle(selectCommand);
 
         //if its successful, create selected square
         _selectedSquare = selectCommand.Success ? coordinate : null;

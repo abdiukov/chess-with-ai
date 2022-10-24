@@ -47,13 +47,13 @@ public class Rook : Piece
         //checking moves from above
         for (var i = y - 1;; i--)
         {
-            var isEmpty = IsEmpty(i, y, this);
+            var isEmpty = IsEmpty(x, i, this);
 
             if (isEmpty == true)
-                moves.Add(new Point(i, y));
+                moves.Add(new Point(x, i));
             else if (isEmpty == false)
             {
-                moves.Add(new Point(i, y));
+                moves.Add(new Point(x, i));
                 break;
             }
             else
@@ -63,13 +63,13 @@ public class Rook : Piece
         //checking moves from below
         for (var i = y + 1;; i++)
         {
-            var isEmpty = IsEmpty(i, y, this);
+            var isEmpty = IsEmpty(x, i, this);
 
             if (isEmpty == true)
-                moves.Add(new Point(i, y));
+                moves.Add(new Point(x, i));
             else if (isEmpty == false)
             {
-                moves.Add(new Point(i, y));
+                moves.Add(new Point(x, i));
                 break;
             }
             else

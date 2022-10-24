@@ -15,9 +15,6 @@ public class ChessCoreEngineAdapterService : IEngineAdapterService
     {
         while (true)
         {
-            if (_engine.WhoseMove != _engine.HumanPlayer)
-                return null;
-
             if (!_engine.IsValidMove(sourceColumn, sourceRow, destinationColumn, destinationRow))
                 return null;
 

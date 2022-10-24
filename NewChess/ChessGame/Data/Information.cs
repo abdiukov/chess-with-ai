@@ -5,21 +5,14 @@ namespace ChessGame.Data;
 
 public class Information : IInformation
 {
-    public bool PlayAgainstAi { get; set; }
-    public Team CurrentTeam { get; set; }
-    public Point WhiteKingLocation { get; set; }
-    public Point BlackKingLocation { get; set; }
-
-    public Information()
-    {
-        WhiteKingLocation = new Point(4, 7);
-        BlackKingLocation = new Point(4, 0);
-    }
+    public bool PlayAgainstAi { get; set; } = false;
+    public Team CurrentTeam { get; set; } = Team.White;
+    public Point WhiteKingLocation { get; set; } = new Point(4, 7);
+    public Point BlackKingLocation { get; set; } = new Point(4, 0);
 
     public Point GetMyKingLocation()
-    {
-        return CurrentTeam == Team.White ? WhiteKingLocation : BlackKingLocation;
-    }
+        => CurrentTeam == Team.White ? WhiteKingLocation : BlackKingLocation;
+    
 
     public void UpdateKingLocation(int x, int y)
     {

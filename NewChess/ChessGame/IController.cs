@@ -1,5 +1,11 @@
-﻿namespace ChessGame;
-public interface IController
+﻿using ChessGame.Model;
+using System.Drawing;
+
+namespace ChessGame;
+public interface IController : ICommandHandler<ControllerCommand>
 {
-    //TODO: Implement
+    void Handle(ControllerCommand command);
+    void Start();
+    bool Select(Point coordinate);
+    void ProcessMouseClickMove(Point coordinate);
 }

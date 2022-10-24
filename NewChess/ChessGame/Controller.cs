@@ -10,64 +10,28 @@ using ChessGame.Service;
 
 namespace ChessGame;
 
-public class Controller : ICommandHandler<ControllerCommand>
+public class Controller : IController
 {
+
+    private readonly MovementService _movementService;
+    private Point? _selectedSquare;
+    private readonly IInformation _information;
     private const int BoardRows = 8;
     private const int BoardColumns = 8;
-    private readonly ICommandHandler<ViewCommand> _commandHandler;
-    private Point? _selectedSquare;
-    private IInformation _information;
     private readonly IEngineAdapterService _adapter = new ChessCoreEngineAdapterService();
 
-    public Controller(ICommandHandler<ViewCommand> commandHandler)
+    public Controller(ICommandHandler<ViewCommand> commandHandler,
+        IInformation information)
     {
-        _commandHandler = commandHandler;
+        _information = information;
+        _movementService = new MovementService(_information, commandHandler);
 
         for (var i = 0; i < BoardRows; i++)
             for (var j = 0; j < BoardColumns; j++)
                 Coordinates.Board[i, j] = new Square();
-
-
     }
 
     public void Handle(ControllerCommand command) { command.Execute(this); }
-
-    //CODE TO START GAME UNDER DIFFERENT CONDITIONS
-
-    public void StartAsBlackAgainstAi()
-    {
-        _information = new Information
-        {
-            PlayAgainstAi = true
-        };
-
-        _adapter.StartGame(ChessPieceColor.Black);
-
-        var outputFromAi = _adapter.MakeEngineMove();
-        ProcessAiOutput(outputFromAi);
-        _information.CurrentTeam = Team.Black;
-    }
-
-    public void StartAsWhiteAgainstAi()
-    {
-        _information = new Information
-        {
-            PlayAgainstAi = true
-        };
-        _adapter.StartGame();
-        _information.CurrentTeam = Team.White;
-    }
-
-    public void StartAsWhiteAgainstPlayer()
-    {
-        _information = new Information
-        {
-            PlayAgainstAi = false,
-            CurrentTeam = Team.White
-        };
-    }
-
-    //CODE TO INITIALISE THE PIECES
 
     public void Start()
     {
@@ -76,33 +40,37 @@ public class Controller : ICommandHandler<ControllerCommand>
         InitPawns(1, Team.Black);
         InitBackRow(0, Team.Black);
         UpdateAll();
+        
+        if (_information.PlayAgainstAi && _information.CurrentTeam == Team.Black)
+        {
+            var outputFromAi = _adapter.MakeEngineMove();
+            ProcessAiOutput(outputFromAi);
+        }
     }
 
     private void UpdateAll()
     {
         for (var i = 0; i < BoardRows; i++)
             for (var j = 0; j < BoardColumns; j++)
-                Update(new Point(i, j));
-
-
+                _movementService.Update(new Point(i, j));
     }
 
     private void InitPawns(int row, Team team)
     {
         for (var i = 0; i < 8; i++)
-            Place(row, i, new Pawn(team));
+            _movementService.Place(row, i, new Pawn(team));
     }
 
     private void InitBackRow(int row, Team team)
     {
-        Place(row, 0, new Rook(team));
-        Place(row, 1, new Knight(team));
-        Place(row, 2, new Bishop(team));
-        Place(row, 3, new Queen(team));
-        Place(row, 4, new King(team));
-        Place(row, 5, new Bishop(team));
-        Place(row, 6, new Knight(team));
-        Place(row, 7, new Rook(team));
+        _movementService.Place(row, 0, new Rook(team));
+        _movementService.Place(row, 1, new Knight(team));
+        _movementService.Place(row, 2, new Bishop(team));
+        _movementService.Place(row, 3, new Queen(team));
+        _movementService.Place(row, 4, new King(team));
+        _movementService.Place(row, 5, new Bishop(team));
+        _movementService.Place(row, 6, new Knight(team));
+        _movementService.Place(row, 7, new Rook(team));
     }
 
     //RESPONSE TO USER INPUT CODE
@@ -141,7 +109,7 @@ public class Controller : ICommandHandler<ControllerCommand>
         var movingPieceIsKing = false;
         var forbiddenSquares = new List<Point?>();
 
-        Move(_selectedSquare.Value, coordinate);
+        _movementService.Move(_selectedSquare.Value, coordinate);
 
         //if the moving piece is King
         if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is King)
@@ -190,14 +158,14 @@ public class Controller : ICommandHandler<ControllerCommand>
                 if (!getMoves.Intersect(forbiddenSquares).Any())
                     continue;
 
-                UndoMove(_selectedSquare.Value, coordinate);
+                _movementService.UndoMove(_selectedSquare.Value, coordinate);
                 return;
             }
 
 
         if (Coordinates.Board[coordinate.X, coordinate.Y].Piece is Pawn)
             if (coordinate.Y is 0 or 7)
-                UpgradePawn(coordinate.X, coordinate.Y);
+                _movementService.UpgradePawn(coordinate.X, coordinate.Y);
 
         if (movingPieceIsKing)
         {
@@ -209,10 +177,10 @@ public class Controller : ICommandHandler<ControllerCommand>
 
             //also if castling has been done, move the rook
             if (kingIsCastlingLeft)
-                Move(_selectedSquare.Value with { X = 0 }, _selectedSquare.Value with { X = 3 });
+                _movementService.Move(_selectedSquare.Value with { X = 0 }, _selectedSquare.Value with { X = 3 });
 
             else if (kingIsCastlingRight)
-                Move(_selectedSquare.Value with { X = 7 }, _selectedSquare.Value with { X = 5 });
+                _movementService.Move(_selectedSquare.Value with { X = 7 }, _selectedSquare.Value with { X = 5 });
 
         }
 
@@ -230,7 +198,7 @@ public class Controller : ICommandHandler<ControllerCommand>
     {
         var outputFromAi = _adapter.MakeMove((byte)moverX, (byte)moverY, (byte)destinationX, (byte)destinationY);
 
-        switch (outputFromAi.Length)
+        switch (outputFromAi?.Length)
         {
             case 4:
                 ProcessAiOutput(outputFromAi);
@@ -257,7 +225,7 @@ public class Controller : ICommandHandler<ControllerCommand>
         var origin = new Point(x1, y1);
         var destination = new Point(x2, y2);
 
-        Move(origin, destination);
+        _movementService.Move(origin, destination);
 
         if (Math.Abs(x1 - x2) != 2 || Coordinates.Board[x2, y2].Piece is not King)
             return;
@@ -266,57 +234,12 @@ public class Controller : ICommandHandler<ControllerCommand>
         {
             case 2:
                 //left side
-                Move(new Point(0, y2), new Point(3, y2));
+                _movementService.Move(new Point(0, y2), new Point(3, y2));
                 break;
             case 6:
                 //right side
-                Move(new Point(7, y2), new Point(5, y2));
+                _movementService.Move(new Point(7, y2), new Point(5, y2));
                 break;
         }
-    }
-
-    //MOVEMENT CODE
-
-    private Piece _savedPiece;
-
-    private void Move(Point origin, Point destination)
-    {
-        _savedPiece = Coordinates.Board[destination.X, destination.Y].Piece;
-
-        var mover = Coordinates.Board[origin.X, origin.Y].Piece;
-        Coordinates.Board[destination.X, destination.Y].Piece = mover;
-        Coordinates.Board[origin.X, origin.Y].Piece = null;
-        Update(origin);
-        Update(destination);
-    }
-
-    private void UndoMove(Point origin, Point destination)
-    {
-        Coordinates.Board[origin.X, origin.Y].Piece = Coordinates.Board[destination.X, destination.Y].Piece;
-        Coordinates.Board[destination.X, destination.Y].Piece = _savedPiece;
-        Update(origin);
-        Update(destination);
-    }
-
-    public void UpgradePawn(int x, int y)
-    {
-        Piece upgradedPiece = new Queen(_information.CurrentTeam);
-
-        Coordinates.Board[x, y].Piece = upgradedPiece;
-
-        Update(new Point(x, y));
-    }
-
-    //CODE TO UPDATE THE BOARD
-    private void Place(int col, int row, Piece piece)
-    {
-        Coordinates.Board[row, col].Piece = piece;
-        Update(new Point(row, col));
-    }
-
-    private void Update(Point coordinate)
-    {
-        var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
-        _commandHandler.Handle(new DrawSquareCommand(coordinate, piece));
     }
 }
