@@ -1,5 +1,4 @@
-﻿using ChessGame.Model;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ChessGame;
 public interface IController : ICommandHandler<ControllerCommand>

@@ -7,8 +7,8 @@ public class Information : IInformation
 {
     public bool PlayAgainstAi { get; set; } = false;
     public Team CurrentTeam { get; set; } = Team.White;
-    public Point WhiteKingLocation { get; set; } = new Point(4, 7);
-    public Point BlackKingLocation { get; set; } = new Point(4, 0);
+    public Point WhiteKingLocation { get; set; } = new(4, 7);
+    public Point BlackKingLocation { get; set; } = new(4, 0);
 
     public Point GetMyKingLocation()
         => CurrentTeam == Team.White ? WhiteKingLocation : BlackKingLocation;

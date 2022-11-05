@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ChessEngine.Engine;
 using ChessGame.Data;
 using ChessGame.Model;
 using ChessGame.Service;

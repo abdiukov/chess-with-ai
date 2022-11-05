@@ -25,6 +25,7 @@ public abstract class Piece
     /// </summary>
     /// <param name="x">X coordinate</param>
     /// <param name="y">Y coordinate</param>
+    /// <param name="piece">Piece being checked</param>
     /// <returns>Returns true if piece is empty. Returns false if piece is not empty and is enemy team. Returns null if it is not empty and it is your team.</returns>
     public static bool? IsEmpty(int x, int y, Piece piece)
     {
