@@ -6,13 +6,10 @@ namespace ChessGame.Service;
 public class MovementService : IMovementService
 {
     private readonly IInformation _information;
-    private readonly ICommandHandler<ViewCommand> _commandHandler;
 
-    public MovementService(IInformation information, 
-        ICommandHandler<ViewCommand> commandHandler)
+    public MovementService(IInformation information)
     {
         _information = information;
-        _commandHandler = commandHandler;
     }
 
     private Piece _savedPiece;
@@ -54,6 +51,15 @@ public class MovementService : IMovementService
     public void Update(Point coordinate)
     {
         var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
-        _commandHandler.Handle(new DrawSquareCommand(coordinate, piece));
+        DrawSquare(coordinate, piece);
+    }
+    public void DrawSquare(Point coordinate, Piece piece)
+    {
+        Image pieceImage = null;
+
+        if (piece != null)
+            pieceImage = piece.Image;
+
+        Program.GameWindow.DrawSquare(pieceImage, coordinate);
     }
 }

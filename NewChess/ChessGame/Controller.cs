@@ -19,18 +19,15 @@ public class Controller : IController
     private const int BoardColumns = 8;
     private readonly IEngineAdapterService _adapter = new ChessCoreEngineAdapterService();
 
-    public Controller(ICommandHandler<ViewCommand> commandHandler,
-        IInformation information)
+    public Controller(IInformation information)
     {
         _information = information;
-        _movementService = new MovementService(_information, commandHandler);
+        _movementService = new MovementService(_information);
 
         for (var i = 0; i < BoardRows; i++)
             for (var j = 0; j < BoardColumns; j++)
                 Coordinates.Board[i, j] = new Square();
     }
-
-    public void Handle(ControllerCommand command) { command.Execute(this); }
 
     public void Start()
     {

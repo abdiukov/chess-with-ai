@@ -6,7 +6,7 @@ using ChessGame.Data;
 
 namespace ChessGame;
 
-public partial class GuiView : Form, IView
+public partial class GuiView : Form
 {
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;
@@ -23,15 +23,15 @@ public partial class GuiView : Form, IView
     public GuiView(IInformation information,
         Brush brushColorOne = null, Brush brushColorTwo = null)
     {
+        Program.GameWindow = this;
         InitializeComponent();
         InitializeGraphics();
         _brushColorOne = brushColorOne ?? Brushes.BlanchedAlmond;
         _brushColorTwo = brushColorTwo ?? Brushes.Silver;
 
-        _controller = new Controller(this, information);
-        _controller.Handle(new StartGameCommand());
+        _controller = new Controller(information);
+        _controller.Start();
         MouseClick += GUIView_MouseClick;
-        Program.GameWindow = this;
     }
 
     private void InitializeGraphics()
@@ -45,20 +45,15 @@ public partial class GuiView : Form, IView
     }
 
     //RESPOND TO USER INPUT CODE
-
-    public new void Handle(ViewCommand command) { command.Execute(this); }
-
     private void GUIView_MouseClick(object sender, MouseEventArgs mouseEventArgs)
     {
         Point? coordinate = new Point(mouseEventArgs.X / (ClientSize.Width / 8),
             mouseEventArgs.Y / (ClientSize.Height / 8));
-        SelectSquareCommand selectCommand = new(coordinate.Value);
 
-        //creates the command and says to model - go handle that command
-        _controller.Handle(selectCommand);
+        var success = _controller.Select(coordinate.Value);
 
         //if its successful, create selected square
-        _selectedSquare = selectCommand.Success ? coordinate : null;
+        _selectedSquare = success ? coordinate : null;
 
         Invalidate();
     }

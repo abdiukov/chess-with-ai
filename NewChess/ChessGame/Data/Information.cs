@@ -12,7 +12,6 @@ public class Information : IInformation
 
     public Point GetMyKingLocation()
         => CurrentTeam == Team.White ? WhiteKingLocation : BlackKingLocation;
-    
 
     public void UpdateKingLocation(int x, int y)
     {

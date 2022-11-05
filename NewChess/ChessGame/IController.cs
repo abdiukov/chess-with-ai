@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
 namespace ChessGame;
-public interface IController : ICommandHandler<ControllerCommand>
+public interface IController 
 {
-    void Handle(ControllerCommand command);
     void Start();
     bool Select(Point coordinate);
     void ProcessMouseClickMove(Point coordinate);
