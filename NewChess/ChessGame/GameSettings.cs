@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using ChessGame.Model;
 
-namespace ChessGame.Data;
+namespace ChessGame;
 
-public class Information : IInformation
+public class GameSettings : IGameSettings
 {
     public bool PlayAgainstAi { get; set; } = false;
     public Team CurrentTeam { get; set; } = Team.White;

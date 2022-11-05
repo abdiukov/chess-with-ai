@@ -1,40 +1,28 @@
 ﻿using System;
-using System.Windows.Forms;
-using ChessGame.Data;
 using ChessGame.Model;
+using ChessGame.View;
 
 namespace ChessGame;
 
-public partial class MainMenu : Form
+public partial class MainMenu : ChessGameForm
 {
     public MainMenu() => InitializeComponent();
 
-    private void Button_StartWhiteVsComputerGame_Click(object sender, EventArgs e)
+    private async void Button_StartWhiteVsComputerGame_Click(object sender, EventArgs e)
     {
-        var information = new Information { PlayAgainstAi = true };
-        var page = new GuiView(information);
-        page.Show();
-
-        Hide();
+        var page = new GuiView(new GameSettings { PlayAgainstAi = true });
+        await ShowNewForm(page);
     }
 
-    private void Button_StartBlackVsComputerGame_Click(object sender, EventArgs e)
+    private async void Button_StartBlackVsComputerGame_Click(object sender, EventArgs e)
     {
-        var information = new Information { PlayAgainstAi = true, CurrentTeam = Team.Black };
-
-        var page = new GuiView(information);
-        page.Show();
-
-        Hide();
+        var page = new GuiView(new GameSettings { PlayAgainstAi = true, CurrentTeam = Team.Black });
+        await ShowNewForm(page);
     }
 
-    private void Button_StartHumanGame_Click(object sender, EventArgs e)
+    private async void Button_StartHumanGame_Click(object sender, EventArgs e)
     {
-        var information = new Information();
-
-        var page = new GuiView(information);
-        page.Show();
-
-        Hide();
+        var page = new GuiView(new GameSettings());
+        await ShowNewForm(page);
     }
 }

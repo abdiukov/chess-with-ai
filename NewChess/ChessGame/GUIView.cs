@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ChessGame.View;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using ChessGame.Data;
 
 namespace ChessGame;
 
-public partial class GuiView : Form
+public partial class GuiView : ChessGameForm
 {
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;
@@ -20,7 +20,7 @@ public partial class GuiView : Form
 
     //INITIALIZATION CODE
 
-    public GuiView(IInformation information,
+    public GuiView(IGameSettings gameSettings,
         Brush brushColorOne = null, Brush brushColorTwo = null)
     {
         Program.GameWindow = this;
@@ -29,7 +29,7 @@ public partial class GuiView : Form
         _brushColorOne = brushColorOne ?? Brushes.BlanchedAlmond;
         _brushColorTwo = brushColorTwo ?? Brushes.Silver;
 
-        _controller = new Controller(information);
+        _controller = new Controller(gameSettings);
         _controller.Start();
         MouseClick += GUIView_MouseClick;
     }

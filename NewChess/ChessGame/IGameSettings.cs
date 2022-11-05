@@ -1,8 +1,8 @@
 ﻿using ChessGame.Model;
 using System.Drawing;
 
-namespace ChessGame.Data;
-public interface IInformation
+namespace ChessGame;
+public interface IGameSettings
 {
     bool PlayAgainstAi { get; set; }
     Team CurrentTeam { get; set; }
