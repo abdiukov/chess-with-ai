@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ChessGame
+namespace ChessGame.View
 {
     partial class GuiView
     {

@@ -1,12 +1,11 @@
-﻿using ChessGame.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ChessGame;
+namespace ChessGame.View;
 
-public partial class GuiView : ChessGameForm
+public partial class GuiView : Form
 {
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;

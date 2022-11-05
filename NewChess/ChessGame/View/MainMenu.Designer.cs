@@ -1,8 +1,7 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace ChessGame
+namespace ChessGame.View
 {
     partial class MainMenu
     {

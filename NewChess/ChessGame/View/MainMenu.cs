@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using ChessGame.Model;
-using ChessGame.View;
 
-namespace ChessGame;
+namespace ChessGame.View;
 
-public partial class MainMenu : ChessGameForm
+public partial class MainMenu : Form
 {
     public MainMenu() => InitializeComponent();
 
@@ -24,5 +25,16 @@ public partial class MainMenu : ChessGameForm
     {
         var page = new GuiView(new GameSettings());
         await ShowNewForm(page);
+    }
+
+    private Task ShowNewForm(Form page)
+    {
+        // Show new page
+        page!.Show();
+
+        // Hide current page
+        Hide();
+
+        return Task.CompletedTask;
     }
 }
