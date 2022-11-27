@@ -6,7 +6,7 @@ using ChessGame.Service;
 
 namespace ChessGame.View;
 
-public partial class GuiView : Form, IGameView
+public partial class GuiView : Form
 {
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;
@@ -110,5 +110,5 @@ public partial class GuiView : Form, IGameView
     }
 
     //NAVIGATION CODE
-    private void GUIView_FormClosing(object sender, FormClosingEventArgs e) => Program.MainMenuView.Show();
+    private void GUIView_FormClosing(object sender, FormClosingEventArgs e) => Environment.Exit(0);
 }

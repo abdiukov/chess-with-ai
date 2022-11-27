@@ -7,34 +7,35 @@ using Microsoft.Extensions.Hosting;
 
 namespace ChessGame;
 
-internal static class Program
+public static class Program
 {
-    public static MainMenuView MainMenuView = new();
-    public static GuiView GameWindow;
+    public static GuiView GameWindow { get; set; }
+    public static IHost ApplicationHost { get; set; }
+
     [STAThread]
     private static void Main()
     {
+        // Set up application style
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
         // Set up dependency injection
-        var host = Host
-         .CreateDefaultBuilder()
-         .ConfigureServices(service =>
-         {
-             // Services
-             service.AddSingleton<IController, Controller>();
-             service.AddSingleton<IGameSettings, GameSettings>();
-             service.AddSingleton<IMovementService, MovementService>();
-             service.AddSingleton<IEngineAdapterService, ChessCoreEngineAdapterService>();
+        ApplicationHost =
+         Host.CreateDefaultBuilder()
+             .ConfigureServices(services =>
+             {
+                 // Services
+                 services.AddSingleton<IController, Controller>();
+                 services.AddSingleton<IGameSettings, GameSettings>();
+                 services.AddSingleton<IMovementService, MovementService>();
+                 services.AddSingleton<IEngineAdapterService, ChessCoreEngineAdapterService>();
 
-             // Views
-             service.AddTransient<IGameView, GuiView>();
-             service.AddTransient<IMainMenuView, MainMenuView>();
-
-         }).Build();
+                 // Views
+                 services.AddSingleton<MainMenuView>();
+             }).Build();
 
         // Start the application
-        Application.Run(MainMenuView);
+        var mainWindow = ApplicationHost.Services.GetService<MainMenuView>();
+        Application.Run(mainWindow);
     }
 }

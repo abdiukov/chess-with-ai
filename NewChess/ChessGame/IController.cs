@@ -5,5 +5,4 @@ public interface IController
 {
     void Start();
     bool Select(Point coordinate);
-    void ProcessMouseClickMove(Point coordinate);
 }
