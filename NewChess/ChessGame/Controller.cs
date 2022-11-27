@@ -10,17 +10,16 @@ namespace ChessGame;
 
 public class Controller : IController
 {
-    private readonly MovementService _movementService;
     private Point? _selectedSquare;
-    private readonly IGameSettings _gameSettings;
     private const int BoardRows = 8;
     private const int BoardColumns = 8;
-    private readonly IEngineAdapterService _adapter = new ChessCoreEngineAdapterService();
+    private readonly IEngineAdapterService _adapter;
+    private readonly IMovementService _movementService;
 
-    public Controller(IGameSettings gameSettings)
+    public Controller(IMovementService movementService, IEngineAdapterService adapter)
     {
-        _gameSettings = gameSettings;
-        _movementService = new MovementService(_gameSettings);
+        _movementService = movementService;
+        _adapter = adapter;
 
         for (var i = 0; i < BoardRows; i++)
             for (var j = 0; j < BoardColumns; j++)
@@ -34,8 +33,9 @@ public class Controller : IController
         InitPawns(1, Team.Black);
         InitBackRow(0, Team.Black);
         UpdateAll();
-        
-        if (_gameSettings.PlayAgainstAi && _gameSettings.CurrentTeam == Team.Black)
+
+        if (_movementService.GameSettings.PlayAgainstAi 
+            && _movementService.GameSettings.CurrentTeam == Team.Black)
         {
             var outputFromAi = _adapter.MakeEngineMove();
             ProcessAiOutput(outputFromAi);
@@ -75,7 +75,7 @@ public class Controller : IController
         {
             var piece = Coordinates.Board[coordinate.X, coordinate.Y].Piece;
 
-            if (piece != null && piece.Team == _gameSettings.CurrentTeam)
+            if (piece != null && piece.Team == _movementService.GameSettings.CurrentTeam)
             {
                 _selectedSquare = coordinate;
                 Program.GameWindow.PossibleMoves = piece.GetMoves(coordinate.X, coordinate.Y);
@@ -130,7 +130,7 @@ public class Controller : IController
         }
         //otherwise, add king to the forbidden squares - the king cannot be checked
         else
-            forbiddenSquares.Add(_gameSettings.GetMyKingLocation());
+            forbiddenSquares.Add(_movementService.GameSettings.GetMyKingLocation());
 
         //check every move to see whether the enemy can check either forbidden squares
         //if the enemy can, undo the move
@@ -144,7 +144,7 @@ public class Controller : IController
 
                 //the piece has to be from the opposite team
                 //the piece should be able to check one of the forbidden squares
-                if (toCheck.Team == _gameSettings.CurrentTeam)
+                if (toCheck.Team == _movementService.GameSettings.CurrentTeam)
                     continue;
 
                 var getMoves = toCheck.GetMoves(i, j);
@@ -167,7 +167,7 @@ public class Controller : IController
             king.HasMoved = true;
 
             //once we have moved, update the position of the king
-            _gameSettings.UpdateKingLocation(coordinate.X, coordinate.Y);
+            _movementService.GameSettings.UpdateKingLocation(coordinate.X, coordinate.Y);
 
             //also if castling has been done, move the rook
             if (kingIsCastlingLeft)
@@ -178,10 +178,11 @@ public class Controller : IController
 
         }
 
-        _gameSettings.CurrentTeam = _gameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
+        _movementService.GameSettings.CurrentTeam = 
+            _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
 
         //logic if it is an ai
-        if (_gameSettings.PlayAgainstAi)
+        if (_movementService.GameSettings.PlayAgainstAi)
             DoAiMove(_selectedSquare.Value.X, _selectedSquare.Value.Y, coordinate.X, coordinate.Y);
     }
 
@@ -196,12 +197,14 @@ public class Controller : IController
         {
             case 4:
                 ProcessAiOutput(outputFromAi);
-                _gameSettings.CurrentTeam = _gameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
+                _movementService.GameSettings.CurrentTeam = 
+                    _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             case > 4:
                 ProcessAiOutput(outputFromAi[..4]);
                 MessageBox.Show(outputFromAi[4..], @"Game over!");
-                _gameSettings.CurrentTeam = _gameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
+                _movementService.GameSettings.CurrentTeam = 
+                    _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             default:
                 MessageBox.Show(@"Move is invalid. Please try again.");

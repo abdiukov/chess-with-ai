@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ChessGame.View
 {
-    partial class MainMenu
+    partial class MainMenuView
     {
         /// <summary>
         /// Required designer variable.
@@ -88,7 +88,7 @@ namespace ChessGame.View
             this.button_StartHumanGame.UseVisualStyleBackColor = true;
             this.button_StartHumanGame.Click += new System.EventHandler(this.Button_StartHumanGame_Click);
             // 
-            // MainMenu
+            // MainMenuView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +98,7 @@ namespace ChessGame.View
             this.Controls.Add(this.button_StartWhiteVsComputerGame);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_StartBlackVsComputerGame);
-            this.Name = "MainMenu";
+            this.Name = "MainMenuView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.ResumeLayout(false);

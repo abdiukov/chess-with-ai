@@ -4,11 +4,11 @@ using System.Drawing;
 namespace ChessGame.Service;
 public class MovementService : IMovementService
 {
-    private readonly IGameSettings _gameSettings;
+    public IGameSettings GameSettings { get; set; }
 
     public MovementService(IGameSettings gameSettings)
     {
-        _gameSettings = gameSettings;
+        GameSettings = gameSettings;
     }
 
     private Piece _savedPiece;
@@ -34,7 +34,7 @@ public class MovementService : IMovementService
 
     public void UpgradePawn(int x, int y)
     {
-        Piece upgradedPiece = new Queen(_gameSettings.CurrentTeam);
+        Piece upgradedPiece = new Queen(GameSettings.CurrentTeam);
 
         Coordinates.Board[x, y].Piece = upgradedPiece;
 

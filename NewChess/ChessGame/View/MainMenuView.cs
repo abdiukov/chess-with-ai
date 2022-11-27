@@ -5,9 +5,9 @@ using ChessGame.Model;
 
 namespace ChessGame.View;
 
-public partial class MainMenu : Form
+public partial class MainMenuView : Form, IMainMenuView
 {
-    public MainMenu() => InitializeComponent();
+    public MainMenuView() => InitializeComponent();
 
     private async void Button_StartWhiteVsComputerGame_Click(object sender, EventArgs e)
     {

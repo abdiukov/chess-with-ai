@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using ChessGame.Service;
 
 namespace ChessGame.View;
 
-public partial class GuiView : Form
+public partial class GuiView : Form, IGameView
 {
     private readonly int _dimension = (int)(Screen.PrimaryScreen.Bounds.Height * 0.95);
     private const int BufferDimension = 1024;
@@ -28,7 +29,7 @@ public partial class GuiView : Form
         _brushColorOne = brushColorOne ?? Brushes.BlanchedAlmond;
         _brushColorTwo = brushColorTwo ?? Brushes.Silver;
 
-        _controller = new Controller(gameSettings);
+        _controller = new Controller(new MovementService(gameSettings), new ChessCoreEngineAdapterService());
         _controller.Start();
         MouseClick += GUIView_MouseClick;
     }
@@ -109,5 +110,5 @@ public partial class GuiView : Form
     }
 
     //NAVIGATION CODE
-    private void GUIView_FormClosing(object sender, FormClosingEventArgs e) => Program.MainMenu.Show();
+    private void GUIView_FormClosing(object sender, FormClosingEventArgs e) => Program.MainMenuView.Show();
 }

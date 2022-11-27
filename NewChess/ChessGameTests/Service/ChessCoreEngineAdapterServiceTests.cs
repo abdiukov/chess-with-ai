@@ -1,6 +1,6 @@
 ﻿namespace ChessGameTests.Service;
 
-public class ChessCoreEngineAdapterService
+public class ChessCoreEngineAdapterServiceTests
 {
     [SetUp]
     public void Setup()
