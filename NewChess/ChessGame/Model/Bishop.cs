@@ -9,7 +9,7 @@ public class Bishop : Piece
         : base(team, "Bishop") { }
     public override IList<Point?> GetMoves(int x, int y)
     {
-       var output = new List<Point?>();
+        var output = new List<Point?>();
 
         //right down
         for (int xValue = x + 1, yValue = y + 1; ; xValue++, yValue++)

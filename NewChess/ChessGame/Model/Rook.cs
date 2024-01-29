@@ -13,7 +13,7 @@ public class Rook : Piece
         var moves = new List<Point?>();
 
         //checking moves from the left
-        for (var i = x - 1;; i--)
+        for (var i = x - 1; ; i--)
         {
             var isEmpty = IsEmpty(i, y, this);
 
@@ -29,7 +29,7 @@ public class Rook : Piece
         }
 
         //checking moves from the right
-        for (var i = x + 1;; i++)
+        for (var i = x + 1; ; i++)
         {
             var isEmpty = IsEmpty(i, y, this);
 
@@ -45,7 +45,7 @@ public class Rook : Piece
         }
 
         //checking moves from above
-        for (var i = y - 1;; i--)
+        for (var i = y - 1; ; i--)
         {
             var isEmpty = IsEmpty(x, i, this);
 
@@ -61,7 +61,7 @@ public class Rook : Piece
         }
 
         //checking moves from below
-        for (var i = y + 1;; i++)
+        for (var i = y + 1; ; i++)
         {
             var isEmpty = IsEmpty(x, i, this);
 

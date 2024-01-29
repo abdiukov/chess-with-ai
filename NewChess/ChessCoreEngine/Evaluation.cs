@@ -5,10 +5,10 @@ namespace ChessEngine.Engine
     {
         private static short[] blackPawnCount;
         private static short[] whitePawnCount;
-      
+
         private static readonly short[] PawnTable = new short[]
         {
-       	     0,  0,  0,  0,  0,  0,  0,  0,
+                0,  0,  0,  0,  0,  0,  0,  0,
             50, 50, 50, 50, 50, 50, 50, 50,
             20, 20, 30, 40, 40, 30, 20, 20,
              5,  5, 10, 30, 30, 10,  5,  5,
@@ -49,7 +49,7 @@ namespace ChessEngine.Engine
           -30, -40, -40, -50, -50, -40, -40, -30,
           -30, -40, -40, -50, -50, -40, -40, -30,
           -20, -30, -30, -40, -40, -30, -30, -20,
-          -10, -20, -20, -20, -20, -20, -20, -10, 
+          -10, -20, -20, -20, -20, -20, -20, -10,
            20,  20,   0,   0,   0,   0,  20,  20,
            20,  30,  10,   0,   0,  10,  30,  20
         };
@@ -75,7 +75,7 @@ namespace ChessEngine.Engine
 
             if (square.Piece.PieceColor == ChessPieceColor.Black)
             {
-                index = (byte)(63-position);
+                index = (byte)(63 - position);
             }
 
             //Calculate Piece Values
@@ -86,7 +86,7 @@ namespace ChessEngine.Engine
             //Double Penalty for Hanging Pieces
             if (square.Piece.DefendedValue < square.Piece.AttackedValue)
             {
-                score -= ((square.Piece.AttackedValue - square.Piece.DefendedValue)* 10);
+                score -= ((square.Piece.AttackedValue - square.Piece.DefendedValue) * 10);
             }
 
             //Add Points for Mobility
@@ -138,7 +138,7 @@ namespace ChessEngine.Engine
                         }
                     }
 
-                    whitePawnCount[position % 8]+=10;
+                    whitePawnCount[position % 8] += 10;
                 }
                 else
                 {
@@ -171,7 +171,7 @@ namespace ChessEngine.Engine
                     }
 
                     blackPawnCount[position % 8] += 10;
-                    
+
                 }
             }
             else if (square.Piece.PieceType == ChessPieceType.Knight)
@@ -237,7 +237,7 @@ namespace ChessEngine.Engine
                     score += KingTable[index];
                 }
 
-                
+
 
 
             }
@@ -373,7 +373,7 @@ namespace ChessEngine.Engine
                         }
 
                     }
-                   
+
                 }
 
                 if (square.Piece.PieceType == ChessPieceType.Knight)

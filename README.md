@@ -1,5 +1,5 @@
 #  Chess with in-built AI
-### Based on C# .NET 5.0
+### Based on C# .NET 8.0
 
 Chess game with competent Artificial Intelligence.
 

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 
 namespace ChessGame;
-public interface IController 
+public interface IController
 {
     void Start();
     bool Select(Point coordinate);

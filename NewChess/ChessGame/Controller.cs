@@ -34,7 +34,7 @@ public class Controller : IController
         InitBackRow(0, Team.Black);
         UpdateAll();
 
-        if (_movementService.GameSettings.PlayAgainstAi 
+        if (_movementService.GameSettings.PlayAgainstAi
             && _movementService.GameSettings.CurrentTeam == Team.Black)
         {
             var outputFromAi = _adapter.MakeEngineMove();
@@ -178,7 +178,7 @@ public class Controller : IController
 
         }
 
-        _movementService.GameSettings.CurrentTeam = 
+        _movementService.GameSettings.CurrentTeam =
             _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
 
         //logic if it is an ai
@@ -197,13 +197,13 @@ public class Controller : IController
         {
             case 4:
                 ProcessAiOutput(outputFromAi);
-                _movementService.GameSettings.CurrentTeam = 
+                _movementService.GameSettings.CurrentTeam =
                     _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             case > 4:
                 ProcessAiOutput(outputFromAi[..4]);
                 MessageBox.Show(outputFromAi[4..], @"Game over!");
-                _movementService.GameSettings.CurrentTeam = 
+                _movementService.GameSettings.CurrentTeam =
                     _movementService.GameSettings.CurrentTeam == Team.White ? Team.Black : Team.White;
                 break;
             default:

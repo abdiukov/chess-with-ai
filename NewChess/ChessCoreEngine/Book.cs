@@ -7,8 +7,8 @@ namespace ChessEngine.Engine
     internal class Book
     {
         public static List<OpeningMove> LoadOpeningBook()
-		{
-			return PopulateOpeningBook();
+        {
+            return PopulateOpeningBook();
         }
 
         internal static List<OpeningMove> PopulateOpeningBook()

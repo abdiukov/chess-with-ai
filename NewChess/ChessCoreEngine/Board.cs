@@ -5,15 +5,15 @@ namespace ChessEngine.Engine
 {
     internal sealed class Board
     {
-      
+
         internal Square[] Squares;
-              
+
         internal bool InsufficientMaterial;
 
         internal int Score;
 
-        internal ulong ZobristHash;       
-       
+        internal ulong ZobristHash;
+
         //Game Over Flags
         internal bool BlackCheck;
         internal bool BlackMate;
@@ -46,7 +46,7 @@ namespace ChessEngine.Engine
         internal byte EnPassantPosition;
 
         internal ChessPieceColor WhoseMove;
-        
+
         internal int MoveCount;
 
         #region Constructors
@@ -120,7 +120,7 @@ namespace ChessEngine.Engine
             else if (fen.Contains("c6"))
             {
                 EnPassantColor = ChessPieceColor.Black;
-                EnPassantPosition =18;
+                EnPassantPosition = 18;
             }
             else if (fen.Contains("d6"))
             {
@@ -159,7 +159,7 @@ namespace ChessEngine.Engine
 
             foreach (char c in fen)
             {
- 
+
                 if (index < 64 && spc == 0)
                 {
                     if (c == '1' && index < 63)
@@ -262,7 +262,7 @@ namespace ChessEngine.Engine
                     }
                     else if (c == 'k')
                     {
-                        Squares[index].Piece = new Piece(ChessPieceType.King, ChessPieceColor.Black);      
+                        Squares[index].Piece = new Piece(ChessPieceType.King, ChessPieceColor.Black);
                         Squares[index].Piece.Moved = true;
                         index++;
                     }
@@ -277,7 +277,7 @@ namespace ChessEngine.Engine
                 }
                 else
                 {
-                    
+
                     if (c == 'K')
                     {
                         if (Squares[60].Piece != null)
@@ -297,7 +297,7 @@ namespace ChessEngine.Engine
                         }
 
                         WhiteCastled = false;
-                        
+
                     }
                     else if (c == 'Q')
                     {
@@ -444,11 +444,11 @@ namespace ChessEngine.Engine
                         MoveCount = (byte)((MoveCount * 10) + 0);
                     }
 
-                    
+
 
                 }
             }
-     
+
         }
 
         internal Board()
@@ -464,7 +464,7 @@ namespace ChessEngine.Engine
 
             BlackCanCastle = true;
             WhiteCanCastle = true;
-            
+
             WhiteAttackBoard = new bool[64];
             BlackAttackBoard = new bool[64];
 
@@ -482,7 +482,7 @@ namespace ChessEngine.Engine
                 }
             }
 
-            
+
 
             WhiteAttackBoard = new bool[64];
             BlackAttackBoard = new bool[64];
@@ -525,7 +525,7 @@ namespace ChessEngine.Engine
 
             HalfMoveClock = board.HalfMoveClock;
             RepeatedMove = board.RepeatedMove;
-           
+
             WhiteCastled = board.WhiteCastled;
             BlackCastled = board.BlackCastled;
 
@@ -588,7 +588,7 @@ namespace ChessEngine.Engine
                 //Reset HalfMoveClockCount if pawn moved
                 board.HalfMoveClock = 0;
 
-                int difference = srcPosition - dstPosition; 
+                int difference = srcPosition - dstPosition;
 
                 if (difference == 16 || difference == -16)
                 {
@@ -629,7 +629,7 @@ namespace ChessEngine.Engine
             board.LastMove.TakenPiece = new PieceTaken(sqr.Piece.PieceColor, sqr.Piece.PieceType, sqr.Piece.Moved, dstPosition);
 
             board.Squares[dstPosition].Piece = null;
-                    
+
             //Reset HalfMoveClockCount if capture
             board.HalfMoveClock = 0;
 
@@ -663,7 +663,7 @@ namespace ChessEngine.Engine
                 }
                 //Castle Left
                 else if (dstPosition == 58)
-                {   
+                {
                     //Ok we are casteling we need to move the Rook
                     if (board.Squares[56].Piece != null)
                     {
@@ -691,7 +691,7 @@ namespace ChessEngine.Engine
                         return;
                     }
                 }
-                    //Castle Left
+                //Castle Left
                 else if (dstPosition == 2)
                 {
                     //Ok we are casteling we need to move the Rook
@@ -743,7 +743,7 @@ namespace ChessEngine.Engine
             //Record my last move
             board.LastMove = new MoveContent();
 
-            
+
 
             if (piece.PieceColor == ChessPieceColor.Black)
             {
@@ -772,7 +772,7 @@ namespace ChessEngine.Engine
                 {
                     board.LastMove.TakenPiece = new PieceTaken(ChessPieceColor.White, ChessPieceType.None, false,
                                                                dstPosition);
-                    
+
                 }
             }
 
@@ -780,7 +780,7 @@ namespace ChessEngine.Engine
 
             //Delete the piece in its source position
             board.Squares[srcPosition].Piece = null;
-      
+
             //Add the piece to its new position
             piece.Moved = true;
             piece.Selected = false;
@@ -788,12 +788,12 @@ namespace ChessEngine.Engine
 
             //Reset EnPassantPosition
             board.EnPassantPosition = 0;
-          
+
             //Record En Passant if Pawn Moving
             if (piece.PieceType == ChessPieceType.Pawn)
             {
-               board.HalfMoveClock = 0;
-               RecordEnPassant(piece.PieceColor, piece.PieceType, board, srcPosition, dstPosition);
+                board.HalfMoveClock = 0;
+                RecordEnPassant(piece.PieceColor, piece.PieceType, board, srcPosition, dstPosition);
             }
 
             board.WhoseMove = board.WhoseMove == ChessPieceColor.White ? ChessPieceColor.Black : ChessPieceColor.White;
@@ -810,7 +810,7 @@ namespace ChessEngine.Engine
                 board.LastMove.PawnPromotedTo = ChessPieceType.None;
             }
 
-            if ( board.HalfMoveClock >= 100)
+            if (board.HalfMoveClock >= 100)
             {
                 board.StaleMate = true;
             }
@@ -911,7 +911,7 @@ namespace ChessEngine.Engine
                 output += " b ";
             }
 
-			string castle = "-";
+            string castle = "-";
 
             if (board.WhiteCastled == false)
             {
@@ -960,12 +960,12 @@ namespace ChessEngine.Engine
                     }
                 }
             }
-			
-			if (castle != "-")
-			{
-				castle = castle.TrimStart('-');
-			}
-			output += castle;
+
+            if (castle != "-")
+            {
+                castle = castle.TrimStart('-');
+            }
+            output += castle;
 
             if (board.EnPassantPosition != 0)
             {
