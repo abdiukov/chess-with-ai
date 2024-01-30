@@ -17,15 +17,11 @@ public class GameSettings : IGameSettings
     {
         if (CurrentTeam == Team.White)
         {
-            var whiteKingLocation = WhiteKingLocation;
-            whiteKingLocation.X = x;
-            whiteKingLocation.Y = y;
+            WhiteKingLocation = new Point(x, y);
         }
         else
         {
-            var blackKingLocation = BlackKingLocation;
-            blackKingLocation.X = x;
-            blackKingLocation.Y = y;
+            BlackKingLocation = new Point(x, y);
         }
     }
 }

@@ -19,13 +19,13 @@ public class QueenTests
                 Coordinates.Board[i, j] = new Square();
             }
         }
-        
+
         var queen = new Queen(Team.White);
 
-        var expectedMoves = new List<Point?> 
+        var expectedMoves = new List<Point?>
         {
             // Horizontal moves to the left and right
-            new Point(2, 3), new Point(1, 3), new Point(0, 3), 
+            new Point(2, 3), new Point(1, 3), new Point(0, 3),
             new Point(4, 3), new Point(5, 3), new Point(6, 3), new Point(7, 3),
             
             // Vertical moves up and down

@@ -14,7 +14,7 @@ public class PawnTests
         //Arrange
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 8; j++) 
+            for (int j = 0; j < 8; j++)
             {
                 Coordinates.Board[i, j] = new Square();
             }
@@ -22,7 +22,7 @@ public class PawnTests
 
         var pawn = new Pawn(Team.White);
 
-        var expectedMoves = new List<Point?> 
+        var expectedMoves = new List<Point?>
         {
             new Point(3, 2)
         };
@@ -40,7 +40,7 @@ public class PawnTests
         //Arrange
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 8; j++) 
+            for (int j = 0; j < 8; j++)
             {
                 Coordinates.Board[i, j] = new Square();
             }
@@ -48,7 +48,7 @@ public class PawnTests
 
         var pawn = new Pawn(Team.Black);
 
-        var expectedMoves = new List<Point?> 
+        var expectedMoves = new List<Point?>
         {
             new Point(3, 4)
         };

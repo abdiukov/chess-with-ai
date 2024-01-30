@@ -13,7 +13,7 @@ public static class Program
     public static IHost ApplicationHost { get; set; }
 
     [STAThread]
-    private static void Main()
+    public static void Main()
     {
         // Set up application style
         Application.EnableVisualStyles();

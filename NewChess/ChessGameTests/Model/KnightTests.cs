@@ -22,7 +22,7 @@ public class KnightTests
 
         var knight = new Knight(Team.White);
 
-        var expectedMoves = new List<Point?> 
+        var expectedMoves = new List<Point?>
         {
             // up right and left
             new Point(4, 1),

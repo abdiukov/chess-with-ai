@@ -14,7 +14,7 @@ public class KingTests
         //Arrange
         for (int i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 8; j++) 
+            for (int j = 0; j < 8; j++)
             {
                 Coordinates.Board[i, j] = new Square();
             }
@@ -22,7 +22,7 @@ public class KingTests
 
         var king = new King(Team.White);
 
-        var expectedMoves = new List<Point?> 
+        var expectedMoves = new List<Point?>
         {
             // all moves around the King
             new Point(3, 2),  // up

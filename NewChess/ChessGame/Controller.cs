@@ -24,6 +24,7 @@ public class Controller : IController
         for (var i = 0; i < BoardRows; i++)
             for (var j = 0; j < BoardColumns; j++)
                 Coordinates.Board[i, j] = new Square();
+
     }
 
     public void Start()
